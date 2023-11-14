@@ -65,7 +65,7 @@ const MarkdownContents = ({ markdown }: TProps) => {
           ul: ({ node, ...props }) => <ul {...props} className={markdown_styles.ul} />,
           ol: ({ node, ...props }) => <ol {...props} className={markdown_styles.ol} />,
           table: ({ node, ...props }) => <table {...props} className={markdown_styles.table} />,
-          // img: ({ node, ...props }) => <img {...props} className={markdown_styles.img} />,
+          img: ({ node, ...props }) => <img {...props} className={markdown_styles.img} />,
           // code: ({ node, ...props }) => <code {...props} className={markdown_styles.code} />,
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || "");
@@ -77,15 +77,15 @@ const MarkdownContents = ({ markdown }: TProps) => {
               <code {...props}>{children}</code>
             );
           },
-          img: (image) => (
-            <Image
-              src={image.src || ""}
-              alt={image.alt || "파일을 찾을 수 없습니다."}
-              width={500}
-              height={300}
-              className={markdown_styles.img}
-            />
-          ),
+          // img: (image) => (
+          //   <Image
+          //     src={image.src || ""}
+          //     alt={image.alt || "파일을 찾을 수 없습니다."}
+          //     width={500}
+          //     height={300}
+          //     className={markdown_styles.img}
+          //   />
+          // ),
         }}
       >
         {markdown}

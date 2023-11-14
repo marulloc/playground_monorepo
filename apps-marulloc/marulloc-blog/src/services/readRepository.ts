@@ -5,11 +5,13 @@ const OWNER = "marulloc";
 const REPOSITORY = "obsidian-git";
 const BRANCH = "master";
 const BASE_URL = `https://api.github.com/repos/${OWNER}/${REPOSITORY}/contents/`;
-const BEARER = `Bearer ${"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"}`;
+const BEARER = `Bearer ${process.env.NEXT_PUBLIC_GITHUB_ACCESSTOKEN}`;
 
 export const readRepoFile = async (path?: string) => {
   const headers = { Authorization: BEARER };
-  const response = await (await fetch(`${BASE_URL}/${path || ""}`, { headers, next: { revalidate: 30000 } })).json();
+  const response = await (
+    await fetch(`${BASE_URL}${path ? `/${path}` : ""}`, { headers, next: { revalidate: 30000 } })
+  ).json();
 
   return response;
 };
@@ -20,10 +22,6 @@ export const readRepoMarkdown = async (name: string) => {
 
   return {
     ...response,
-    // content: parseImageUrl(
-    //   decodeUnicode(response.content),
-    //   `https://raw.githubusercontent.com/${OWNER}/${REPOSITORY}/blob/${BRANCH}`,
-    // ),
     content: decodeUnicode(response.content),
   };
 };
