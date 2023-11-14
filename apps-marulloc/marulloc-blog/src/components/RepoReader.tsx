@@ -3,10 +3,12 @@
 import { readRepoMarkdown, readRepoFile } from "@/services/readRepository";
 import { readFile } from "fs";
 import { useEffect, useState } from "react";
+import MarkdownContents from "./MarkdownContents";
 
 const RepoReader = () => {
   const [dir, setDir] = useState<any[]>([]);
 
+  const [contents, setContents] = useState("");
   const eventConsole = async () => {
     const result = await readRepoFile();
     console.log(result);
@@ -30,7 +32,10 @@ const RepoReader = () => {
               onClick={async () => {
                 let result;
                 if (item.type === "dir") result = await readRepoFile(item.path as string);
-                else if (item.type === "file") result = await readRepoMarkdown(item.name);
+                else if (item.type === "file") {
+                  result = await readRepoMarkdown(item.name);
+                  setContents(result.content);
+                }
 
                 console.log(result);
               }}
@@ -40,6 +45,8 @@ const RepoReader = () => {
           </div>
         ))}
       </div>
+
+      <MarkdownContents markdown={contents} />
     </div>
   );
 };
