@@ -80,11 +80,10 @@ const MarkdownContents = ({ markdown }: TProps) => {
           img: (image) => (
             <Image
               src={image.src || ""}
-              alt={image.alt || ""}
+              alt={image.alt || "파일을 찾을 수 없습니다."}
               width={500}
               height={300}
               className={markdown_styles.img}
-              // className={classes.markdown_container_img}
             />
           ),
         }}
@@ -128,5 +127,5 @@ const markdown_styles = {
     "[&>*>td]:border [&>*>td]:border-gray-500 [&>*>td]:text-left [&>*>td]:p-1 [&>*>td:first-child]:mt-0 [&>*>td:last-child]mb-0:",
     "[&>*>*>td]:border [&>*>*>td]:border-gray-500 [&>*>*>td]:text-left [&>*>*>td]:p-1 [&>*>*>td:first-child]:mt-0 [&>*>*>td:last-child]mb-0",
   ),
-  img: classComposer("rounded-md"),
+  img: classComposer("rounded-md "),
 };
