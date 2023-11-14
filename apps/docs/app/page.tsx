@@ -2,15 +2,7 @@ import Image from "next/image";
 import { Card } from "ui";
 import styles from "./page.module.css";
 
-function Gradient({
-  conic,
-  className,
-  small,
-}: {
-  small?: boolean;
-  conic?: boolean;
-  className?: string;
-}): JSX.Element {
+function Gradient({ conic, className, small }: { small?: boolean; conic?: boolean; className?: string }): JSX.Element {
   return (
     <span
       className={[
@@ -44,8 +36,7 @@ const LINKS = [
   {
     title: "Deploy",
     href: "https://vercel.com/new",
-    description:
-      " Instantly deploy your Turborepo to a shareable URL with Vercel.",
+    description: " Instantly deploy your Turborepo to a shareable URL with Vercel.",
   },
 ];
 
@@ -64,14 +55,7 @@ export default function Page(): JSX.Element {
             target="_blank"
           >
             By{" "}
-            <Image
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              height={24}
-              priority
-              src="/vercel.svg"
-              width={100}
-            />
+            <Image alt="Vercel Logo" className={styles.vercelLogo} height={24} priority src="/vercel.svg" width={100} />
           </a>
         </div>
       </div>
@@ -80,25 +64,14 @@ export default function Page(): JSX.Element {
         <div className={styles.heroContent}>
           <div className={styles.logos}>
             <div className={styles.circles}>
-              <Image
-                alt="Turborepo"
-                height={614}
-                src="circles.svg"
-                width={614}
-              />
+              <Image alt="Turborepo" height={614} src="circles.svg" width={614} />
             </div>
             <div className={styles.logoGradientContainer}>
               <Gradient className={styles.logoGradient} conic small />
             </div>
 
             <div className={styles.logo}>
-              <Image
-                alt=""
-                height={120}
-                priority
-                src="turborepo.svg"
-                width={120}
-              />
+              <Image alt="" height={120} priority src="turborepo.svg" width={120} />
             </div>
           </div>
           <Gradient className={styles.backgroundGradient} conic />
