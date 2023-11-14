@@ -1,3 +1,6 @@
 packages:
   - "apps/*"
+  - "apps-marulloc/*"
+  - "apps-playground/*"
+  - "apps-shopify-headless/*"
   - "packages/*"
