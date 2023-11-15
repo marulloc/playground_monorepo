@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { getRepoStructure, readRepoFile } from "@/services/readRepository";
 import Header from "@/components/Header";
 import { classNames } from "@/utils/classNames";
+import BreadCrumb from "@/components/BreadCrumb";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className={classNames(inter.className, " relative")}>
         <Header rootNav={rootDir} />
+        <BreadCrumb />
         {children}
       </body>
     </html>

@@ -11,7 +11,7 @@ const SubNav = ({ subNav }: { subNav: any[] }) => {
           key={item.sha}
           className={classNames("bg-red-900 pointer-events-auto  text-white py-3 px-6 block rounded-lg")}
           href={item.type === "dir" ? `/${item.path}` : `/articles/${item.path}`}
-        >{`${item.type} - ${item.name} -> ${item.path}`}</Link>
+        >{`${item.type} - ${item.name}  `}</Link>
       ))}
     </nav>
   );
