@@ -1,10 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { getRepoStructure, readRepoFile } from "@/services/readRepository";
+import { readRepoFile } from "@/services/readRepository";
 import Header from "@/components/Header";
 import { classNames } from "@/utils/classNames";
 import BreadCrumb from "@/components/BreadCrumb";
+import { getRepoStructure } from "@/services/getRepoSturucture";
+import ConsoleCompo from "@/components/ConsoleCompo";
+import { parseRepoTree } from "@/parsers/parseRepoTree";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +19,15 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const rootDir = await readRepoFile();
 
+  const draft = await getRepoStructure();
+
   return (
     <html lang="en">
       <body className={classNames(inter.className, " relative")}>
         <Header rootNav={rootDir} />
         <BreadCrumb />
+
+        <ConsoleCompo data={parseRepoTree(draft.tree)} />
         {children}
       </body>
     </html>
