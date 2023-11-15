@@ -1,9 +1,9 @@
 import { classNames } from "@/utils/classNames";
 import Image from "next/image";
 import avatarImage from "./mock.png";
-import MainNav from "./MainNav";
+import MainNav from "./Navigation/MainNav";
 
-const Header = ({ rootNav }: { rootNav: any[] }) => {
+const Header = ({ children }: { children: React.ReactNode }) => {
   return (
     <header className=" sticky top-0   ">
       <div className=" grid grid-cols-8 px-16 py-4">
@@ -17,9 +17,7 @@ const Header = ({ rootNav }: { rootNav: any[] }) => {
           <ThemeToggle />
         </div>
 
-        <div className="col-span-8 mt-4">
-          <MainNav rootNav={rootNav} />
-        </div>
+        <div className="col-span-8 mt-4">{children}</div>
       </div>
     </header>
   );

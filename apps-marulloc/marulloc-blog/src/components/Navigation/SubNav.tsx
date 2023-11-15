@@ -10,7 +10,7 @@ const SubNav = ({ subNav }: { subNav: any[] }) => {
         <Link
           key={item.sha}
           className={classNames("bg-red-900 pointer-events-auto  text-white py-3 px-6 block rounded-lg")}
-          href={item.type === "dir" ? `/${item.path}` : `/articles/${item.path}`}
+          href={item.type === "tree" ? `/${item.path}` : `/articles/${item.path}`}
         >{`${item.type} - ${item.name}  `}</Link>
       ))}
     </nav>

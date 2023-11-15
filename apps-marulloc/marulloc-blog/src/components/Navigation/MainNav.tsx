@@ -4,7 +4,7 @@ import { classNames } from "@/utils/classNames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const MainNav = ({ rootNav }: { rootNav: any[] }) => {
+const MainNav = ({ routes }: { routes: any[] }) => {
   const pathname = usePathname();
 
   const activateClass = (pathname: string, type: "dir" | "file", path: string) => {
@@ -14,17 +14,19 @@ const MainNav = ({ rootNav }: { rootNav: any[] }) => {
       : "bg-slate-400";
   };
 
+  console.log("???", routes);
+
   return (
     <nav className="flex justify-center gap-4 m-4">
-      {rootNav.map((item: any) => (
+      {routes.map((item: any) => (
         <div
-          key={item.sha}
+          key={item.path}
           className={classNames(
             "pointer-events-auto text-white px-4 py-2 rounded-lg text-sm",
             activateClass(pathname, item.type, item.path),
           )}
         >
-          <Link href={item.type === "dir" ? `/${item.path}` : `/articles/${item.path}`}>{item.name}</Link>
+          <Link href={item.type === "tree" ? `/${item.path}` : `/articles/${item.path}`}>{item.name}</Link>
         </div>
       ))}
     </nav>

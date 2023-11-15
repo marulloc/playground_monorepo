@@ -1,4 +1,10 @@
-export const parseRepoTree = (flatTree: any[]) => {
+/**
+ * @summary repoTree api에서 응답하는 flat한 array를 tree형태로 변환한다
+ * @param flatTree
+ * @returns
+ */
+
+export const parseRepoNavigation = (flatTree: any[]) => {
   const parsedFlatTree = flatTree.map((item) => ({
     type: item.type as "blob" | "tree",
     path: item.path,

@@ -4,10 +4,11 @@ import { Inter } from "next/font/google";
 import { readRepoFile } from "@/services/readRepository";
 import Header from "@/components/Header";
 import { classNames } from "@/utils/classNames";
-import BreadCrumb from "@/components/BreadCrumb";
+import BreadCrumb from "@/components/Navigation/BreadCrumb";
 import { getRepoStructure } from "@/services/getRepoSturucture";
 import ConsoleCompo from "@/components/ConsoleCompo";
-import { parseRepoTree } from "@/parsers/parseRepoTree";
+import { parseRepoNavigation } from "@/parsers/parseRepoNavigation";
+import MainNav from "@/components/Navigation/MainNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,17 +18,19 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const rootDir = await readRepoFile();
-
-  const draft = await getRepoStructure();
+  // const rootDir = await readRepoFile();
+  const flatRepoStructure = await getRepoStructure();
+  const repoTreeStructure = parseRepoNavigation(flatRepoStructure.tree);
 
   return (
     <html lang="en">
       <body className={classNames(inter.className, " relative")}>
-        <Header rootNav={rootDir} />
+        <Header>
+          <MainNav routes={repoTreeStructure} />
+        </Header>
         <BreadCrumb />
 
-        <ConsoleCompo data={parseRepoTree(draft.tree)} />
+        <ConsoleCompo data={flatRepoStructure} />
         {children}
       </body>
     </html>
