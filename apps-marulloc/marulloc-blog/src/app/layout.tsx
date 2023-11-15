@@ -2,7 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navigation from "@/components/Navigation";
-import { getRepoStructure } from "@/services/readRepository";
+import { getRepoStructure, readRepoFile } from "@/services/readRepository";
+import MainNav from "@/components/MainNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,12 +13,14 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const response = await getRepoStructure();
+  // const response = await getRepoStructure();
+  const rootDir = await readRepoFile();
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navigation route={response} />
+        {/* <Navigation route={response} /> */}
+        <MainNav rootNav={rootDir} />
         {children}
       </body>
     </html>
