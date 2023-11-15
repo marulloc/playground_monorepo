@@ -9,8 +9,11 @@ import GITHUB_SERVICE_CONFIG from "./config";
  */
 export const readRepoFile = async (path?: string) => {
   const headers = { Authorization: GITHUB_SERVICE_CONFIG.BEARER };
+  // console.log("@@", path);
+  // console.log("@@", decodeURIComponent(path));
+  console.log("request path ->", path, `${GITHUB_SERVICE_CONFIG.BASE_URL}${path ? `${path}` : ""}`);
   const response = await (
-    await fetch(`${GITHUB_SERVICE_CONFIG.BASE_URL}${path ? `/${path}` : ""}`, { headers, next: { revalidate: 30000 } })
+    await fetch(`${GITHUB_SERVICE_CONFIG.BASE_URL}${path ? `${path}` : ""}`, { headers, next: { revalidate: 30000 } })
   ).json();
 
   return response;
