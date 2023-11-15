@@ -1,5 +1,4 @@
 const Page = (props: any) => {
-  console.log(props);
   return <>asdasd</>;
 };
 

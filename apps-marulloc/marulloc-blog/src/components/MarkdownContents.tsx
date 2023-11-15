@@ -66,17 +66,17 @@ const MarkdownContents = ({ markdown }: TProps) => {
           ol: ({ node, ...props }) => <ol {...props} className={markdown_styles.ol} />,
           table: ({ node, ...props }) => <table {...props} className={markdown_styles.table} />,
           img: ({ node, ...props }) => <img {...props} className={markdown_styles.img} />,
-          // code: ({ node, ...props }) => <code {...props} className={markdown_styles.code} />,
-          code({ node, inline, className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || "");
-            return !inline && match ? (
-              <SyntaxHighlighter language={match[1]} PreTag="div" {...props} style={materialDark}>
-                {String(children).replace(/\n$/, "")}
-              </SyntaxHighlighter>
-            ) : (
-              <code {...props}>{children}</code>
-            );
-          },
+          code: ({ node, ...props }) => <code {...props} className={markdown_styles.code} />,
+          // code({ node, inline, className, children, ...props }) {
+          //   const match = /language-(\w+)/.exec(className || "");
+          //   return !inline && match ? (
+          //     <SyntaxHighlighter language={match[1]} PreTag="div" {...props} style={materialDark}>
+          //       {String(children).replace(/\n$/, "")}
+          //     </SyntaxHighlighter>
+          //   ) : (
+          //     <code {...props}>{children}</code>
+          //   );
+          // },
           // img: (image) => (
           //   <Image
           //     src={image.src || ""}

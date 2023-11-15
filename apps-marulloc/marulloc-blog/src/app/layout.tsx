@@ -1,9 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navigation from "@/components/Navigation";
 import { getRepoStructure, readRepoFile } from "@/services/readRepository";
-import MainNav from "@/components/MainNav";
 import Header from "@/components/Header";
 import { classNames } from "@/utils/classNames";
 
@@ -21,7 +19,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className={classNames(inter.className, " relative")}>
         <Header rootNav={rootDir} />
-        {/* <MainNav rootNav={rootDir} /> */}
         {children}
       </body>
     </html>
