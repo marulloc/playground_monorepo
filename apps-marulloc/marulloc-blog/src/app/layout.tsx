@@ -2,13 +2,13 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { readRepoFile } from "@/services/readRepository";
-import Header from "@/components/Header";
 import { classNames } from "@/utils/classNames";
-import BreadCrumb from "@/components/Navigation/BreadCrumb";
+import BreadCrumb from "@/components/BreadCrumb";
 import { getRepoStructure } from "@/services/getRepoSturucture";
 import ConsoleCompo from "@/components/ConsoleCompo";
 import { parseRepoNavigation } from "@/parsers/parseRepoNavigation";
-import MainNav from "@/components/Navigation/MainNav";
+import Header from "@/components/Header";
+import Container from "@/components/Container";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,13 +25,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body className={classNames(inter.className, " relative")}>
-        <Header>
-          <MainNav routes={repoTreeStructure} />
-        </Header>
+        <Header routes={repoTreeStructure} />
         <BreadCrumb />
 
-        <ConsoleCompo data={flatRepoStructure} />
-        {children}
+        {/* <ConsoleCompo data={flatRepoStructure} /> */}
+        <Container>{children}</Container>
       </body>
     </html>
   );

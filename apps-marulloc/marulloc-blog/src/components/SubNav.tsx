@@ -4,6 +4,7 @@ import { classNames } from "@/utils/classNames";
 import Link from "next/link";
 
 const SubNav = ({ subNav }: { subNav: any[] }) => {
+  console.log("???", subNav);
   return (
     <nav className=" space-y-2 mx-48">
       {subNav.map((item: any) => (
