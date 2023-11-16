@@ -1,4 +1,3 @@
-import ConsoleCompo from "@/components/ConsoleCompo";
 import { getDirectoryContents } from "@/services/repository/getDirectoryContents";
 import Link from "next/link";
 
@@ -10,7 +9,6 @@ const Page = async ({ params, children }: any) => {
 
   return (
     <>
-      <ConsoleCompo data={directoryData} />
       <div className="space-y-8">
         {series.length > 0 && (
           <div>

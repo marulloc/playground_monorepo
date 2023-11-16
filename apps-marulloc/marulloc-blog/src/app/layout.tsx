@@ -2,12 +2,10 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { classNames } from "@/utils/classNames";
-import BreadCrumb from "@/components/BreadCrumb";
 import Header from "@/components/Header";
 import Container from "@/components/Container";
 import { getRepositoryTree } from "@/services/repository/getRepositoryTree";
 import { getDirectoryContents } from "@/services/repository/getDirectoryContents";
-import ConsoleCompo from "@/components/ConsoleCompo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,11 +20,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en">
-      <body className={classNames(inter.className, " relative")}>
+      <body className={classNames(inter.className, " relative text-gray-300")}>
         <Header routes={directoryData} />
-        {/* <BreadCrumb /> */}
 
-        <ConsoleCompo data={repositoryData} />
         <Container className="mt-24 my-12">{children}</Container>
       </body>
     </html>

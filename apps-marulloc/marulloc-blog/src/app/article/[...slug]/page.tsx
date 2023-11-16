@@ -1,4 +1,3 @@
-import ConsoleCompo from "@/components/ConsoleCompo";
 import MarkdownContents from "@/components/MarkdownContents";
 import { getDirectoryContents } from "@/services/repository/getDirectoryContents";
 import { getMarkdownContents } from "@/services/repository/getMarkdownContents";
@@ -13,8 +12,7 @@ const Page = async ({ params }: any) => {
   const markdownData = await getMarkdownContents(params.slug.join("/"));
 
   return (
-    <div className=" text-white">
-      <ConsoleCompo data={markdownData} />
+    <div className="  ">
       {siblings.length > 0 && (
         <div>
           <div className="mb-4">
