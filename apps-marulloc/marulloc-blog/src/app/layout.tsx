@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Container from "@/components/Container";
 import { getRepositoryTree } from "@/services/repository/getRepositoryTree";
 import { getDirectoryContents } from "@/services/repository/getDirectoryContents";
+import ConsoleCompo from "@/components/ConsoleCompo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Header routes={directoryData} />
         {/* <BreadCrumb /> */}
 
+        <ConsoleCompo data={repositoryData} />
         <Container className="mt-24 my-12">{children}</Container>
       </body>
     </html>
