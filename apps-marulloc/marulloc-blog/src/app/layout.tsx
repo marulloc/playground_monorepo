@@ -1,14 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { readRepoFile } from "@/services/readRepository";
 import { classNames } from "@/utils/classNames";
 import BreadCrumb from "@/components/BreadCrumb";
 import { getRepoStructure } from "@/services/getRepoSturucture";
-import ConsoleCompo from "@/components/ConsoleCompo";
-import { parseRepoNavigation } from "@/parsers/parseRepoNavigation";
 import Header from "@/components/Header";
 import Container from "@/components/Container";
+import { modifiyFlatRepo, parseRepoStructure } from "@/parsers/parseGithubRepo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,17 +17,17 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // const rootDir = await readRepoFile();
-  const flatRepoStructure = await getRepoStructure();
-  const repoTreeStructure = parseRepoNavigation(flatRepoStructure.tree);
+  const flatRepo = await getRepoStructure();
+  const modifiedFlatRepo = modifiyFlatRepo(flatRepo.tree);
+  const repository = parseRepoStructure(modifiedFlatRepo);
 
   return (
     <html lang="en">
       <body className={classNames(inter.className, " relative")}>
-        <Header routes={repoTreeStructure} />
-        <BreadCrumb />
+        <Header routes={repository.tree} />
+        {/* <BreadCrumb /> */}
 
-        {/* <ConsoleCompo data={flatRepoStructure} /> */}
-        <Container>{children}</Container>
+        <Container className="mt-24 my-12">{children}</Container>
       </body>
     </html>
   );

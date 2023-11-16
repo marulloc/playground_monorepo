@@ -1,5 +1,10 @@
 import { Card } from "ui";
 
 export default function Home() {
-  return <></>;
+  return (
+    <>
+      <div>About</div>
+      <div>Series (navigation)</div>
+    </>
+  );
 }

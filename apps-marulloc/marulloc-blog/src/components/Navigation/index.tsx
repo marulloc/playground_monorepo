@@ -7,7 +7,9 @@ import { usePathname } from "next/navigation";
 const NavItem = ({ href, children }: { href: string; children: React.ReactNode }) => {
   const pathname = usePathname();
   const isActive =
-    decodeURIComponent(pathname).startsWith(href) || decodeURIComponent(pathname).startsWith(`/articles/${href}`);
+    decodeURIComponent(pathname.replace("/article", "")).startsWith(href.replace("/category", "")) ||
+    decodeURIComponent(pathname.replace("/category", "")).startsWith(href.replace("/article", "")) ||
+    decodeURIComponent(pathname).startsWith(href);
 
   return (
     <li>
@@ -35,7 +37,10 @@ const Navigation = ({ routes }: { routes: any[] }) => {
           if (item.path === ".obsidian") return null;
           else if (item.type === "blob") return null;
           return (
-            <NavItem key={item.path} href={item.type === "tree" ? `/${item.path}` : `/articles/${item.path}`}>
+            <NavItem
+              key={item.pathname}
+              href={item.type === "tree" ? `/category/${item.path}` : `/article/${item.path}`}
+            >
               {item.name}
             </NavItem>
           );
