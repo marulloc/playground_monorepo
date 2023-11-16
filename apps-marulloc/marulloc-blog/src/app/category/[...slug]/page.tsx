@@ -1,25 +1,50 @@
-import SubNav from "@/components/SubNav";
-import { readRepoFile } from "@/services/readRepository";
-import Test from "../../Test";
-import { getRepoStructure } from "@/services/getRepoSturucture";
-import { modifiyFlatRepo, parseRepoStructure } from "@/parsers/parseGithubRepo";
 import ConsoleCompo from "@/components/ConsoleCompo";
+import { getDirectoryContents } from "@/services/repository/getDirectoryContents";
+import Link from "next/link";
 
 const Page = async ({ params, children }: any) => {
-  // const subDir = await readRepoFile(params.slug.join("/"));
+  const directoryData = await getDirectoryContents(params.slug.join("/"));
 
-  const flatRepo = await getRepoStructure();
-  const modifiedFlatRepo = modifiyFlatRepo(flatRepo.tree);
-  const repository = parseRepoStructure(modifiedFlatRepo);
+  const series = directoryData.filter((item) => item.type === "dir");
+  const contents = directoryData.filter((item) => item.type === "file" && item.name.endsWith(".md"));
 
   return (
     <>
-      {/* <SubNav subNav={subDir} /> */}
-      {/* <ConsoleCompo data={repository} />
-      <ConsoleCompo data={decodeURIComponent("/category/" + params.slug.join("/"))} />
-      <ConsoleCompo data={repository.routeMap[decodeURIComponent("/category/" + params.slug.join("/"))]} /> */}
-
-      <Test tree={repository.routeMap[decodeURIComponent("/category/" + params.slug.join("/"))]?.subTree || []} />
+      <ConsoleCompo data={directoryData} />
+      <div className="space-y-8">
+        {series.length > 0 && (
+          <div>
+            <div className="mb-4">
+              <span className=" text-xl border-b">Series</span>
+            </div>
+            <div>
+              {series.map((node) => (
+                <Link key={node.path} href={`/category/${node.path}`}>
+                  <div key={node.path}>
+                    {node.name} {node.path}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+        {contents.length > 0 && (
+          <div>
+            <div className="mb-4">
+              <span className=" text-xl border-b">Contents</span>
+            </div>
+            <div>
+              {contents.map((node) => (
+                <Link key={node.path} href={`/article/${node.path}`}>
+                  <div key={node.path}>
+                    {node.name} {node.path}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </>
   );
 };

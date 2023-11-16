@@ -1,7 +1,7 @@
-import Navigation from "../Navigation";
 import Link from "next/link";
 import Avatar from "../Avatar";
 import Container from "../Container";
+import Navigation from "../Navigation";
 
 const Header = ({ routes }: { routes: any[] }) => {
   return (
