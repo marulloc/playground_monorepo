@@ -70,7 +70,7 @@ const Page = async ({ params, children }: any) => {
         .filter((paragraph) => !paragraph.trim().match(/^([#-\<\|\>])|!\[/));
 
       const imgPattern = /!\[\[(.*?)\]\]/;
-      const match = readme.match(imgPattern);
+      const match = content.match(imgPattern);
 
       if (match) {
         const firstImage = match[1];
@@ -94,7 +94,7 @@ const Page = async ({ params, children }: any) => {
     <div className="relative">
       <Image height={50} width={300} alt="" src={readmeImgUrl} />
       {/* <ConsoleCompo data={series} /> */}
-      {/* <ConsoleCompo data={contentsMarkdownData} /> */}
+      <ConsoleCompo data={directoryData} />
       <div className="space-y-8   my-8  ">
         {seriesDirectoryData.length > 0 && (
           <div className="">

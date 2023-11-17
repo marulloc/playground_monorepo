@@ -9,7 +9,12 @@ const Page = async ({ params }: any) => {
   const siblings = parentDirData.filter(
     (item) => item.type === "file" && item.path !== decodeURIComponent(params.slug.join("/")),
   );
-  const markdownData = await getMarkdownContents(params.slug.join("/"));
+  const { content: markdown } = await getMarkdownContents(params.slug.join("/"));
+  const imgPattern = /!\[\[([^\[\]\n]+)\.(.*?)\]\]/g;
+  const modifiedMarkdown = markdown.replaceAll(imgPattern, (match, fileName, fileExtension) => {
+    const file = encodeURIComponent(`${fileName}.${fileExtension}`);
+    return `![](https://raw.githubusercontent.com/marulloc/obsidian-git/master/${file})`;
+  });
 
   return (
     <div className="  ">
@@ -31,7 +36,7 @@ const Page = async ({ params }: any) => {
       )}
 
       <div>
-        <MarkdownContents markdown={markdownData.content || ""} />{" "}
+        <MarkdownContents markdown={modifiedMarkdown || ""} />{" "}
       </div>
     </div>
   );
