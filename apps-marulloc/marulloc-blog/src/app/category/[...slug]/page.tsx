@@ -10,7 +10,7 @@ const Page = async ({ params, children }: any) => {
 
   // Current page's readme parsing - get first image & contents in markdown - for making hero section
   const [readmeFile] = directoryData.filter((item) => item.type === "file" && item.name.toLowerCase() === "readme.md");
-  const { content: readme } = await getMarkdownContents(readmeFile.path);
+  const { content: readme } = readmeFile ? await getMarkdownContents(readmeFile.path) : { content: "" };
   const imgPattern = /!\[\[(.*?)\]\]/;
   const match = readme.match(imgPattern);
   const readmeImgUrl = match ? `https://raw.githubusercontent.com/marulloc/obsidian-git/master/${match[1]}` : "";
@@ -58,18 +58,48 @@ const Page = async ({ params, children }: any) => {
   const contents = directoryData.filter(
     (item) => item.type === "file" && item.name.endsWith(".md") && item.name.toLowerCase() !== "readme.md",
   );
-  const contentsMarkdownData = await Promise.all([]);
+  const contentsMarkdownData = await Promise.all(
+    contents.map(async (contentsChild) => {
+      const { content } = await getMarkdownContents(contentsChild.path);
+
+      // extract summary...
+      const [paragraphs] = content
+        .replaceAll(/```[\s\S]*?```/g, "")
+        .split("\n\n")
+        .slice(0, 10)
+        .filter((paragraph) => !paragraph.trim().match(/^([#-\<\|\>])|!\[/));
+
+      const imgPattern = /!\[\[(.*?)\]\]/;
+      const match = readme.match(imgPattern);
+
+      if (match) {
+        const firstImage = match[1];
+        return {
+          ...contentsChild,
+          content,
+          contentDescription: paragraphs || "",
+          contentImageUrl: `https://raw.githubusercontent.com/marulloc/obsidian-git/master/${firstImage}`,
+        };
+      }
+      return {
+        ...contentsChild,
+        content,
+        contentDescription: paragraphs || "",
+        contentImageUrl: "",
+      };
+    }),
+  );
 
   return (
     <div className="relative">
       <Image height={50} width={300} alt="" src={readmeImgUrl} />
       {/* <ConsoleCompo data={series} /> */}
-      <ConsoleCompo data={readme} />
+      {/* <ConsoleCompo data={contentsMarkdownData} /> */}
       <div className="space-y-8   my-8  ">
         {seriesDirectoryData.length > 0 && (
           <div className="">
             <div className="mb-4">
-              <span className=" text-xl border-b">Series</span>
+              <span className=" text-xl border-b">Child Series</span>
             </div>
             <div className="flex gap-4 p-4  bg-gray-900 rounded-lg ">
               {seriesDirectoryData.map((node) => (
@@ -83,18 +113,25 @@ const Page = async ({ params, children }: any) => {
             </div>
           </div>
         )}
-        {contents.length > 0 && (
+        {contentsMarkdownData.length > 0 && (
           <div>
             <div className="mb-4">
-              <span className=" text-xl border-b">Contents</span>
+              <span className=" text-xl border-b">Contents in this Series</span>
             </div>
-            <div className="p-4  bg-gray-900 rounded-lg ">
-              {contents.map((node) => (
-                <Link key={node.path} href={`/article/${node.path}`}>
-                  <div key={node.path}>
-                    {node.name} {node.path}
-                  </div>
-                </Link>
+            <div className="   rounded-lg space-y-4 ">
+              {contentsMarkdownData.map((node) => (
+                <div key={node.path} className="p-4 bg-gray-900 ">
+                  <Link href={`/article/${node.path}`} className="  ">
+                    <div className="relative h-24 w-48">
+                      <Image src={node.contentImageUrl} fill alt={""} />
+                    </div>
+                    <div>{node.name}</div>
+                    <div className=" text">
+                      {/* <p className="h-24 text-ellipsis">{node.readmeDescription}</p> */}
+                      <MarkdownContents markdown={node.contentDescription} />
+                    </div>
+                  </Link>
+                </div>
               ))}
             </div>
           </div>
