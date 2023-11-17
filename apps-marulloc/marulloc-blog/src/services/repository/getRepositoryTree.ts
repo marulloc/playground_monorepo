@@ -1,19 +1,5 @@
 import GITHUB_SERVICE_CONFIG from "../config";
 
-// export type TGithubRepoNode = {
-//   path: string;
-//   mode: string;
-//   type: "blob" | "tree";
-//   sha: string;
-//   url: string;
-// };
-// export type TGithubRepoTree = {
-//   sha: string;
-//   url: string;
-//   tree: TGithubRepoNode[];
-//   truncated: boolean;
-// };
-
 /**
  * @description response repository tree data (in flatMap form)
  * @usage1 nodes'path property used by generateStaticPath (required data processing)

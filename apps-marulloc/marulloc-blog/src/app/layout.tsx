@@ -23,7 +23,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className={classNames(inter.className, " relative text-gray-300")}>
         <Header routes={directoryData} />
 
-        <Container className="mt-24 my-12">{children}</Container>
+        {/* <Container className=" ">
+          </Container> */}
+        {children}
       </body>
     </html>
   );

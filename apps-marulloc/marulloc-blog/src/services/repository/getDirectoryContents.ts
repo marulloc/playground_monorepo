@@ -1,5 +1,10 @@
 import GITHUB_SERVICE_CONFIG from "../config";
 
+/**
+ *
+ * @param path
+ * @returns
+ */
 export const getDirectoryContents = async (path?: string): Promise<TGitRepoContents> => {
   const headers = { Authorization: GITHUB_SERVICE_CONFIG.BEARER };
   const response = await (

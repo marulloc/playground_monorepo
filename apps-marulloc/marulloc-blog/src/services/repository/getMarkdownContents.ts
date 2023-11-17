@@ -1,6 +1,11 @@
 import { decodeUnicode } from "@/utils/decode";
 import GITHUB_SERVICE_CONFIG from "../config";
 
+/**
+ *
+ * @param path
+ * @returns
+ */
 export const getMarkdownContents = async (path: string): Promise<TGitRepoFileNode> => {
   const headers = { Authorization: GITHUB_SERVICE_CONFIG.BEARER };
   const response = await (

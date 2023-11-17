@@ -1,4 +1,5 @@
 import MarkdownContents from "@/components/MarkdownContents";
+import { convertImgUrlInMarkdown } from "@/parsers/paresrs";
 import { getDirectoryContents } from "@/services/repository/getDirectoryContents";
 import { getMarkdownContents } from "@/services/repository/getMarkdownContents";
 import Link from "next/link";
@@ -9,12 +10,10 @@ const Page = async ({ params }: any) => {
   const siblings = parentDirData.filter(
     (item) => item.type === "file" && item.path !== decodeURIComponent(params.slug.join("/")),
   );
+
+  // image parsing
   const { content: markdown } = await getMarkdownContents(params.slug.join("/"));
-  const imgPattern = /!\[\[([^\[\]\n]+)\.(.*?)\]\]/g;
-  const modifiedMarkdown = markdown.replaceAll(imgPattern, (match, fileName, fileExtension) => {
-    const file = encodeURIComponent(`${fileName}.${fileExtension}`);
-    return `![](https://raw.githubusercontent.com/marulloc/obsidian-git/master/${file})`;
-  });
+  const modifiedMarkdown = convertImgUrlInMarkdown(markdown);
 
   return (
     <div className="  ">
