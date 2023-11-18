@@ -1,19 +1,12 @@
 import BreadCrumbs from "@/components/BreadCrumbs";
 import Container from "@/components/Container";
 import MarkdownContents from "@/components/MarkdownContents";
-import { eraseImgStringFromReadme, extractFirstImgFromReadme, findReadme } from "@/parsers/paresrs";
-import { getDirectoryContents } from "@/services/repository/getDirectoryContents";
-import { getMarkdownContents } from "@/services/repository/getMarkdownContents";
+import { getReadmeData } from "@/services/get";
 import { classNames } from "@/utils/classNames";
 import Image from "next/image";
 
 const Layout = async ({ params, children }: any) => {
-  const currentDirData = await getDirectoryContents(params.slug.join("/"));
-  const readmeFile = findReadme(currentDirData);
-  const { content: readme } = readmeFile ? await getMarkdownContents(readmeFile.path) : { content: "" };
-
-  const { firstImgName, firstImgUrl } = extractFirstImgFromReadme(readme);
-  const readmeWithoutFirstImg = eraseImgStringFromReadme(readme, firstImgName);
+  const { readme, readmeWithoutFirstImg, readmeFirstImg } = await getReadmeData(params.slug.join("/"));
 
   return (
     <>
@@ -22,7 +15,7 @@ const Layout = async ({ params, children }: any) => {
       </Container>
 
       <Container>
-        <CategoryHero url={firstImgUrl} />
+        <CategoryHero url={readmeFirstImg} />
       </Container>
 
       <Container className="">
