@@ -3,7 +3,7 @@ import Avatar from "../Avatar";
 import Container from "../Container";
 import Navigation from "../Navigation";
 
-const Header = ({ routes }: { routes: any[] }) => {
+const Header = () => {
   return (
     <>
       <header className=" ">
@@ -15,7 +15,7 @@ const Header = ({ routes }: { routes: any[] }) => {
               </Link>
             </div>
             <div className="flex items-center gap-4">
-              <Navigation routes={routes} />
+              <Navigation />
               <Avatar />
             </div>
           </div>

@@ -1,9 +1,6 @@
 import MarkdownContents from "@/components/MarkdownContents";
-import dirParser from "@/parsers/directoryParser";
-import mdParser from "@/parsers/markdownParser";
-import { getParsedMarkdown, getSiblingList } from "@/services/get";
-import { getDirectoryContents } from "@/services/repository/getDirectoryContents";
-import { getMarkdownContents } from "@/services/repository/getMarkdownContents";
+import { getParsedMarkdown } from "@/services/getParsedMarkdown";
+import { getSiblingList } from "@/services/getSiblingList";
 import Link from "next/link";
 
 const Page = async ({ params }: any) => {

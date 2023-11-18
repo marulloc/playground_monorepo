@@ -1,9 +1,4 @@
-import ConsoleCompo from "@/components/ConsoleCompo";
-import dirParser from "@/parsers/directoryParser";
-import mdParser from "@/parsers/markdownParser";
-import { getSeriesList } from "@/services/get";
-import { getDirectoryContents } from "@/services/repository/getDirectoryContents";
-import { getMarkdownContents } from "@/services/repository/getMarkdownContents";
+import { getSeriesList } from "@/services/getSeriesList";
 import Image from "next/image";
 import Link from "next/link";
 

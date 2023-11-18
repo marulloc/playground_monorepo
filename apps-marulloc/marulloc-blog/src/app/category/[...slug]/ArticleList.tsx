@@ -1,5 +1,5 @@
 import MarkdownContents from "@/components/MarkdownContents";
-import { getArticleList } from "@/services/get";
+import { getArticleList } from "@/services/getArticleList";
 import Image from "next/image";
 import Link from "next/link";
 

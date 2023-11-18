@@ -1,4 +1,18 @@
-const mdParser = {
+export const markdownParser = {
+  /**
+   *
+   * @param string
+   * @returns
+   */
+  decodeUnicode: (string: string) => {
+    return decodeURIComponent(
+      atob(string)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join(""),
+    );
+  },
+
   /**
    *
    * @param readme
@@ -27,6 +41,11 @@ const mdParser = {
     return imgName ? readme.replace(`![[${imgName}]]`, "") : readme;
   },
 
+  /**
+   *
+   * @param markdown
+   * @returns
+   */
   convertAllImgString: (markdown: string) => {
     const regexPattern = /!\[\[([^\[\]\n]+)\.(.*?)\]\]/g;
     return markdown.replaceAll(regexPattern, (match, fileName, fileExtension) => {
@@ -54,5 +73,3 @@ const mdParser = {
     return targetParagraph || "";
   },
 };
-
-export default mdParser;

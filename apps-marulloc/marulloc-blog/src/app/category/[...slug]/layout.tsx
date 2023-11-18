@@ -1,7 +1,7 @@
 import BreadCrumbs from "@/components/BreadCrumbs";
 import Container from "@/components/Container";
 import MarkdownContents from "@/components/MarkdownContents";
-import { getReadmeData } from "@/services/get";
+import { getReadmeData } from "@/services/getReadmeData";
 import { classNames } from "@/utils/classNames";
 import Image from "next/image";
 
