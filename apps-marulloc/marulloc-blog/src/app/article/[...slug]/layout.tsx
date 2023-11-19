@@ -19,7 +19,7 @@ const Layout = ({ children, params }: { children: React.ReactNode; params: any }
 
       <SiblingList path={params.slug.slice(0, params.slug.length - 1).join("/")} pathSegments={params.slug} />
 
-      <Container className="my-12 bg-gray-800 p-8 rounded-lg">
+      <Container className="my-12   rounded-lg">
         <div className=" mb-12">
           <h1 className="text-4xl font-bold">{currentFileName}</h1>
         </div>

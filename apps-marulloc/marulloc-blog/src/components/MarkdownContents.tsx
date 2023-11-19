@@ -15,48 +15,12 @@ const MarkdownContents = ({ markdown }: TProps) => {
         remarkPlugins={[remarkGfm]}
         components={{
           //  ID 다시 삽입해줘야됨 ;;
-          h1: ({ node, ...props }) => (
-            <h1
-              {...props}
-              // id={`h1-${props.children[0]}`}
-              className={markdown_styles.h1}
-            />
-          ),
-          h2: ({ node, ...props }) => (
-            <h2
-              {...props}
-              // id={`h2-${props.children[0]}`}
-              className={markdown_styles.h2}
-            />
-          ),
-          h3: ({ node, ...props }) => (
-            <h3
-              {...props}
-              // id={`h3-${props.children[0]}`}
-              className={markdown_styles.h3}
-            />
-          ),
-          h4: ({ node, ...props }) => (
-            <h4
-              {...props}
-              // id={`h4-${props.children[0]}`}
-              className={markdown_styles.h4}
-            />
-          ),
-          h5: ({ node, ...props }) => (
-            <h5
-              {...props}
-              // id={`h5-${props.children[0]}`}
-              className={markdown_styles.h5}
-            />
-          ),
-          h6: ({ node, ...props }) => (
-            <h6
-              {...props}
-              // id={`h6-${props.children[0]}`}
-              className={markdown_styles.h6}
-            />
-          ),
+          h1: ({ node, ...props }) => <h1 {...props} id={`level-1-${props.children}`} className={markdown_styles.h1} />,
+          h2: ({ node, ...props }) => <h2 {...props} id={`level-2-${props.children}`} className={markdown_styles.h2} />,
+          h3: ({ node, ...props }) => <h3 {...props} id={`level-3-${props.children}`} className={markdown_styles.h3} />,
+          h4: ({ node, ...props }) => <h4 {...props} id={`level-4-${props.children}`} className={markdown_styles.h4} />,
+          h5: ({ node, ...props }) => <h5 {...props} id={`level-5-${props.children}`} className={markdown_styles.h5} />,
+          h6: ({ node, ...props }) => <h6 {...props} id={`level-6-${props.children}`} className={markdown_styles.h6} />,
           p: ({ node, ...props }) => <p {...props} className={markdown_styles.p} />,
           a: ({ node, ...props }) => <a {...props} className={markdown_styles.a} />,
           blockquote: ({ node, ...props }) => <blockquote {...props} className={markdown_styles.blockquote} />,
