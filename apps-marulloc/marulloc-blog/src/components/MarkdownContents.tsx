@@ -1,8 +1,11 @@
-import Image from "next/image";
+"use client";
+
+import { classNames } from "@/utils/classNames";
 import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import remarkGfm from "remark-gfm";
+
+import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from "react-syntax-highlighter";
+import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 type TProps = {
   markdown: string;
@@ -11,7 +14,7 @@ const MarkdownContents = ({ markdown }: TProps) => {
   return (
     <div id="observing-target">
       <ReactMarkdown
-        className=" text-white [&>h1]:mt-8 [&>h1]:mb-4 [&>h2]:mt-6 [&>h2]:mb-4   "
+        className={classNames(" text-zinc-400  font-light")}
         remarkPlugins={[remarkGfm]}
         components={{
           //  ID 다시 삽입해줘야됨 ;;
@@ -24,32 +27,33 @@ const MarkdownContents = ({ markdown }: TProps) => {
           p: ({ node, ...props }) => <p {...props} className={markdown_styles.p} />,
           a: ({ node, ...props }) => <a {...props} className={markdown_styles.a} />,
           blockquote: ({ node, ...props }) => <blockquote {...props} className={markdown_styles.blockquote} />,
-          pre: ({ node, ...props }) => <pre {...props} className={markdown_styles.pre} />,
+          // pre: ({ node, ...props }) => <pre {...props} className={markdown_styles.pre} />,
           hr: ({ node, ...props }) => <hr {...props} className={markdown_styles.hr} />,
+
+          li: ({ node, ...props }) => <li {...props} className={markdown_styles.li} />,
           ul: ({ node, ...props }) => <ul {...props} className={markdown_styles.ul} />,
           ol: ({ node, ...props }) => <ol {...props} className={markdown_styles.ol} />,
           table: ({ node, ...props }) => <table {...props} className={markdown_styles.table} />,
           img: ({ node, ...props }) => <img {...props} className={markdown_styles.img} />,
-          code: ({ node, ...props }) => <code {...props} className={markdown_styles.code} />,
-          // code({ node, inline, className, children, ...props }) {
-          //   const match = /language-(\w+)/.exec(className || "");
-          //   return !inline && match ? (
-          //     <SyntaxHighlighter language={match[1]} PreTag="div" {...props} style={materialDark}>
-          //       {String(children).replace(/\n$/, "")}
-          //     </SyntaxHighlighter>
-          //   ) : (
-          //     <code {...props}>{children}</code>
-          //   );
-          // },
-          // img: (image) => (
-          //   <Image
-          //     src={image.src || ""}
-          //     alt={image.alt || "파일을 찾을 수 없습니다."}
-          //     width={500}
-          //     height={300}
-          //     className={markdown_styles.img}
-          //   />
-          // ),
+          code(props) {
+            const { children, className, node, ...rest } = props;
+            const match = /language-(\w+)/.exec(className || "");
+            return match ? (
+              <SyntaxHighlighter
+                {...(rest as SyntaxHighlighterProps)}
+                PreTag="div"
+                language={match[1]}
+                style={materialDark}
+                className={"rounded-lg bg-zinc-800  "}
+              >
+                {String(children).replace(/\n$/, "")}
+              </SyntaxHighlighter>
+            ) : (
+              <code {...rest} className={markdown_styles.code}>
+                {children}
+              </code>
+            );
+          },
         }}
       >
         {markdown}
@@ -59,28 +63,37 @@ const MarkdownContents = ({ markdown }: TProps) => {
 };
 
 export default MarkdownContents;
-const classComposer = (...classes: any[]) => {
-  return classes.filter(Boolean).join(" ");
+
+const typo = {
+  base: { main: "dark:text-zinc-400", sub: "dar:text-zinc-200" },
+  primary: { main: "dark:text-indigo-400", sub: "dark:text-indigo-600" },
+};
+
+const background = {
+  base: { main: "dark:bg-zinc-800" },
 };
 
 const markdown_styles = {
-  h1: classComposer("text-4xl font-bold mt-0 mb-2 border-b  italic"),
-  h2: classComposer("text-3xl font-bold mt-0 mb-2 "),
-  h3: classComposer("text-2xl font-bold mt-0 mb-2  "),
-  h4: classComposer("text-xl font-bold mt-0 mb-2  "),
-  h5: classComposer("text-lg font-bold mt-0 mb-2  "),
-  h6: classComposer("text-lg font-bold mt-0 mb-2  "),
-  p: classComposer(" mt-0 mb-4 "),
-  a: classComposer(" text-blue-500 hover:text-blue-600 cursor-pointer"),
-  blockquote: classComposer(
-    "border-gray-300 border-l-4 font-normal italic my-8 pl-6 text-gray-400 bg-gray-800 py-2 text-lg [&>p]:m-0",
+  h1: classNames("text-4xl font-bold", "text-zinc-200 mt-20 mb-8   "),
+  h2: classNames("text-3xl font-bold ", "text-zinc-200 mt-16 mb-8 "),
+  h3: classNames("text-xl font-semibold ", "text-zinc-200 mt-12 mb-8"),
+  h4: classNames("text-lg font-bold ", "text-zinc-100  mt-8 mb-2"),
+  h5: classNames("text-md ", "font-semibold text-zinc-300 my-4  "),
+  h6: classNames("text-md   ", " font-semibold text-zinc-300 my-4"),
+
+  p: classNames("my-4 ", "leading-6  "),
+  a: classNames(" text-indigo-400 hover:text-indigo-600 cursor-pointer"),
+  blockquote: classNames(
+    "border-indigo-400 border-l-4 text-zinc-400 bg-zinc-800 text-md [&>p]:m-0 p-6 py-4 ",
+    "my-8",
+    "[&>h1]:mt-0 [&>h2]:mt-0 [&>h3]:mt-0 [&>h4]:mt-0",
   ),
-  code: classComposer("bg-gray-700  p-1 py-0 max-w-full overflow-auto rounded-sm text-sm text-red-400 inline-flex"),
-  pre: classComposer("bg-gray-700 px-2 py-2 w-full overflow-auto rounded-md"),
-  hr: classComposer("border-b border-gray-300 my-12 rounded-full"),
-  ul: classComposer("list-disc   my-1 ml-4"),
-  ol: classComposer("list-decimal   my-1 ml-4"),
-  table: classComposer(
+  hr: classNames("border-b border-zinc-600  ", " my-12 border-1"),
+
+  li: classNames("my-1 pl-2"),
+  ul: classNames("list-disc ml-6 my-2"),
+  ol: classNames("list-decimal ml-6 my-2 "),
+  table: classNames(
     "w-full text-white mb-4 p-0 border-collapse border border-red-600",
     "[&>tr]:border-t [&>tr]:border-gray-500 [&>tr]:bg-white [&>tr]:m-0 [&>tr]:p-0 [&>tr:nth-child(2n)]:bg-gray-800",
     "[&>*>tr]:border-t [&>*>tr]:border-gray-500 [&>*>tr]:bg-gray-600 [&>*>tr]:m-0 [&>*>tr]:p-0 [&>*>tr:nth-child(2n)]:bg-gray-800",
@@ -91,5 +104,10 @@ const markdown_styles = {
     "[&>*>td]:border [&>*>td]:border-gray-500 [&>*>td]:text-left [&>*>td]:p-1 [&>*>td:first-child]:mt-0 [&>*>td:last-child]mb-0:",
     "[&>*>*>td]:border [&>*>*>td]:border-gray-500 [&>*>*>td]:text-left [&>*>*>td]:p-1 [&>*>*>td:first-child]:mt-0 [&>*>*>td:last-child]mb-0",
   ),
-  img: classComposer("rounded-md "),
+  img: classNames("rounded-md  mx-auto"),
+
+  // pre: classNames("bg-zinc-700 w-full overflow-auto rounded-md p-4 my-8 "),
+  code: classNames(
+    "bg-zinc-700 max-w-full overflow-auto rounded-md text-sm text-zinc-200 inline-flex p-0.5 px-1.5 text-red-400",
+  ),
 };
