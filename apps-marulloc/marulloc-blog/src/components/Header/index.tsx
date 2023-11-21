@@ -6,7 +6,7 @@ import Navigation from "../Navigation";
 const Header = () => {
   return (
     <>
-      <header className=" ">
+      <header className="sticky top-0 w-screen z-50 bg-black  ">
         <Container className="border-b border-gray-800">
           <div className="flex items-center py-4  ">
             <div className="flex-1">

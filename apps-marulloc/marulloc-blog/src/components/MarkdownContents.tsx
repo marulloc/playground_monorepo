@@ -14,7 +14,7 @@ const MarkdownContents = ({ markdown }: TProps) => {
   return (
     <div id="observing-target">
       <ReactMarkdown
-        className={classNames(" text-zinc-400  font-light")}
+        className={classNames(" text-zinc-400  font-light  ")}
         remarkPlugins={[remarkGfm]}
         components={{
           //  ID 다시 삽입해줘야됨 ;;
@@ -74,9 +74,9 @@ const background = {
 };
 
 const markdown_styles = {
-  h1: classNames("text-4xl font-bold", "text-zinc-200 mt-20 mb-8   "),
-  h2: classNames("text-3xl font-bold ", "text-zinc-200 mt-16 mb-8 "),
-  h3: classNames("text-xl font-semibold ", "text-zinc-200 mt-12 mb-8"),
+  h1: classNames("text-4xl font-bold", "text-zinc-200 mt-20 mb-8   scroll-m-24 "),
+  h2: classNames("text-3xl font-bold ", "text-zinc-200 mt-16 mb-8 scroll-m-24"),
+  h3: classNames("text-xl font-semibold ", "text-zinc-200 mt-12 mb-8 scroll-m-24"),
   h4: classNames("text-lg font-bold ", "text-zinc-100  mt-8 mb-2"),
   h5: classNames("text-md ", "font-semibold text-zinc-300 my-4  "),
   h6: classNames("text-md   ", " font-semibold text-zinc-300 my-4"),
