@@ -17,24 +17,26 @@ const SiblingArticles = async ({ parentPathSegments, currentPathSegments }: TPro
   const siblingList = await getSiblingList(parentDirPath);
 
   return (
-    <section className=" ">
+    <section className="mt-8">
       {siblingList.length > 0 && (
         <div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <span className=" text-xl border-b">{parentDirName} 시리즈의 다른 글</span>
-          </div>
-          <div className=" space-y-2 text-sm">
+          </div> */}
+          <h2 className="text-2xl font-bold mb-4 text-gray-800">{parentDirName}</h2>
+
+          <ul className=" space-y-2 text-sm list-disc pl-6">
             {siblingList.map((node) => (
-              <div key={node.path}>
+              <li key={node.path}>
                 <Link
                   href={`/article/${node.path}`}
                   className={classNames(decodeURIComponent(currentFilePath) === node.path ? "text-teal-400" : "")}
                 >
                   <div>{node.name}</div>
                 </Link>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       )}
     </section>

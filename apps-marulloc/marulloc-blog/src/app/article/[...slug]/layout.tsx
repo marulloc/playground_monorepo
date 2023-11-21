@@ -4,9 +4,7 @@ import Container from "@/components/Container";
 const Layout = ({ children, params }: { children: React.ReactNode; params: any }) => {
   return (
     <div className="relative">
-      <Container>
-        <BreadCrumbs pathSegments={params.slug} />
-      </Container>
+      <Container>{/* <BreadCrumbs pathSegments={params.slug} /> */}</Container>
 
       {children}
     </div>

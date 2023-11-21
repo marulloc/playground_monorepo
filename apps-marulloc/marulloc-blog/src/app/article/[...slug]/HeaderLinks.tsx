@@ -13,12 +13,12 @@ const HeaderLinks = async ({ pathSegments }: TProps) => {
   const linkBaseStyle = ["pl-0", "pl-4", "pl-8"];
 
   return (
-    <div className=" space-y-2 text-xs text-zinc-400">
+    <div className=" space-y-2 text-xs text-zinc-400 ">
       {headings.map(({ level, text }) => (
         <div className={classNames(linkBaseStyle[level - 1], " ")}>
           <Link
             href={`#level-${level}-${text}`}
-            className="  hover:text-zinc-200 hover:font-semibold   transition-all duration-100  "
+            className="  hover:text-zinc-200 hover:font-semibold   transition-all duration-100  whitespace-nowrap "
           >
             {text}
           </Link>

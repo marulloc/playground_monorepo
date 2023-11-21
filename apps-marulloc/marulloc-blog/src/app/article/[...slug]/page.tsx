@@ -1,23 +1,29 @@
 import HeaderLinks from "./HeaderLinks";
 import Article from "./Article";
 import SiblingArticles from "./SiblingArticles";
+import Container from "@/components/Container";
 
 const Page = async ({ params }: any) => {
   const parentDirPathSegments = [...params.slug].slice(0, params.slug.length - 1);
   const currentFilePathSegments = [...params.slug];
 
   return (
-    <main className="  ">
-      <div className="max-w-2xl mx-auto w-screen   ">
-        <SiblingArticles currentPathSegments={currentFilePathSegments} parentPathSegments={parentDirPathSegments} />
+    <main className=" flex gap-24 p-4">
+      <div className="flex-1 hidden lg:block"></div>
+
+      <div className=" max-w-2xl w-full mx-auto  ">
         <Article pathSegments={currentFilePathSegments} />
+
+        <SiblingArticles parentPathSegments={parentDirPathSegments} currentPathSegments={currentFilePathSegments} />
       </div>
 
-      <aside className="fixed right-0 top-0  hidden xl:block lg:w-72   h-full">
-        <div className="h-full  pt-80">
-          <HeaderLinks pathSegments={currentFilePathSegments} />
+      <div className="flex-1  hidden lg:block   ">
+        <div className=" relative h-full w-full">
+          <div className="sticky top-60">
+            <HeaderLinks pathSegments={currentFilePathSegments} />
+          </div>
         </div>
-      </aside>
+      </div>
     </main>
   );
 };

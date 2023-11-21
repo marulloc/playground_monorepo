@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="kr">
       <body className={classNames(" relative     ")}>
         <Header />
 
