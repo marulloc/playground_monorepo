@@ -21,7 +21,7 @@ export const getSeriesList = async (curPath: string) => {
       const readme = markdownParser.decodeUnicode(content);
       const { firstImgName, firstImgUrl } = markdownParser.extractFirstImg(readme);
 
-      return { ...seriesDir, firstImgName, firstImgUrl };
+      return { ...seriesDir, firstImgName, firstImgUrl, childDir };
     }),
   );
 

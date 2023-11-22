@@ -32,7 +32,7 @@ export default ArticleList;
 
 const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof getArticleList>>[number] }) => {
   return (
-    <article className="bg-zinc-950 border border-zinc-800 p-4 rounded-lg group hover:bg-zinc-900 hover:scale-105  transition-all duration-75   ">
+    <article className="   bg-white bg-opacity-20 backdrop-blur-sm border border-zinc-800 p-4 rounded-lg group hover:bg-zinc-900 hover:scale-105  transition-all duration-75   ">
       <Link href={`/article/${node.path}`} className="flex flex-col items-start justify-between">
         <div className="relative w-full  h-48  bg-zinc-800 rounded-lg ">
           {node.contentImageUrl && (
