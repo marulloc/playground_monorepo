@@ -1,3 +1,4 @@
+import ConsoleCompo from "@/components/ConsoleCompo";
 import { getSeriesList } from "@/services/getSeriesList";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +8,7 @@ const SeriesList = async ({ path }: { path: string }) => {
 
   return (
     <>
+      <ConsoleCompo data={seriesList} />
       {seriesList.length > 0 && (
         <div className="">
           <div className="mb-4">
@@ -29,3 +31,7 @@ const SeriesList = async ({ path }: { path: string }) => {
 };
 
 export default SeriesList;
+
+const SeriesCard = () => {
+  return <></>;
+};

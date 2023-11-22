@@ -9,20 +9,15 @@ const Layout = async ({ params, children }: any) => {
   const { readme, readmeWithoutFirstImg, readmeFirstImg } = await getReadmeData(params.slug.join("/"));
 
   return (
-    <>
-      <Container className="py-2   border-gray-800">
-        <BreadCrumbs pathSegments={params.slug} />
-      </Container>
+    <div className=" max-w-4xl mx-auto  ">
+      <BreadCrumbs pathSegments={params.slug} />
 
-      <div className=" max-w-4xl mx-auto  ">
-        <CategoryHero url={readmeFirstImg} pathSegments={params.slug} />
-      </div>
+      <CategoryHero url={readmeFirstImg} pathSegments={params.slug} />
 
-      <Container className="">
-        {children}
-        <CategoryReadme readme={readmeWithoutFirstImg} />
-      </Container>
-    </>
+      {children}
+
+      <CategoryReadme readme={readmeWithoutFirstImg} />
+    </div>
   );
 };
 
