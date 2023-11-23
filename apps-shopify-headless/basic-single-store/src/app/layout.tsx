@@ -1,6 +1,8 @@
+import { classNames } from "@/utils/classNames";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,7 +14,28 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={classNames(inter.className, "relative min-h-screen w-screen h-screen")}>
+        {/* Background section */}
+        <div className="fixed top-0 w-full h-full -z-50 bg-white dark:bg-black">
+          <div className="relative w-full h-full">
+            <Image src="/background3.jpg" fill alt="" className=" object-cover  " />
+          </div>
+        </div>
+
+        <div className=" max-w-7xl mx-auto">
+          {/* Header Section */}
+          <div className=" sticky top-0 p-8 ">
+            <header className="h-16 bg-white bg-opacity-30 border border-gray-300 shadow-lg backdrop-blur-xl rounded-2xl">
+              Untitled
+            </header>
+          </div>
+          <main className=" min-h-[calc(100vh-128px)]">{children}</main>
+        </div>
+
+        {/* <div className="">
+          <footer className="h-24 bg-white bg-opacity-30 border border-gray-300 shadow-lg backdrop-blur-xl flex justify-center items-center"></footer>
+        </div> */}
+      </body>
     </html>
   );
 }
