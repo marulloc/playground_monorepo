@@ -5,6 +5,7 @@ import { classNames } from "@/utils/classNames";
 import { getSeriesList } from "@/services/getSeriesList";
 import { getArticleList } from "@/services/getArticleList";
 import { redirect } from "next/navigation";
+import ConsoleCompo from "@/components/ConsoleCompo";
 
 type TPageProps = {
   params: { slug: string[] };
@@ -59,6 +60,7 @@ const Page = async ({ params, searchParams }: TPageProps) => {
         </ul>
       </div>
 
+      <ConsoleCompo data={articleList} />
       <div className="  ">
         {curTabQuery === "article" && <ArticleList path={params.slug.join("/")} />}
         {curTabQuery === "series" && <SeriesList path={params.slug.join("/")} />}

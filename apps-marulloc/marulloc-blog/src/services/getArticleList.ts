@@ -1,6 +1,7 @@
 import { directoryParser } from "@/services/parsers/directoryParser";
 import { markdownParser } from "@/services/parsers/markdownParser";
 import { githubApi } from "@/services/api/github-api";
+import { dictionaryOrderSort } from "@/utils/dictionaryOrderSort";
 
 /**
  *
@@ -29,5 +30,5 @@ export const getArticleList = async (curPath: string) => {
     }),
   );
 
-  return articleList;
+  return articleList.sort(dictionaryOrderSort);
 };
