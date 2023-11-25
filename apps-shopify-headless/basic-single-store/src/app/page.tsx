@@ -1,5 +1,5 @@
 import { Card } from "ui";
 
 export default function Home() {
-  return <main className=""></main>;
+  return <main className="">asd</main>;
 }

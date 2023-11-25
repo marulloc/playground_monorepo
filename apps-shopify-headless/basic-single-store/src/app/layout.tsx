@@ -18,18 +18,43 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Background section */}
         <div className="fixed top-0 w-full h-full -z-50 bg-white dark:bg-black">
           <div className="relative w-full h-full">
-            <Image src="/background3.jpg" fill alt="" className=" object-cover  " />
+            <Image src="/background4.jpg" fill alt="" className=" object-cover   " />
           </div>
         </div>
 
         <div className=" max-w-7xl mx-auto">
           {/* Header Section */}
           <div className=" sticky top-0 p-8 ">
-            <header className="h-16 bg-white bg-opacity-30 border border-gray-300 shadow-lg backdrop-blur-xl rounded-2xl">
-              Untitled
+            <header className="h-16  ">
+              <GlassCard.Box>
+                <GlassCard.Contents>
+                  <div className="text-pink-950">Untitled</div>
+                </GlassCard.Contents>
+              </GlassCard.Box>
             </header>
           </div>
-          <main className=" min-h-[calc(100vh-128px)]">{children}</main>
+
+          <main className=" p-8 pt-0   ">
+            <div className="min-h-[calc(100vh-160px)] h-[calc(100vh-160px)]    ">
+              <GlassCard>
+                <div className="grid grid-cols-4 p-12">
+                  {/*  */}
+                  <GlassCard.Box className={""}>
+                    <GlassCard.Image src="/background.jpg" />
+                    <GlassCard.Contents className={"h-48"}>
+                      <span>Abstracter</span>
+                      <div>
+                        <button className=" m-8 p-2 px-6 bg-pink-500 hover:bg-indigo-400 shadow-lg text-white rounded-md  ">
+                          Add to cart
+                        </button>
+                      </div>
+                    </GlassCard.Contents>
+                  </GlassCard.Box>
+                </div>
+                {children}
+              </GlassCard>
+            </div>
+          </main>
         </div>
 
         {/* <div className="">
@@ -39,3 +64,49 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
+const GlassCard = ({ children, className }: { children: React.ReactNode; className?: any[] }) => {
+  return (
+    <GlassCard.Box>
+      <GlassCard.Contents className=" p-4 ">{children}</GlassCard.Contents>
+    </GlassCard.Box>
+  );
+};
+
+// eslint-disable-next-line react/display-name
+GlassCard.Box = ({ children, className }: { children: React.ReactNode; className?: any[] | string }) => {
+  return (
+    <div
+      className={classNames(
+        "h-full ",
+        "bg-white bg-opacity-40   border-gray-100  border backdrop-blur-sm rounded-xl shadow-lg overflow-hidden",
+        // "overflow-hidden",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+// eslint-disable-next-line react/display-name
+GlassCard.Contents = ({ children, className }: { children: React.ReactNode; className?: any[] | string }) => {
+  return <div className={classNames("p-4 flex justify-center flex-col items-center", className)}>{children}</div>;
+};
+
+// eslint-disable-next-line react/display-name
+GlassCard.Image = ({
+  children,
+  className,
+  src,
+}: {
+  children?: React.ReactNode;
+  className?: any[] | string;
+  src: string;
+}) => {
+  return (
+    <div className={classNames("h-2/3 relative round", className)}>
+      <Image fill src={src} alt="" className=" object-cover " />
+    </div>
+  );
+};
