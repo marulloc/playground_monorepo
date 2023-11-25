@@ -12,8 +12,9 @@ const Layout = async ({ params, children }: any) => {
     <div className=" max-w-4xl mx-auto  ">
       {/* <BreadCrumbs pathSegments={params.slug} /> */}
 
-      <CategoryHero url={readmeFirstImg} pathSegments={params.slug} />
+      {/* <CategoryHero url={readmeFirstImg} pathSegments={params.slug} /> */}
 
+      <CategoryHeroV2 url={readmeFirstImg} pathSegments={params.slug} />
       <div className=" relative">{children}</div>
 
       <CategoryReadme readme={readmeWithoutFirstImg} />
@@ -48,6 +49,21 @@ const CategoryHero = async ({ url, pathSegments }: { url?: string; pathSegments:
           </a>
         </div>
       </div>
+    </section>
+  );
+};
+
+const CategoryHeroV2 = async ({ url, pathSegments }: { url?: string; pathSegments: string[] }) => {
+  return (
+    <section className=" text-center my-16">
+      <div className=" flex justify-center items-center">
+        <div className="h-32 w-32 relative">
+          {url && <Image alt="" src={url} fill className="absolute  -z-10   object-cover rounded-xl p-0.5" />}
+        </div>
+      </div>
+      <h1 className="text-4xl my-4  font-bold tracking-wide text-zinc-50 spacing   ">
+        {decodeURIComponent(pathSegments[pathSegments.length - 1])}
+      </h1>
     </section>
   );
 };

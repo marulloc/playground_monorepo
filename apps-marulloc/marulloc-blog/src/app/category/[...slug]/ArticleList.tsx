@@ -9,14 +9,8 @@ const ArticleList = async ({ path }: { path: string }) => {
 
   return (
     <>
-      <div className="  py-12 sm:py-32">
-        <div className=" o max-w-7xl ">
-          <div className=" max-w-2xl text-left">
-            <h2 className="text-3xl font-bold tracking-tight text-zinc-200 sm:text-4xl">Articles </h2>
-            {/* <p className="mt-2 text-lg leading-8 text-gray-600">
-            Learn how to grow your business with our expert advice.
-          </p> */}
-          </div>
+      <div className="   ">
+        <div className="   max-w-7xl ">
           <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {articleList.map((node) => (
               <ArticleCard key={node.path} node={node} />
