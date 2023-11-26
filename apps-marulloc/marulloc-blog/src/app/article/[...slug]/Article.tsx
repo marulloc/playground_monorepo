@@ -9,8 +9,8 @@ const Article = async ({ pathSegments }: TProps) => {
   const modifiedMarkdown = await getParsedMarkdown(pathSegments.join("/"));
   const currentFileName = decodeURIComponent(pathSegments.at(-1) as string);
   return (
-    <article className="mt-12 ">
-      <div className="  mb-12">
+    <article className="  ">
+      <div className="  ">
         <h1 className="text-4xl font-bold leading-normal ">{currentFileName}</h1>
       </div>
       <div>

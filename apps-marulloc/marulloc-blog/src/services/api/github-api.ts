@@ -12,7 +12,7 @@ export const githubApi = {
       const response = await (
         await fetch(GITHUB_API_CONFIG.TREE_API_URL, {
           headers,
-          next: { revalidate: 300 },
+          next: { revalidate: 30000 },
         })
       ).json();
 
@@ -29,7 +29,7 @@ export const githubApi = {
       const response = await (
         await fetch(`${GITHUB_API_CONFIG.CONTENTS_API_URL}${path ? `${path}` : ""}`, {
           headers,
-          next: { revalidate: 300 },
+          next: { revalidate: 30000 },
         })
       ).json();
 
@@ -43,7 +43,7 @@ export const githubApi = {
     markdown: async (path: string): Promise<TGitRepoFileNode> => {
       const headers = { Authorization: GITHUB_API_CONFIG.BEARER };
       const response = await (
-        await fetch(`${GITHUB_API_CONFIG.CONTENTS_API_URL}/${path}`, { headers, next: { revalidate: 300 } })
+        await fetch(`${GITHUB_API_CONFIG.CONTENTS_API_URL}/${path}`, { headers, next: { revalidate: 30000 } })
       ).json();
 
       return response as Promise<TGitRepoFileNode>;

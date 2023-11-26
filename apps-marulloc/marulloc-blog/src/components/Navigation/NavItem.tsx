@@ -21,12 +21,12 @@ const NavItem = ({ href, type, children }: TProps) => {
         href={type === "dir" ? `/category/${href}` : `/article/${href}`}
         className={classNames(
           "relative block px-3 py-2 transition",
-          isActive ? "text-teal-500 dark:text-teal-400" : "hover:text-teal-500 dark:hover:text-teal-400",
+          isActive ? "text-pink-500 dark:text-pink-400" : "hover:text-pink-500 dark:hover:text-pink-400",
         )}
       >
         {children}
         {isActive && (
-          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0 dark:from-teal-400/0 dark:via-teal-400/40 dark:to-teal-400/0" />
+          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-pink-500/0 via-pink-500/40 to-pink-500/0 dark:from-pink-400/0 dark:via-pink-400/40 dark:to-pink-400/0" />
         )}
       </Link>
     </li>
