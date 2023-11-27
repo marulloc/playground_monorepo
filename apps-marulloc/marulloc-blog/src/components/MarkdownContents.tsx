@@ -34,6 +34,7 @@ const MarkdownContents = ({ markdown }: TProps) => {
           ul: ({ node, ...props }) => <ul {...props} className={markdown_styles.ul} />,
           ol: ({ node, ...props }) => <ol {...props} className={markdown_styles.ol} />,
           table: ({ node, ...props }) => <table {...props} className={markdown_styles.table} />,
+          // eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element
           img: ({ node, ...props }) => <img {...props} className={markdown_styles.img} />,
           code(props) {
             const { children, className, node, ...rest } = props;
