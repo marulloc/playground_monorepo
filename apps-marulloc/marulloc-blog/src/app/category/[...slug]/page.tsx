@@ -113,6 +113,8 @@ const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof 
         <div className="text-zinc-400 group-hover:text-pink-400 text-xs    ">
           {/* {`view ${node.childDir.filter(({ name }) => name.toLowerCase() !== "readme.md").length} articles`} */}
         </div>
+
+        <div className="text-zinc-200 group-hover:text-pink-400 text-xs  absolute bottom-4    ">read more</div>
       </div>
     </Link>
   );
@@ -144,7 +146,7 @@ const SeriesCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof g
         <div className="  line-clamp-3 text-sm leading-6 text-zinc-400 min-h-[20px] -my-2">
           <MarkdownContents markdown={node.readmeWithoutFirstImg} />
         </div>
-        <div className="text-zinc-400 group-hover:text-pink-400 text-xs    ">
+        <div className="text-zinc-200 group-hover:text-pink-400 text-xs    ">
           {`view ${node.childDir.filter(({ name }) => name.toLowerCase() !== "readme.md").length} articles`}
         </div>
       </div>

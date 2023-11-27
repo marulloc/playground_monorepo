@@ -37,8 +37,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </div>
 
           {/* Main */}
-          <div className="   relative isolate  bg-zinc-700 bg-opacity-40  h-full   backdrop-blur-lg  rounded-lg min-h-[calc(100vh-160px)] flex ">
-            <main className="  p-8 w-full  ">{children}</main>
+          <div className="   relative isolate  bg-zinc-700 bg-opacity-40  h-full   backdrop-blur-lg  rounded-lg min-h-[calc(100vh-160px)] flex flex-col  mb-8 ">
+            <main className=" flex-1 h-full flex flex-col w-full ">{children}</main>
           </div>
         </div>
       </body>

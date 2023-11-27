@@ -8,29 +8,31 @@ const Page = async ({ params }: any) => {
   const currentFilePathSegments = [...params.slug];
 
   return (
-    <main>
-      <div className="flex gap-8 xl:gap-12 2xl:gap-24 p-4">
-        <div className="flex-1 hidden lg:block"></div>
-
-        <div className=" max-w-2xl w-full mx-auto  ">
-          <Article pathSegments={currentFilePathSegments} />
-
-          {/* <SiblingArticles parentPathSegments={parentDirPathSegments} currentPathSegments={currentFilePathSegments} /> */}
-        </div>
-
-        <div className="flex-1  hidden lg:block   ">
-          <div className=" relative h-full w-full">
-            <div className="sticky top-60 mb-12">
-              <HeaderLinks pathSegments={currentFilePathSegments} />
-            </div>
+    <div className="   flex gap-2 my-12  ">
+      <div className=" flex-1 hidden lg:block ">
+        <div className=" relative h-full w-full   ">
+          <div className="sticky   top-96 py-8 my-12  flex justify-center">
+            <button className=" flex justify-center items-center bg-zinc-700 p-3  rounded-full h-12 w-12 border border-zinc-800 text-zinc-400 hover:text-zinc-200">
+              {"<-"}
+            </button>
           </div>
         </div>
       </div>
 
-      <Container>
-        <RelatedPost />
-      </Container>
-    </main>
+      <div className="     mx-auto     ">
+        <div className="mx-auto max-w-3xl w-full  px-8 ">
+          <Article pathSegments={currentFilePathSegments} />
+        </div>
+      </div>
+
+      <div className="   hidden lg:block">
+        <div className=" relative h-full w-full  ">
+          <div className="sticky top-80 mb-12  flex justify-center ">
+            <HeaderLinks pathSegments={currentFilePathSegments} />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
