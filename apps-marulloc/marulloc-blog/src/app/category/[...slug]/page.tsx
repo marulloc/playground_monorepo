@@ -30,9 +30,9 @@ const Page = async ({ params, searchParams }: TPageProps) => {
 
   return (
     <>
-      <div className="relative mt-20">
+      <div className="relative  ">
         <div className="mb-4 border-b dark:border-zinc-700">
-          <ul className="flex flex-wrap text-lg   text-center text-zinc-400">
+          <ul className="flex flex-wrap text-lg   text-center text-zinc-200">
             <li className={classNames(hasArticle ? "block" : "hidden")}>
               <Link
                 href={{ query: { tab: "article" } }}

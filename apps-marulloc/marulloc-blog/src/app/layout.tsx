@@ -23,7 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <div className=" relative max-w-7xl mx-auto  ">
           {/* Header */}
           <div className=" isolate sticky  top-0 pb-8 lg:-top-8 lg:py-8 w-full z-30   ">
-            <header className="flex items-center    h-16  z-50  backdrop-blur-xl bg-zinc-800 bg-opacity-40     rounded-lg  px-8    ">
+            <header className="flex items-center    h-16  z-50  backdrop-blur-xl bg-zinc-700 bg-opacity-40     rounded-lg  px-8    ">
               <div className="flex-1">
                 <Link href="/" className=" text-2xl font-semibold">
                   marul.log
@@ -37,8 +37,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </div>
 
           {/* Main */}
-          <div className="relative isolate  bg-zinc-800 bg-opacity-40  h-full   backdrop-blur-lg  rounded-lg min-h-[calc(100vh-160px)] ">
-            <main className=" px-8 lg:px-24  py-8 lg:py-24 ">{children}</main>
+          <div className="   relative isolate  bg-zinc-700 bg-opacity-40  h-full   backdrop-blur-lg  rounded-lg min-h-[calc(100vh-160px)] flex ">
+            <main className="  p-8 w-full  ">{children}</main>
           </div>
         </div>
       </body>
