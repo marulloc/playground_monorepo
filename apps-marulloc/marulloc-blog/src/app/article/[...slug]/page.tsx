@@ -9,26 +9,24 @@ const Page = async ({ params }: any) => {
   const currentFilePathSegments = [...params.slug];
 
   return (
-    <div className="   flex gap-2 my-12  ">
-      <div className=" flex-1 hidden lg:block ">
-        <div className=" relative h-full w-full   ">
-          <div className="sticky   top-96 py-8 my-12  flex justify-center">
-            <FallbackBtn />
-          </div>
+    <div className="w-full flex gap-4   ">
+      <div className="flex-1 relative hidden lg:block">
+        <div className="sticky top-96 mb-12  flex justify-center  ">
+          <FallbackBtn />
         </div>
       </div>
-
-      <div className="     mx-auto     ">
-        <div className="mx-auto max-w-xl w-full  px-8  min-w-[672px]">
+      <div className="max-w-2xl mx-auto relative  w-full  ">
+        <div className="mb-4   lg:hidden flex justify-end ">
+          <FallbackBtn />
+        </div>
+        <div className=" mt-12 ">
           <Article pathSegments={currentFilePathSegments} />
         </div>
       </div>
 
-      <div className=" flex-1  hidden lg:block">
-        <div className=" relative h-full w-full  ">
-          <div className="sticky top-80 mb-12  flex justify-center  ">
-            <HeaderLinks pathSegments={currentFilePathSegments} />
-          </div>
+      <div className="flex-1 relative hidden lg:block ">
+        <div className="sticky top-80 mb-12  flex justify-center  ">
+          <HeaderLinks pathSegments={currentFilePathSegments} />
         </div>
       </div>
     </div>
