@@ -14,7 +14,7 @@ const Article = async ({ pathSegments }: TProps) => {
         <h1 className="text-4xl font-bold leading-normal ">{currentFileName}</h1>
       </div>
       <div>
-        <MarkdownContents markdown={modifiedMarkdown || ""} />{" "}
+        <MarkdownContents markdown={modifiedMarkdown || "> !! empty"} />{" "}
       </div>
     </article>
   );

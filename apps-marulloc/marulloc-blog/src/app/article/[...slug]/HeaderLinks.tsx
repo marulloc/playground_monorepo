@@ -15,7 +15,7 @@ const HeaderLinks = async ({ pathSegments }: TProps) => {
   return (
     <div className=" space-y-2 text-xs text-zinc-400 ">
       {headings.map(({ level, text }) => (
-        <div className={classNames(linkBaseStyle[level - 1], " ")}>
+        <div className={classNames(linkBaseStyle[level - 1], " ")} key={`header-inner-link-level-${level}-${text}`}>
           <Link
             href={`#level-${level}-${text}`}
             className="  hover:text-zinc-200 hover:font-semibold   transition-all duration-100  whitespace-nowrap "

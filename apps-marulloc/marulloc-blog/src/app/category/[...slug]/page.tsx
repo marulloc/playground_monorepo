@@ -104,17 +104,14 @@ const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof 
       </div>
 
       {/*  */}
-      <div className=" mt-4 ">
+      <div className=" mt-4  ">
         <h2 className=" text-xl font-semibold   text-zinc-200 tracking-wide ">{node.name}</h2>
 
-        <div className="  line-clamp-3 text-sm leading-6 text-zinc-400 min-h-[20px] -my-2">
+        <div className="  line-clamp-3 text-sm leading-6 text-zinc-400 min-h-[20px]  mb-2">
           <MarkdownContents markdown={node.contentDescription} />
         </div>
-        <div className="text-zinc-400 group-hover:text-pink-400 text-xs    ">
-          {/* {`view ${node.childDir.filter(({ name }) => name.toLowerCase() !== "readme.md").length} articles`} */}
-        </div>
 
-        <div className="text-zinc-200 group-hover:text-pink-400 text-xs  absolute bottom-4    ">read more</div>
+        <div className="text-zinc-200 group-hover:text-pink-400 text-xs absolute bottom-2    mt-4  ">read more</div>
       </div>
     </Link>
   );

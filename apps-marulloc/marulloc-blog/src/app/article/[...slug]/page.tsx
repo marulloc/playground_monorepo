@@ -2,6 +2,7 @@ import HeaderLinks from "./HeaderLinks";
 import Article from "./Article";
 import SiblingArticles from "./SiblingArticles";
 import Container from "@/components/Container";
+import FallbackBtn from "./Fallbackbtn";
 
 const Page = async ({ params }: any) => {
   const parentDirPathSegments = [...params.slug].slice(0, params.slug.length - 1);
@@ -12,22 +13,20 @@ const Page = async ({ params }: any) => {
       <div className=" flex-1 hidden lg:block ">
         <div className=" relative h-full w-full   ">
           <div className="sticky   top-96 py-8 my-12  flex justify-center">
-            <button className=" flex justify-center items-center bg-zinc-700 p-3  rounded-full h-12 w-12 border border-zinc-800 text-zinc-400 hover:text-zinc-200">
-              {"<-"}
-            </button>
+            <FallbackBtn />
           </div>
         </div>
       </div>
 
       <div className="     mx-auto     ">
-        <div className="mx-auto max-w-3xl w-full  px-8 ">
+        <div className="mx-auto max-w-xl w-full  px-8  min-w-[672px]">
           <Article pathSegments={currentFilePathSegments} />
         </div>
       </div>
 
-      <div className="   hidden lg:block">
+      <div className=" flex-1  hidden lg:block">
         <div className=" relative h-full w-full  ">
-          <div className="sticky top-80 mb-12  flex justify-center ">
+          <div className="sticky top-80 mb-12  flex justify-center  ">
             <HeaderLinks pathSegments={currentFilePathSegments} />
           </div>
         </div>

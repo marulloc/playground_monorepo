@@ -6,6 +6,7 @@ import Navigation from "@/components/Navigation";
 import Avatar from "@/components/Avatar";
 import Link from "next/link";
 import Background from "@/components/Background";
+import FallbackBtn from "./article/[...slug]/Fallbackbtn";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
