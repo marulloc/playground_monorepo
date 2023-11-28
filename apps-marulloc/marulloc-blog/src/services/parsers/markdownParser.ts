@@ -7,9 +7,9 @@ export const markdownParser = {
   decodeUnicode: (string: string) => {
     return decodeURIComponent(
       atob(string)
-        .split("")
-        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-        .join(""),
+        .split('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join(''),
     );
   },
 
@@ -27,7 +27,7 @@ export const markdownParser = {
       firstImgName: matchedImgName ? matchedImgName[1] : null,
       firstImgUrl: matchedImgName
         ? `https://raw.githubusercontent.com/marulloc/obsidian-git/master/${matchedImgName[1]}`
-        : "",
+        : '',
     };
   },
 
@@ -38,7 +38,7 @@ export const markdownParser = {
    * @returns
    */
   eraceFirstImgString: (readme: string, imgName: string | null) => {
-    return imgName ? readme.replace(`![[${imgName}]]`, "") : readme;
+    return imgName ? readme.replace(`![[${imgName}]]`, '') : readme;
   },
 
   /**
@@ -65,11 +65,11 @@ export const markdownParser = {
     const markdownGrammerRegexPattern = /^([#-\<\|\>])|!\[/;
 
     const [targetParagraph] = readme
-      .replaceAll(codeBlockRegexPatter, "")
-      .split("\n\n")
+      .replaceAll(codeBlockRegexPatter, '')
+      .split('\n\n')
       .slice(0, lineLimit || 10)
       .filter((paragraph) => !paragraph.trim().match(markdownGrammerRegexPattern));
 
-    return targetParagraph || "";
+    return targetParagraph || '';
   },
 };

@@ -1,4 +1,4 @@
-import { GITHUB_API_CONFIG } from "@/services/api/api-config";
+import { GITHUB_API_CONFIG } from '@/services/api/api-config';
 
 export const githubApi = {
   get: {
@@ -27,7 +27,7 @@ export const githubApi = {
     directory: async (path?: string): Promise<TGitRepoContents> => {
       const headers = { Authorization: GITHUB_API_CONFIG.BEARER };
       const response = await (
-        await fetch(`${GITHUB_API_CONFIG.CONTENTS_API_URL}${path ? `${path}` : ""}`, {
+        await fetch(`${GITHUB_API_CONFIG.CONTENTS_API_URL}${path ? `${path}` : ''}`, {
           headers,
           next: { revalidate: 30000 },
         })

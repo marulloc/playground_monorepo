@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { classNames } from "@/utils/classNames";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { classNames } from '@/utils/classNames';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
-import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from "react-syntax-highlighter";
-import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from 'react-syntax-highlighter';
+import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 type TProps = {
   markdown: string;
@@ -14,7 +14,7 @@ const MarkdownContents = ({ markdown }: TProps) => {
   return (
     <div id="observing-target">
       <ReactMarkdown
-        className={classNames(" text-zinc-400  font-light  ")}
+        className={classNames(' text-zinc-400  font-light  ')}
         remarkPlugins={[remarkGfm]}
         components={{
           //  ID 다시 삽입해줘야됨 ;;
@@ -38,16 +38,16 @@ const MarkdownContents = ({ markdown }: TProps) => {
           img: ({ node, ...props }) => <img {...props} className={markdown_styles.img} />,
           code(props) {
             const { children, className, node, ...rest } = props;
-            const match = /language-(\w+)/.exec(className || "");
+            const match = /language-(\w+)/.exec(className || '');
             return match ? (
               <SyntaxHighlighter
                 {...(rest as SyntaxHighlighterProps)}
                 PreTag="div"
                 language={match[1]}
                 style={materialDark}
-                className={"rounded-lg bg-zinc-800  "}
+                className={'rounded-lg bg-zinc-800  '}
               >
-                {String(children).replace(/\n$/, "")}
+                {String(children).replace(/\n$/, '')}
               </SyntaxHighlighter>
             ) : (
               <code {...rest} className={markdown_styles.code}>
@@ -66,49 +66,49 @@ const MarkdownContents = ({ markdown }: TProps) => {
 export default MarkdownContents;
 
 const typo = {
-  base: { main: "dark:text-zinc-400", sub: "dar:text-zinc-200" },
-  primary: { main: "dark:text-indigo-400", sub: "dark:text-indigo-600" },
+  base: { main: 'dark:text-zinc-400', sub: 'dar:text-zinc-200' },
+  primary: { main: 'dark:text-indigo-400', sub: 'dark:text-indigo-600' },
 };
 
 const background = {
-  base: { main: "dark:bg-zinc-800" },
+  base: { main: 'dark:bg-zinc-800' },
 };
 
 const markdown_styles = {
-  h1: classNames("text-4xl font-bold", "text-zinc-200 mt-20 mb-8   scroll-m-24 "),
-  h2: classNames("text-3xl font-bold ", "text-zinc-200 mt-16 mb-8 scroll-m-24"),
-  h3: classNames("text-xl font-semibold ", "text-zinc-200 mt-12 mb-8 scroll-m-24"),
-  h4: classNames("text-lg font-bold ", "text-zinc-100  mt-8 mb-2"),
-  h5: classNames("text-md ", "font-semibold text-zinc-300 my-4  "),
-  h6: classNames("text-md   ", " font-semibold text-zinc-300 my-4"),
+  h1: classNames('text-4xl font-bold', 'text-zinc-200 mt-20 mb-8   scroll-m-24 '),
+  h2: classNames('text-3xl font-bold ', 'text-zinc-200 mt-16 mb-8 scroll-m-24'),
+  h3: classNames('text-xl font-semibold ', 'text-zinc-200 mt-12 mb-8 scroll-m-24'),
+  h4: classNames('text-lg font-bold ', 'text-zinc-100  mt-8 mb-2'),
+  h5: classNames('text-md ', 'font-semibold text-zinc-300 my-4  '),
+  h6: classNames('text-md   ', ' font-semibold text-zinc-300 my-4'),
 
-  p: classNames("my-4 ", "leading-6  "),
-  a: classNames(" text-indigo-400 hover:text-indigo-600 cursor-pointer"),
+  p: classNames('my-4 ', 'leading-6  '),
+  a: classNames(' text-indigo-400 hover:text-indigo-600 cursor-pointer'),
   blockquote: classNames(
-    "border-indigo-400 border-l-4 text-zinc-400 bg-zinc-800 text-md [&>p]:m-0 p-6 py-4 ",
-    "my-8",
-    "[&>h1]:mt-0 [&>h2]:mt-0 [&>h3]:mt-0 [&>h4]:mt-0",
+    'border-indigo-400 border-l-4 text-zinc-400 bg-zinc-800 text-md [&>p]:m-0 p-6 py-4 ',
+    'my-8',
+    '[&>h1]:mt-0 [&>h2]:mt-0 [&>h3]:mt-0 [&>h4]:mt-0',
   ),
-  hr: classNames("border-b border-zinc-600  ", " my-12 border-1"),
+  hr: classNames('border-b border-zinc-600  ', ' my-12 border-1'),
 
-  li: classNames("my-1 pl-2"),
-  ul: classNames("list-disc ml-6 my-2"),
-  ol: classNames("list-decimal ml-6 my-2 "),
+  li: classNames('my-1 pl-2'),
+  ul: classNames('list-disc ml-6 my-2'),
+  ol: classNames('list-decimal ml-6 my-2 '),
   table: classNames(
-    "w-full text-white mb-4 p-0 border-collapse border border-red-600",
-    "[&>tr]:border-t [&>tr]:border-gray-500 [&>tr]:bg-white [&>tr]:m-0 [&>tr]:p-0 [&>tr:nth-child(2n)]:bg-gray-800",
-    "[&>*>tr]:border-t [&>*>tr]:border-gray-500 [&>*>tr]:bg-gray-600 [&>*>tr]:m-0 [&>*>tr]:p-0 [&>*>tr:nth-child(2n)]:bg-gray-800",
-    "[&>th]:font-bold [&>th]:border [&>th]:bg-gray-900 [&>th]:border-gray-500 [&>th]:text-left [&>th]:m-0 [&>th]:p-1 [&>th:first-child]:mt-0 [&>th:last-child]:mb-0",
-    "[&>*>th]:font-bold [&>*>th]:border [&>*>th]:bg-gray-900 [&>*>th]:border-gray-500 [&>*>th]:text-left [&>*>th]:m-0 [&>*>th]:p-1 [&>*>th:first-child]:mt-0 [&>*>th:last-child]:mb-0",
-    "[&>*>*>th]:font-bold [&>*>*>th]:border [&>*>*>th]:bg-gray-900 [&>*>*>th]:border-gray-500 [&>*>*>th]:text-left [&>*>*>th]:m-0 [&>*>*>th]:p-1 [&>*>*>th:first-child]:mt-0 [&>*>*>th:last-child]:mb-0",
-    "[&>td]:border [&>td]:border-gray-500 [&>td]:text-left [&>td]:p-1 [&>td:first-child]:mt-0 [&>td:last-child]mb-0:",
-    "[&>*>td]:border [&>*>td]:border-gray-500 [&>*>td]:text-left [&>*>td]:p-1 [&>*>td:first-child]:mt-0 [&>*>td:last-child]mb-0:",
-    "[&>*>*>td]:border [&>*>*>td]:border-gray-500 [&>*>*>td]:text-left [&>*>*>td]:p-1 [&>*>*>td:first-child]:mt-0 [&>*>*>td:last-child]mb-0",
+    'w-full text-white mb-4 p-0 border-collapse border border-red-600',
+    '[&>tr]:border-t [&>tr]:border-gray-500 [&>tr]:bg-white [&>tr]:m-0 [&>tr]:p-0 [&>tr:nth-child(2n)]:bg-gray-800',
+    '[&>*>tr]:border-t [&>*>tr]:border-gray-500 [&>*>tr]:bg-gray-600 [&>*>tr]:m-0 [&>*>tr]:p-0 [&>*>tr:nth-child(2n)]:bg-gray-800',
+    '[&>th]:font-bold [&>th]:border [&>th]:bg-gray-900 [&>th]:border-gray-500 [&>th]:text-left [&>th]:m-0 [&>th]:p-1 [&>th:first-child]:mt-0 [&>th:last-child]:mb-0',
+    '[&>*>th]:font-bold [&>*>th]:border [&>*>th]:bg-gray-900 [&>*>th]:border-gray-500 [&>*>th]:text-left [&>*>th]:m-0 [&>*>th]:p-1 [&>*>th:first-child]:mt-0 [&>*>th:last-child]:mb-0',
+    '[&>*>*>th]:font-bold [&>*>*>th]:border [&>*>*>th]:bg-gray-900 [&>*>*>th]:border-gray-500 [&>*>*>th]:text-left [&>*>*>th]:m-0 [&>*>*>th]:p-1 [&>*>*>th:first-child]:mt-0 [&>*>*>th:last-child]:mb-0',
+    '[&>td]:border [&>td]:border-gray-500 [&>td]:text-left [&>td]:p-1 [&>td:first-child]:mt-0 [&>td:last-child]mb-0:',
+    '[&>*>td]:border [&>*>td]:border-gray-500 [&>*>td]:text-left [&>*>td]:p-1 [&>*>td:first-child]:mt-0 [&>*>td:last-child]mb-0:',
+    '[&>*>*>td]:border [&>*>*>td]:border-gray-500 [&>*>*>td]:text-left [&>*>*>td]:p-1 [&>*>*>td:first-child]:mt-0 [&>*>*>td:last-child]mb-0',
   ),
-  img: classNames("rounded-md  mx-auto"),
+  img: classNames('rounded-md  mx-auto'),
 
   // pre: classNames("bg-zinc-700 w-full overflow-auto rounded-md p-4 my-8 "),
   code: classNames(
-    "bg-zinc-700 max-w-full overflow-auto rounded-md text-sm text-zinc-200 inline-flex p-0.5 px-1.5 text-red-400",
+    'bg-zinc-700 max-w-full overflow-auto rounded-md text-sm text-zinc-200 inline-flex p-0.5 px-1.5 text-red-400',
   ),
 };

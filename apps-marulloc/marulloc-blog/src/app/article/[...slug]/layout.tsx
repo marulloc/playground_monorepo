@@ -1,5 +1,5 @@
-import BreadCrumbs from "@/components/BreadCrumbs";
-import Container from "@/components/Container";
+import BreadCrumbs from '@/components/BreadCrumbs';
+import Container from '@/components/Container';
 
 const Layout = ({ children, params }: { children: React.ReactNode; params: any }) => {
   return (

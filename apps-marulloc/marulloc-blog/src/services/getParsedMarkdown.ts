@@ -1,5 +1,5 @@
-import { markdownParser } from "@/services/parsers/markdownParser";
-import { githubApi } from "@/services/api/github-api";
+import { markdownParser } from '@/services/parsers/markdownParser';
+import { githubApi } from '@/services/api/github-api';
 
 /**
  *

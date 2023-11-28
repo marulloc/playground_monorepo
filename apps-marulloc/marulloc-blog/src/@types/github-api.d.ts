@@ -1,7 +1,7 @@
 type TGitRepoConfigNode = {
   path: string;
   mode: string;
-  type: "blob" | "tree";
+  type: 'blob' | 'tree';
   sha: string;
   url: string;
 };
@@ -22,7 +22,7 @@ type TGitRepoFileNode = {
   html_url: string;
   git_url: string;
   download_url: string;
-  type: "file";
+  type: 'file';
   content: string;
   _links: {
     self: string;
@@ -40,7 +40,7 @@ type TGitRepoDirNode = {
   html_url: string;
   git_url: string;
   download_url: string;
-  type: "dir";
+  type: 'dir';
   _links: {
     self: string;
     git: string;

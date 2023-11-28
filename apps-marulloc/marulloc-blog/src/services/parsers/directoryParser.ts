@@ -1,5 +1,5 @@
-import { AsyncFunctionValueType } from "@/utils/conditionalType";
-import { githubApi } from "@/services/api/github-api";
+import { AsyncFunctionValueType } from '@/utils/conditionalType';
+import { githubApi } from '@/services/api/github-api';
 
 export const directoryParser = {
   /**
@@ -8,7 +8,7 @@ export const directoryParser = {
    * @returns
    */
   findReadme: (directories: AsyncFunctionValueType<ReturnType<typeof githubApi.get.directory>>) => {
-    return directories.find((file) => file.name.toLowerCase() === "readme.md") || (null as TGitRepoFileNode | null);
+    return directories.find((file) => file.name.toLowerCase() === 'readme.md') || (null as TGitRepoFileNode | null);
   },
 
   /**
@@ -18,7 +18,7 @@ export const directoryParser = {
    */
   filterMD: (directories: AsyncFunctionValueType<ReturnType<typeof githubApi.get.directory>>) => {
     return directories.filter(
-      (item) => item.type === "file" && item.name.endsWith(".md") && item.name.toLowerCase() !== "readme.md",
+      (item) => item.type === 'file' && item.name.endsWith('.md') && item.name.toLowerCase() !== 'readme.md',
     ) as TGitRepoFileNode[];
   },
 
@@ -28,6 +28,6 @@ export const directoryParser = {
    * @returns
    */
   filterDir: (directories: AsyncFunctionValueType<ReturnType<typeof githubApi.get.directory>>) => {
-    return directories.filter((item) => item.type === "dir") as TGitRepoDirNode[];
+    return directories.filter((item) => item.type === 'dir') as TGitRepoDirNode[];
   },
 };

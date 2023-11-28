@@ -1,21 +1,21 @@
-import { getParsedMarkdown } from "@/services/getParsedMarkdown";
-import { classNames } from "@/utils/classNames";
-import Link from "next/link";
+import { getParsedMarkdown } from '@/services/getParsedMarkdown';
+import { classNames } from '@/utils/classNames';
+import Link from 'next/link';
 
 type TProps = {
   pathSegments: string[];
 };
 
 const HeaderLinks = async ({ pathSegments }: TProps) => {
-  const modifiedMarkdown = await getParsedMarkdown(pathSegments.join("/"));
+  const modifiedMarkdown = await getParsedMarkdown(pathSegments.join('/'));
 
   const headings = extractHeadings(modifiedMarkdown);
-  const linkBaseStyle = ["pl-0", "pl-4", "pl-8"];
+  const linkBaseStyle = ['pl-0', 'pl-4', 'pl-8'];
 
   return (
     <div className=" space-y-2 text-xs text-zinc-400 ">
       {headings.map(({ level, text }) => (
-        <div className={classNames(linkBaseStyle[level - 1], " ")} key={`header-inner-link-level-${level}-${text}`}>
+        <div className={classNames(linkBaseStyle[level - 1], ' ')} key={`header-inner-link-level-${level}-${text}`}>
           <Link
             href={`#level-${level}-${text}`}
             replace

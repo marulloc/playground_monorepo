@@ -1,11 +1,11 @@
-import { classNames } from "@/utils/classNames";
+import { classNames } from '@/utils/classNames';
 
 type CardProps = {};
 
 const Card = ({}: CardProps) => {
   return (
     <>
-      <Container defaultProps={{ className: classNames("p-12") }}>
+      <Container defaultProps={{ className: classNames('p-12') }}>
         <></>
       </Container>
     </>
@@ -19,8 +19,8 @@ type ContainerProps<T extends React.ElementType> = {
 };
 
 const Container = <T extends React.ElementType>({ children, as, defaultProps }: ContainerProps<T>) => {
-  const Component = as ?? "div";
-  const defaultClassName = classNames("p-6");
+  const Component = as ?? 'div';
+  const defaultClassName = classNames('p-6');
 
   return (
     <Component {...defaultProps} className={classNames(defaultClassName, defaultProps?.className)}>
@@ -36,8 +36,8 @@ type PaperProps<T extends React.ElementType> = {
 };
 
 const Paper = <T extends React.ElementType>({ children, as, defaultProps }: PaperProps<T>) => {
-  const Component = as ?? "div";
-  const defaultClassName = classNames("isolate bg-zinc-700 bg-opacity-40 backdrop-blur-lg rounded-lg");
+  const Component = as ?? 'div';
+  const defaultClassName = classNames('bg-zinc-700 bg-opacity-40 backdrop-blur-lg rounded-lg ', 'overflow-hidden');
 
   return (
     <Component {...defaultProps} className={classNames(defaultClassName, defaultProps?.className)}>

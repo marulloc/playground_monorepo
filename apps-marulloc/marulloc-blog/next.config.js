@@ -1,8 +1,8 @@
 module.exports = {
   reactStrictMode: false,
-  transpilePackages: ["ui"],
+  transpilePackages: ['ui'],
 
   images: {
-    domains: ["raw.githubusercontent.com"],
+    domains: ['raw.githubusercontent.com'],
   },
 };

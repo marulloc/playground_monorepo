@@ -1,6 +1,6 @@
-import { getSiblingList } from "@/services/getSiblingList";
-import { classNames } from "@/utils/classNames";
-import Link from "next/link";
+import { getSiblingList } from '@/services/getSiblingList';
+import { classNames } from '@/utils/classNames';
+import Link from 'next/link';
 
 type TProps = {
   parentPathSegments: string[];
@@ -9,10 +9,10 @@ type TProps = {
 
 const SiblingArticles = async ({ parentPathSegments, currentPathSegments }: TProps) => {
   const parentDirName = decodeURIComponent(parentPathSegments.at(-1) as string);
-  const parentDirPath = parentPathSegments.join("/");
+  const parentDirPath = parentPathSegments.join('/');
 
   const currentFileName = decodeURIComponent(currentPathSegments.at(-1) as string);
-  const currentFilePath = currentPathSegments.join("/");
+  const currentFilePath = currentPathSegments.join('/');
 
   const siblingList = await getSiblingList(parentDirPath);
 
@@ -30,7 +30,7 @@ const SiblingArticles = async ({ parentPathSegments, currentPathSegments }: TPro
               <li key={node.path}>
                 <Link
                   href={`/article/${node.path}`}
-                  className={classNames(decodeURIComponent(currentFilePath) === node.path ? "text-teal-400" : "")}
+                  className={classNames(decodeURIComponent(currentFilePath) === node.path ? 'text-teal-400' : '')}
                 >
                   <div>{node.name}</div>
                 </Link>

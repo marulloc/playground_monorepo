@@ -1,7 +1,7 @@
-import { directoryParser } from "@/services/parsers/directoryParser";
-import { markdownParser } from "@/services/parsers/markdownParser";
-import { githubApi } from "@/services/api/github-api";
-import { dictionaryOrderSort } from "@/utils/dictionaryOrderSort";
+import { directoryParser } from '@/services/parsers/directoryParser';
+import { markdownParser } from '@/services/parsers/markdownParser';
+import { githubApi } from '@/services/api/github-api';
+import { dictionaryOrderSort } from '@/utils/dictionaryOrderSort';
 
 /**
  *

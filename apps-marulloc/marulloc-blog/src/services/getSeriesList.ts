@@ -1,7 +1,7 @@
-import { directoryParser } from "@/services/parsers/directoryParser";
-import { markdownParser } from "@/services/parsers/markdownParser";
-import { githubApi } from "@/services/api/github-api";
-import { dictionaryOrderSort } from "@/utils/dictionaryOrderSort";
+import { directoryParser } from '@/services/parsers/directoryParser';
+import { markdownParser } from '@/services/parsers/markdownParser';
+import { githubApi } from '@/services/api/github-api';
+import { dictionaryOrderSort } from '@/utils/dictionaryOrderSort';
 
 /**
  *
@@ -17,7 +17,7 @@ export const getSeriesList = async (curPath: string) => {
       const childDir = await githubApi.get.directory(seriesDir.path);
 
       const readmeFile = directoryParser.findReadme(childDir);
-      const { content } = readmeFile ? await githubApi.get.markdown(readmeFile.path) : { content: "" };
+      const { content } = readmeFile ? await githubApi.get.markdown(readmeFile.path) : { content: '' };
 
       const readme = markdownParser.decodeUnicode(content);
       const { firstImgName, firstImgUrl } = markdownParser.extractFirstImg(readme);
