@@ -3,32 +3,48 @@ import Article from "./Article";
 import SiblingArticles from "./SiblingArticles";
 import Container from "@/components/Container";
 import FallbackBtn from "./Fallbackbtn";
+import Link from "next/link";
 
 const Page = async ({ params }: any) => {
   const parentDirPathSegments = [...params.slug].slice(0, params.slug.length - 1);
   const currentFilePathSegments = [...params.slug];
 
   return (
-    <div className="w-full flex gap-4   ">
-      <div className="flex-1 relative hidden lg:block">
-        <div className="sticky top-96 mb-12  flex justify-center  ">
-          <FallbackBtn />
+    <div>
+      <div className="w-full flex   gap-8 py-12">
+        <div className="flex-1 relative hidden lg:block">
+          <div className="sticky top-80 mb-12  flex gap-4  items-end flex-col p-2  ">
+            <div>
+              <FallbackBtn />
+            </div>
+            <div>
+              {/* <Link
+            href={`#level-${level}-${text}`}
+            replace
+            className="  hover:text-pink-400    transition-all duration-100  whitespace-nowrap "
+          >
+            {text}
+          </Link> */}
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="max-w-2xl mx-auto relative  w-full  ">
-        <div className="mb-4   lg:hidden flex justify-end ">
-          <FallbackBtn />
+        <div className="max-w-2xl mx-auto relative  w-full  ">
+          <div className="mb-4   lg:hidden flex justify-end ">
+            <FallbackBtn />
+          </div>
+          <div className="    ">
+            <Article pathSegments={currentFilePathSegments} />
+          </div>
         </div>
-        <div className=" mt-12 ">
-          <Article pathSegments={currentFilePathSegments} />
+
+        <div className="flex-1 relative hidden lg:block ">
+          <div className="sticky top-80 mb-12  flex justify-center p-2   ">
+            <HeaderLinks pathSegments={currentFilePathSegments} />
+          </div>
         </div>
       </div>
 
-      <div className="flex-1 relative hidden lg:block ">
-        <div className="sticky top-80 mb-12  flex justify-center  ">
-          <HeaderLinks pathSegments={currentFilePathSegments} />
-        </div>
-      </div>
+      <h1 id="">Siblings 여기 카드로 대체하자</h1>
     </div>
   );
 };

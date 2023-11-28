@@ -19,7 +19,7 @@ const HeaderLinks = async ({ pathSegments }: TProps) => {
           <Link
             href={`#level-${level}-${text}`}
             replace
-            className="  hover:text-zinc-200 hover:font-semibold   transition-all duration-100  whitespace-nowrap "
+            className="  hover:text-pink-400    transition-all duration-100  whitespace-nowrap "
           >
             {text}
           </Link>

@@ -1,10 +1,16 @@
-import { Card } from "ui";
+// import { Card } from "ui";
+
+import Card from "@/componentsV2/Card";
 
 export default function Home() {
   return (
     <>
-      <div>About</div>
-      <div>Series (navigation)</div>
+      <Card.Paper as="section">
+        <Card.Container as="article">
+          <div>About</div>
+          <div>Series (navigation)</div>
+        </Card.Container>
+      </Card.Paper>
     </>
   );
 }
