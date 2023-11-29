@@ -1,8 +1,7 @@
-import HeaderLinks from './HeaderLinks';
-import Article from './Article';
-import SiblingArticles from './SiblingArticles';
-import Container from '@/components/Container';
-import FallbackBtn from './Fallbackbtn';
+import HeaderLinks from '../../../components/HeaderLinks';
+import Article from '../../../components/Article';
+import SiblingArticles from '../../../components/SiblingArticles';
+import FallbackBtn from '../../../components/Fallbackbtn';
 import Link from 'next/link';
 
 const Page = async ({ params }: any) => {
