@@ -1,6 +1,6 @@
 import Image from 'next/image';
 // import avatarImage from './mock.png';
-import { classNames } from '@/componentsV2/Marulloc-UI/utils/classNames';
+import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 
 const Avatar = ({ src }: { src?: string }) => {
   return (

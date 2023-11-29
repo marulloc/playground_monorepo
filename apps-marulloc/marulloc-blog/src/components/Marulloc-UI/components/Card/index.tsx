@@ -1,4 +1,4 @@
-import { classNames } from '@/componentsV2/Marulloc-UI/utils/classNames';
+import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import Container from '../../common/Container';
 import Paper from '../../common/Paper';
 

@@ -1,9 +1,9 @@
-import CategorySummary from '@/componentsV2/CategorySummary';
-import MarkdownContents from '@/componentsV2/MarkdownContents';
+import CategorySummary from '@/components/CategorySummary';
+import MarkdownContents from '@/components/MarkdownContents';
 import { getReadmeData } from '@/services/getReadmeData';
-import { classNames } from '@/componentsV2/Marulloc-UI/utils/classNames';
+import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import Image from 'next/image';
-import Breadcrumbs from '@/componentsV2/Breadcrumbs';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const Layout = async ({ params, children }: any) => {
   const { readme, readmeWithoutFirstImg, readmeFirstImg } = await getReadmeData(params.slug.join('/'));

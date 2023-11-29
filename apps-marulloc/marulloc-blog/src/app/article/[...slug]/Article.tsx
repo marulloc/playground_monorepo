@@ -1,4 +1,4 @@
-import MarkdownContents from '@/componentsV2/MarkdownContents';
+import MarkdownContents from '@/components/MarkdownContents';
 import { getParsedMarkdown } from '@/services/getParsedMarkdown';
 
 type TProps = {

@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import { classNames } from '@/componentsV2/Marulloc-UI/utils/classNames';
+import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import { getSeriesList } from '@/services/getSeriesList';
 import { getArticleList } from '@/services/getArticleList';
 import { redirect } from 'next/navigation';
-import ConsoleCompo from '@/componentsV2/ConsoleCompo';
+import ConsoleCompo from '@/components/ConsoleCompo';
 import { AsyncFunctionValueType } from '@/utils/conditionalType';
 import Image from 'next/image';
-import MarkdownContents from '@/componentsV2/MarkdownContents';
+import MarkdownContents from '@/components/MarkdownContents';
 
 type TPageProps = {
   params: { slug: string[] };

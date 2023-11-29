@@ -1,4 +1,4 @@
-import Breadcrumbs from '@/componentsV2/Breadcrumbs';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const Layout = ({ children, params }: { children: React.ReactNode; params: any }) => {
   return (

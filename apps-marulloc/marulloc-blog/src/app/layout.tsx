@@ -1,12 +1,12 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { classNames } from '@/componentsV2/Marulloc-UI/utils/classNames';
+import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import Link from 'next/link';
-import Background from '@/componentsV2/Background';
+import Background from '@/components/Background';
 import FallbackBtn from './article/[...slug]/Fallbackbtn';
-import Avatar from '@/componentsV2/Avatar';
-import Navigation from '@/componentsV2/Navigation';
+import Avatar from '@/components/Avatar';
+import Navigation from '@/components/Navigation';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {

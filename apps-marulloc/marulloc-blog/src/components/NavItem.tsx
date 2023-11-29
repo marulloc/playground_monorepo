@@ -1,6 +1,6 @@
 'use client';
 
-import { classNames } from '@/componentsV2/Marulloc-UI/utils/classNames';
+import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

@@ -1,7 +1,7 @@
 // import { Card } from "ui";
 
-import Card from '@/componentsV2/Marulloc-UI/components/Card';
-import { classNames } from '@/componentsV2/Marulloc-UI/utils/classNames';
+import Card from '@/components/Marulloc-UI/components/Card';
+import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 
 export default function Home() {
   return (
