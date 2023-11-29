@@ -7,6 +7,11 @@ type PaperProps<T extends React.ElementType> = {
   defaultProps?: Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
 };
 
+/**
+ * @todo background level 조절
+ * @param param0
+ * @returns
+ */
 const Paper = <T extends React.ElementType>({ children, as, defaultProps }: PaperProps<T>) => {
   const Component = as ?? 'div';
 

@@ -10,6 +10,7 @@ import Navigation from '@/components/Navigation';
 import Paper from '@/components/Marulloc-UI/common/Paper';
 import Container from '@/components/Marulloc-UI/common/Container';
 import { COLOR_THEME } from '@/components/Marulloc-UI/config';
+import Typography from '@/components/Marulloc-UI/common/Typography';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -31,7 +32,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Paper as={'header'} defaultProps={{ className: classNames('flex items-center h-16 z-50 px-8') }}>
             <div className="flex-1">
               <Link href="/" className=" text-2xl font-semibold">
-                marul.log
+                <Typography variant="h3" color="base" hover="base">
+                  marullog
+                </Typography>
               </Link>
             </div>
             <div className="flex items-center gap-4">
@@ -41,16 +44,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </Paper>
         </Container>
 
-        {/* <Container defaultProps={{ className: 'w-full flex-1  flex  flex-col pb-8 ' }}>
-          <Paper
-            as={'main'}
-            defaultProps={{
-              className: classNames('isolate  flex-1'),
-            }}
-          > */}
         <>{children}</>
-        {/* </Paper>
-        </Container> */}
       </body>
     </html>
   );

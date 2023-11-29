@@ -3,6 +3,7 @@
 import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Typography from './Marulloc-UI/common/Typography';
 
 type TProps = {
   href: string;
@@ -24,7 +25,9 @@ const NavItem = ({ href, type, children }: TProps) => {
           isActive ? 'text-pink-500 dark:text-pink-400' : 'hover:text-pink-500 dark:hover:text-pink-400',
         )}
       >
-        {children}
+        <Typography variant="span" color="base">
+          {children}
+        </Typography>
         {isActive && (
           <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-pink-500/0 via-pink-500/40 to-pink-500/0 dark:from-pink-400/0 dark:via-pink-400/40 dark:to-pink-400/0" />
         )}

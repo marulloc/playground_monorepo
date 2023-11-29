@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import MarkdownContents from './MarkdownContents';
 import { classNames } from '@/components/Marulloc-UI/utils/classNames';
+import Typography from './Marulloc-UI/common/Typography';
 
 const CategorySummary = ({ url, pathSegments, readme }: { url?: string; pathSegments: string[]; readme: string }) => {
   return (
@@ -10,9 +11,10 @@ const CategorySummary = ({ url, pathSegments, readme }: { url?: string; pathSegm
       </div>
 
       <div>
-        <h1 className="text-4xl mb-4  font-bold tracking-wide  text-zinc-200 spacing   ">
+        <Typography variant="h1">{decodeURIComponent(pathSegments[pathSegments.length - 1])}</Typography>
+        {/* <h1 className="text-4xl mb-4  font-bold tracking-wide  text-zinc-200 spacing   ">
           {decodeURIComponent(pathSegments[pathSegments.length - 1])}
-        </h1>
+        </h1> */}
 
         <div className=" text-zinc-400">
           <MarkdownContents markdown={readme} />

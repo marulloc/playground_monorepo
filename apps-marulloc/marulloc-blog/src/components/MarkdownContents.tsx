@@ -108,7 +108,5 @@ const markdown_styles = {
   img: classNames('rounded-md  mx-auto'),
 
   // pre: classNames("bg-zinc-700 w-full overflow-auto rounded-md p-4 my-8 "),
-  code: classNames(
-    'bg-zinc-700 max-w-full overflow-auto rounded-md text-sm text-zinc-200 inline-flex p-0.5 px-1.5 text-red-400',
-  ),
+  code: classNames('bg-zinc-700 max-w-full overflow-auto rounded-md text-sm  inline-flex p-0.5 px-1.5 text-red-400'),
 };
