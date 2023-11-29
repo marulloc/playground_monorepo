@@ -9,6 +9,8 @@ import Image from 'next/image';
 import MarkdownContents from '@/components/MarkdownContents';
 import ArticleCard from '@/components/ArticleCard';
 import SeriesCard from '@/components/SeriesCard';
+import Container from '@/components/Marulloc-UI/common/Container';
+import Paper from '@/components/Marulloc-UI/common/Paper';
 
 type TPageProps = {
   params: { slug: string[] };
@@ -31,8 +33,8 @@ const Page = async ({ params, searchParams }: TPageProps) => {
   }
 
   return (
-    <>
-      <div className="relative  ">
+    <Container as={'main'} defaultProps={{ className: 'w-full flex-1  flex  flex-col  pb-8  ' }}>
+      <Paper defaultProps={{ className: 'flex-1' }}>
         <div className="mb-4 border-b dark:border-zinc-700">
           <ul className="flex flex-wrap text-lg   text-center text-zinc-200">
             <li className={classNames(hasArticle ? 'block' : 'hidden')}>
@@ -79,8 +81,8 @@ const Page = async ({ params, searchParams }: TPageProps) => {
           )}
           {!curTabQuery && <h1 className=" text-7xl">404</h1>}
         </div>
-      </div>
-    </>
+      </Paper>
+    </Container>
   );
 };
 

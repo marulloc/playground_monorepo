@@ -41,16 +41,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </Paper>
         </Container>
 
-        <Container defaultProps={{ className: 'w-full flex-1  flex  flex-col pb-8 ' }}>
+        {/* <Container defaultProps={{ className: 'w-full flex-1  flex  flex-col pb-8 ' }}>
           <Paper
             as={'main'}
             defaultProps={{
-              className: classNames('isolate relative flex-1'),
+              className: classNames('isolate  flex-1'),
             }}
-          >
-            {children}
-          </Paper>
-        </Container>
+          > */}
+        <>{children}</>
+        {/* </Paper>
+        </Container> */}
       </body>
     </html>
   );

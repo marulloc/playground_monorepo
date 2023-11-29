@@ -5,13 +5,13 @@ type ContainerProps<T extends React.ElementType> = {
   py?: boolean;
   children?: React.ReactNode;
   as?: T;
-  defaultProps?: Omit<React.ComponentPropsWithoutRef<T>, 'className'>;
+  defaultProps?: Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
 };
 
 const Container = <T extends React.ElementType>({ children, as, py, defaultProps }: ContainerProps<T>) => {
   const Component = as ?? 'div';
   const classes = classNames(
-    'mx-auto max-w-7xl ',
+    'mx-auto max-w-7xl w-full ',
     RESPONSIVE_THEME.px,
     py && RESPONSIVE_THEME.py,
     defaultProps?.className,

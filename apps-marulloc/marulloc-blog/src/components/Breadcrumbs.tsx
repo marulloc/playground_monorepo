@@ -9,7 +9,7 @@ const Breadcrumbs = ({ pathSegments }: TProps) => {
   const currentPath = parentDirSegment.pop() as string;
 
   return (
-    <div className="flex">
+    <div className="flex text-sm text-zinc-400 ">
       <Link href={'/'}>Home</Link>
       <>
         {parentDirSegment.map((path, index) => (

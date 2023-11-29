@@ -1,13 +1,14 @@
 import Breadcrumbs from '@/components/Breadcrumbs';
+import Container from '@/components/Marulloc-UI/common/Container';
+import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 
 const Layout = ({ children, params }: { children: React.ReactNode; params: any }) => {
   return (
-    <div className="relative flex-1 flex flex-col px-8 ">
-      <div className="ml-0 px-20 pt-4 pb-12 text-zinc-400 text-xs">
+    <div className="space-y-4">
+      <Container py>
         <Breadcrumbs pathSegments={params.slug} />
-      </div>
-
-      <div className="flex flex-1 flex-col  h-full  ">{children}</div>
+      </Container>
+      <>{children}</>
     </div>
   );
 };
