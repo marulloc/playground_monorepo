@@ -1,10 +1,9 @@
-import BreadCrumbs from '@/components/BreadCrumbs';
-import CategorySummary from '@/components/CategorySummary';
-import Container from '@/components/Container';
-import MarkdownContents from '@/components/MarkdownContents';
+import CategorySummary from '@/componentsV2/CategorySummary';
+import MarkdownContents from '@/componentsV2/MarkdownContents';
 import { getReadmeData } from '@/services/getReadmeData';
-import { classNames } from '@/utils/classNames';
+import { classNames } from '@/componentsV2/Marulloc-UI/utils/classNames';
 import Image from 'next/image';
+import Breadcrumbs from '@/componentsV2/Breadcrumbs';
 
 const Layout = async ({ params, children }: any) => {
   const { readme, readmeWithoutFirstImg, readmeFirstImg } = await getReadmeData(params.slug.join('/'));
@@ -12,7 +11,7 @@ const Layout = async ({ params, children }: any) => {
   return (
     <div className="  mx-auto  flex flex-col h-full w-full px-16">
       <div className=" ml-12  pt-4 text-zinc-400 text-xs">
-        <BreadCrumbs pathSegments={params.slug} />
+        <Breadcrumbs pathSegments={params.slug} />
       </div>
 
       <div className="   rounded-lg p-12 pt-16   ">

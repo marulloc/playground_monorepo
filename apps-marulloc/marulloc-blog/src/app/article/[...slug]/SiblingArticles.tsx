@@ -1,5 +1,5 @@
 import { getSiblingList } from '@/services/getSiblingList';
-import { classNames } from '@/utils/classNames';
+import { classNames } from '@/componentsV2/Marulloc-UI/utils/classNames';
 import Link from 'next/link';
 
 type TProps = {

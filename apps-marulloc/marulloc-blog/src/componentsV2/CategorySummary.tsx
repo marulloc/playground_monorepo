@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import MarkdownContents from './MarkdownContents';
-import { classNames } from '@/utils/classNames';
+import { classNames } from '@/componentsV2/Marulloc-UI/utils/classNames';
 
 const CategorySummary = ({ url, pathSegments, readme }: { url?: string; pathSegments: string[]; readme: string }) => {
   return (

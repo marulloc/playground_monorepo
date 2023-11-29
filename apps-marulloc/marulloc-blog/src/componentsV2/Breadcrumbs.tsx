@@ -4,7 +4,7 @@ type TProps = {
   pathSegments: string[];
 };
 
-const BreadCrumbs = ({ pathSegments }: TProps) => {
+const Breadcrumbs = ({ pathSegments }: TProps) => {
   const parentDirSegment = [...pathSegments];
   const currentPath = parentDirSegment.pop() as string;
 
@@ -28,7 +28,7 @@ const BreadCrumbs = ({ pathSegments }: TProps) => {
   );
 };
 
-export default BreadCrumbs;
+export default Breadcrumbs;
 
 const V2 = () => {
   return (
