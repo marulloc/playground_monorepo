@@ -1,17 +1,24 @@
+import { RESPONSIVE_THEME } from '../config';
 import { classNames } from '../utils/classNames';
 
 type ContainerProps<T extends React.ElementType> = {
+  py?: boolean;
   children?: React.ReactNode;
   as?: T;
-  defaultProps?: Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
+  defaultProps?: Omit<React.ComponentPropsWithoutRef<T>, 'className'>;
 };
 
-const Container = <T extends React.ElementType>({ children, as, defaultProps }: ContainerProps<T>) => {
+const Container = <T extends React.ElementType>({ children, as, py, defaultProps }: ContainerProps<T>) => {
   const Component = as ?? 'div';
-  const defaultClassName = classNames('p-6');
+  const classes = classNames(
+    'mx-auto max-w-7xl ',
+    RESPONSIVE_THEME.px,
+    py && RESPONSIVE_THEME.py,
+    defaultProps?.className,
+  );
 
   return (
-    <Component {...defaultProps} className={classNames(defaultClassName, defaultProps?.className)}>
+    <Component {...defaultProps} className={classes}>
       {children}
     </Component>
   );

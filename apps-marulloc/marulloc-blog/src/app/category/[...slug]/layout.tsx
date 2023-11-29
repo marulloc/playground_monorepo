@@ -1,23 +1,22 @@
-import CategorySummary from '@/components/CategorySummary';
-import MarkdownContents from '@/components/MarkdownContents';
-import { getReadmeData } from '@/services/getReadmeData';
-import { classNames } from '@/components/Marulloc-UI/utils/classNames';
-import Image from 'next/image';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import CategorySummary from '@/components/CategorySummary';
+import Container from '@/components/Marulloc-UI/common/Container';
+import { getReadmeData } from '@/services/getReadmeData';
 
 const Layout = async ({ params, children }: any) => {
   const { readme, readmeWithoutFirstImg, readmeFirstImg } = await getReadmeData(params.slug.join('/'));
 
   return (
-    <div className="  mx-auto  flex flex-col h-full w-full px-16">
-      <div className=" ml-12  pt-4 text-zinc-400 text-xs">
+    <div className="">
+      <Container py>
         <Breadcrumbs pathSegments={params.slug} />
-      </div>
-
-      <div className="   rounded-lg p-12 pt-16   ">
         <CategorySummary url={readmeFirstImg} pathSegments={params.slug} readme={readmeWithoutFirstImg} />
-      </div>
-      <div className=" relative  p-12 pt-0 flex-1  rounded-lg mt-8 ">{children}</div>
+        {children}
+        {/* <div className=" ml-12  pt-4 text-zinc-400 text-xs"></div> */}
+
+        {/* <div className="   rounded-lg p-12 pt-16   "></div> */}
+        {/* <div className=" relative  p-12 pt-0 flex-1  rounded-lg mt-8 "></div> */}
+      </Container>
     </div>
   );
 };

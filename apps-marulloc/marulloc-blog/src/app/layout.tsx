@@ -4,9 +4,12 @@ import { Inter } from 'next/font/google';
 import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import Link from 'next/link';
 import Background from '@/components/Background';
-import FallbackBtn from './article/[...slug]/Fallbackbtn';
+import FallbackBtn from '../components/Fallbackbtn';
 import Avatar from '@/components/Avatar';
 import Navigation from '@/components/Navigation';
+import Paper from '@/components/Marulloc-UI/common/Paper';
+import Container from '@/components/Marulloc-UI/common/Container';
+import { COLOR_THEME } from '@/components/Marulloc-UI/config';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -16,32 +19,38 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="kr">
-      <body className={classNames(' relative min-h-screen     ', inter.className)}>
+    <html lang="kr" className=" h-full  scroll-smooth ">
+      <body
+        className={classNames('relative min-h-full  flex flex-col    bg-black', COLOR_THEME.text.base, inter.className)}
+      >
         <Background />
 
-        {/* Container */}
-        <div className=" relative max-w-7xl mx-auto  ">
-          {/* Header */}
-          <div className=" isolate sticky  top-0 pb-8 lg:-top-8 lg:py-8 w-full z-30   ">
-            <header className="flex items-center    h-16  z-50  backdrop-blur-xl bg-zinc-700 bg-opacity-40     rounded-lg  px-8    ">
-              <div className="flex-1">
-                <Link href="/" className=" text-2xl font-semibold">
-                  marul.log
-                </Link>
-              </div>
-              <div className="flex items-center gap-4">
-                <Navigation />
-                <Avatar />
-              </div>
-            </header>
-          </div>
+        <Container
+          defaultProps={{ className: classNames('isolate sticky  top-0 pb-8 lg:-top-8 lg:py-8 w-full z-30   ') }}
+        >
+          <Paper as={'header'} defaultProps={{ className: classNames('flex items-center h-16 z-50 px-8') }}>
+            <div className="flex-1">
+              <Link href="/" className=" text-2xl font-semibold">
+                marul.log
+              </Link>
+            </div>
+            <div className="flex items-center gap-4">
+              <Navigation />
+              <Avatar />
+            </div>
+          </Paper>
+        </Container>
 
-          {/* Main */}
-          <div className="   relative isolate  bg-zinc-700 bg-opacity-40  h-full   backdrop-blur-lg  rounded-lg min-h-[calc(100vh-160px)] flex flex-col  mb-8 ">
-            <main className=" flex-1 h-full flex flex-col w-full ">{children}</main>
-          </div>
-        </div>
+        <Container defaultProps={{ className: 'w-full flex-1  flex  flex-col pb-8 ' }}>
+          <Paper
+            as={'main'}
+            defaultProps={{
+              className: classNames('isolate relative flex-1'),
+            }}
+          >
+            {children}
+          </Paper>
+        </Container>
       </body>
     </html>
   );
