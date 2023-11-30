@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 
 import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { COLOR_SET, SCALE_SET } from './Marulloc-UI/theme-config';
 
 type TProps = {
   markdown: string;
@@ -65,31 +66,24 @@ const MarkdownContents = ({ markdown }: TProps) => {
 
 export default MarkdownContents;
 
-const typo = {
-  base: { main: 'dark:text-zinc-400', sub: 'dar:text-zinc-200' },
-  primary: { main: 'dark:text-indigo-400', sub: 'dark:text-indigo-600' },
-};
-
-const background = {
-  base: { main: 'dark:bg-zinc-800' },
-};
-
 const markdown_styles = {
-  h1: classNames('text-4xl font-bold', 'text-zinc-200 mt-20 mb-8   scroll-m-24 '),
-  h2: classNames('text-3xl font-bold ', 'text-zinc-200 mt-16 mb-8 scroll-m-24'),
-  h3: classNames('text-xl font-semibold ', 'text-zinc-200 mt-12 mb-8 scroll-m-24'),
-  h4: classNames('text-lg font-bold ', 'text-zinc-100  mt-8 mb-2'),
-  h5: classNames('text-md ', 'font-semibold text-zinc-300 my-4  '),
-  h6: classNames('text-md   ', ' font-semibold text-zinc-300 my-4'),
+  h1: classNames(SCALE_SET.text.h2, COLOR_SET.text.default.base, 'mt-20 mb-8 scroll-m-24 '),
+  h2: classNames(SCALE_SET.text.h3, COLOR_SET.text.default.base, 'mt-16 mb-8 scroll-m-24'),
+  h3: classNames(SCALE_SET.text.h4, COLOR_SET.text.default.base, 'mt-12 mb-8 scroll-m-24'),
+  h4: classNames(SCALE_SET.text.h5, COLOR_SET.text.default.base, 'mt-8 mb-2'),
+  h5: classNames(SCALE_SET.text.h6, COLOR_SET.text.default.base, 'my-4  '),
+  h6: classNames(SCALE_SET.text.body1, COLOR_SET.text.default.base, 'my-4'),
 
-  p: classNames('my-4 ', 'leading-6  '),
+  p: classNames(SCALE_SET.text.body2, COLOR_SET.text.default.muted, 'my-4 leading-6  '),
   a: classNames(' text-indigo-400 hover:text-indigo-600 cursor-pointer'),
   blockquote: classNames(
-    'border-indigo-400 border-l-4 text-zinc-400 bg-zinc-800 text-md [&>p]:m-0 p-6 py-4 ',
-    'my-8',
+    SCALE_SET.text.body2,
+    COLOR_SET.text.default.muted,
+    'border-indigo-400 border-l-4 bg-zinc-800 ',
+    'my-8 [&>p]:m-0 p-6 py-4 ',
     '[&>h1]:mt-0 [&>h2]:mt-0 [&>h3]:mt-0 [&>h4]:mt-0',
   ),
-  hr: classNames('border-b border-zinc-600  ', ' my-12 border-1'),
+  hr: classNames('border-b border-zinc-600 border-1 ', 'my-12'),
 
   li: classNames('my-1 pl-2'),
   ul: classNames('list-disc ml-6 my-2'),
