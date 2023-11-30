@@ -32,19 +32,26 @@ export const COLOR_THEME = {
 
 export const RESPONSIVE_THEME = {
   Typography: {
-    h1: classNames('text-4xl font-bold', 'inline-block'),
-    h2: classNames('text-3xl font-bold ', 'inline-block'),
-    h3: classNames('text-xl font-semibold ', 'inline-block'),
-    h4: classNames('text-lg font-bold ', 'inline-block'),
-    h5: classNames('text-md font-semibold', 'inline-block'),
-    h6: classNames('text-md font-semibold', 'inline-block'),
+    h1: classNames('text-2xl md:text-3xl lg:text-4xl', 'font-bold', 'inline-block space-x-2'),
+    h2: classNames('text-xl md:text-2xl lg:text-3xl', 'font-bold ', 'inline-block space-x-2'),
+    h3: classNames('text-[16px] md:text-lg lg:text-xl ', 'font-semibold ', 'inline-block space-x-2'),
+    h4: classNames('text-sm md:text-[16px] md:leading-6 lg:text-lg', 'font-semibold ', 'inline-block space-x-2'),
+    h5: classNames('text-xs md:text-sm lg:text-[16px] lg:leading-6', ' font-semibold', 'inline-block space-x-2'),
+    h6: classNames('text-xs md:text-sm lg:text-[16px] lg:leading-6', ' font-semibold', 'inline-block space-x-2'),
 
-    p: classNames('leading-6  '),
-    a: classNames('cursor-pointer'),
-    span: classNames(),
-    code: classNames('text-sm ', COLOR_THEME.fill.base, 'inline bg-opacity-100', 'rounded-md  p-0.5 px-1.5 '),
+    p: classNames('text-xs lg:text-sm space-x-2'),
+    a: classNames('text-xs lg:text-sm', 'cursor-pointer space-x-2'),
+    span: classNames('text-xs lg:text-sm space-x-2'),
+    code: classNames(
+      'text-xs lg:text-sm ',
+      COLOR_THEME.fill.base,
+      'inline bg-opacity-100',
+      'rounded-md  p-0.5 px-1.5 ',
+    ),
   },
 
   px: classNames('px-4 sm:px-6 lg:px-8'),
   py: classNames('py-4 sm:py-6 lg:py-8'),
 };
+
+// body1 body2 로 scale 조정해야될듯

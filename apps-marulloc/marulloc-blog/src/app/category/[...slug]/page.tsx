@@ -11,6 +11,7 @@ import ArticleCard from '@/components/ArticleCard';
 import SeriesCard from '@/components/SeriesCard';
 import Container from '@/components/Marulloc-UI/common/Container';
 import Paper from '@/components/Marulloc-UI/common/Paper';
+import Typography from '@/components/Marulloc-UI/common/Typography';
 
 type TPageProps = {
   params: { slug: string[] };
@@ -47,7 +48,9 @@ const Page = async ({ params, searchParams }: TPageProps) => {
                 role="tab"
                 aria-controls="article"
               >
-                Article
+                <Typography variant="h4" color="base" hover="base">
+                  Article
+                </Typography>
               </Link>
             </li>
             <li className={classNames(hasSeries ? 'block' : 'hidden')}>
@@ -60,7 +63,9 @@ const Page = async ({ params, searchParams }: TPageProps) => {
                 role="tab"
                 aria-controls="series"
               >
-                Series
+                <Typography variant="h4" color="base" hover="base">
+                  Series
+                </Typography>
               </Link>
             </li>
           </ul>

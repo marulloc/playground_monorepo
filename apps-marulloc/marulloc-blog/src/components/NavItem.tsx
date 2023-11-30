@@ -20,12 +20,19 @@ const NavItem = ({ href, type, children }: TProps) => {
     <li>
       <Link
         href={type === 'dir' ? `/category/${href}` : `/article/${href}`}
-        className={classNames(
-          'relative block px-3 py-2 transition',
-          isActive ? 'text-pink-500 dark:text-pink-400' : 'hover:text-pink-500 dark:hover:text-pink-400',
-        )}
+        className={classNames('relative block px-3 py-2  group ')}
       >
-        <Typography variant="span" color="base">
+        <Typography
+          variant="span"
+          color="base"
+          defaultProps={{
+            className: classNames(
+              isActive
+                ? 'text-pink-500 dark:text-pink-400'
+                : 'group-hover:text-pink-500 dark:group-hover:text-pink-400',
+            ),
+          }}
+        >
           {children}
         </Typography>
         {isActive && (

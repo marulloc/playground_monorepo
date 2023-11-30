@@ -1,6 +1,7 @@
 import { getParsedMarkdown } from '@/services/getParsedMarkdown';
 import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import Link from 'next/link';
+import Typography from './Marulloc-UI/common/Typography';
 
 type TProps = {
   pathSegments: string[];
@@ -13,15 +14,14 @@ const HeaderLinks = async ({ pathSegments }: TProps) => {
   const linkBaseStyle = ['pl-0', 'pl-4', 'pl-8'];
 
   return (
-    <div className=" space-y-2 text-xs text-zinc-400 ">
+    <div className=" space-y-2 ">
       {headings.map(({ level, text }) => (
         <div className={classNames(linkBaseStyle[level - 1], ' ')} key={`header-inner-link-level-${level}-${text}`}>
-          <Link
-            href={`#level-${level}-${text}`}
-            replace
-            className="  hover:text-pink-400    transition-all duration-100  whitespace-nowrap "
-          >
-            {text}
+          <Link href={`#level-${level}-${text}`} replace className="transition-all duration-100  whitespace-nowrap ">
+            <Typography variant="span" color="muted" hover="base">
+              {text}
+            </Typography>
+            {/* xs */}
           </Link>
         </div>
       ))}

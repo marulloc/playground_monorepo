@@ -7,6 +7,8 @@ import ConsoleCompo from '@/components/ConsoleCompo';
 import { AsyncFunctionValueType } from '@/utils/conditionalType';
 import Image from 'next/image';
 import MarkdownContents from '@/components/MarkdownContents';
+import Typography from './Marulloc-UI/common/Typography';
+import { RESPONSIVE_THEME } from './Marulloc-UI/config';
 
 const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof getArticleList>>[number] }) => {
   return (
@@ -29,13 +31,21 @@ const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof 
 
       {/*  */}
       <div className=" mt-4  ">
-        <h2 className=" text-xl font-semibold   text-zinc-200 tracking-wide ">{node.name}</h2>
+        <div className="tracking-wide ">
+          <Typography variant="h3" color="base" hover="base">
+            {node.name}
+          </Typography>
+        </div>
 
-        <div className="  line-clamp-3 text-sm leading-6 text-zinc-400 min-h-[20px]  mb-2">
+        <div className={classNames('  line-clamp-3   min-h-[20px]  mb-2', RESPONSIVE_THEME.Typography.span)}>
           <MarkdownContents markdown={node.contentDescription} />
         </div>
 
-        <div className="text-zinc-200 group-hover:text-pink-400 text-xs absolute bottom-2    mt-4  ">read more</div>
+        <div className="text-xs absolute bottom-2  mt-4">
+          <Typography variant="span" color="base" hover="accent">
+            read more {/* xs */}
+          </Typography>
+        </div>
       </div>
     </Link>
   );

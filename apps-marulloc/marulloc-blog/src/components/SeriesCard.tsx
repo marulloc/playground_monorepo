@@ -7,6 +7,8 @@ import ConsoleCompo from '@/components/ConsoleCompo';
 import { AsyncFunctionValueType } from '@/utils/conditionalType';
 import Image from 'next/image';
 import MarkdownContents from '@/components/MarkdownContents';
+import Typography from './Marulloc-UI/common/Typography';
+import { RESPONSIVE_THEME } from './Marulloc-UI/config';
 
 const SeriesCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof getSeriesList>>[number] }) => {
   return (
@@ -29,13 +31,21 @@ const SeriesCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof g
 
       {/*  */}
       <div className=" mt-4 ">
-        <h2 className=" text-xl font-semibold   text-zinc-200 tracking-wide ">{node.name}</h2>
+        <div className="tracking-wide ">
+          <Typography variant="h3" color="base" hover="base">
+            {node.name}
+          </Typography>
+        </div>
 
-        <div className="  line-clamp-3 text-sm leading-6 text-zinc-400 min-h-[20px] -my-2">
+        <div className={classNames('  line-clamp-3   min-h-[20px] -my-2', RESPONSIVE_THEME.Typography.span)}>
           <MarkdownContents markdown={node.readmeWithoutFirstImg} />
         </div>
-        <div className="text-zinc-200 group-hover:text-pink-400 text-xs    ">
-          {`view ${node.childDir.filter(({ name }) => name.toLowerCase() !== 'readme.md').length} articles`}
+
+        <div className=" text-xs    ">
+          <Typography variant="span" color="base" hover="accent">
+            {`view ${node.childDir.filter(({ name }) => name.toLowerCase() !== 'readme.md').length} articles`}{' '}
+            {/* xs */}
+          </Typography>
         </div>
       </div>
     </Link>

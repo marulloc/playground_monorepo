@@ -27,7 +27,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Background />
 
         <Container
-          defaultProps={{ className: classNames('isolate sticky  top-0 pb-8 lg:-top-8 lg:py-8 w-full z-30   ') }}
+          defaultProps={{
+            className: classNames('isolate sticky  w-full z-30', 'pb-4 pt-4 -top-4'),
+          }}
         >
           <Paper as={'header'} defaultProps={{ className: classNames('flex items-center h-16 z-50 px-8') }}>
             <div className="flex-1">
