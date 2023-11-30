@@ -15,24 +15,21 @@ const Page = async ({ params }: any) => {
   const currentFileName = decodeURIComponent(currentFilePathSegments.at(-1) as string);
 
   return (
-    <main className="  ">
-      <Container
-        as="section"
-        py
-        defaultProps={{ className: classNames('relative  flex flex-col xl:flex-row space-y-4 ') }}
-      >
-        <div className="static xl:absolute left-0 lg:left-16 h-full  z-10 ">
-          <div className="sticky top-96 pt-20  flex justify-between flex-row xl:flex-col  gap-4">
-            <FallbackBtn />
-            <button className=" flex justify-center items-center bg-zinc-700 p-3  rounded-full h-12 w-12 border border-zinc-800 text-zinc-400 hover:text-zinc-200">
-              =
-            </button>
+    <div className={classNames('relative', RESPONSIVE_THEME.px, RESPONSIVE_THEME.py, 'pt-0 sm:pt-0 lg:pt-0')}>
+      <main className={classNames('flex gap-4 sm:gap-4 lg:gap-4 ')}>
+        <div className="flex-1 self-stretch hidden lg:block  ">
+          <div className="h-full  ">
+            <div className="sticky top-72 flex flex-col gap-2 items-end  pl-4 pt-20 ">
+              <FallbackBtn />
+              <button className=" flex justify-center items-center bg-zinc-700 p-3  rounded-full h-12 w-12 border border-zinc-800 text-zinc-400 hover:text-zinc-200">
+                =
+              </button>
+            </div>
           </div>
         </div>
 
-        {/*  */}
-        <div className="w-full md:max-w-3xl  xl:max-w-3xl mx-auto relative  ">
-          <div className=" mb-20 ">
+        <div className="w-full md:max-w-3xl  xl:max-w-3xl mx-auto       ">
+          <div className=" mb-12 lg:mb-16  ">
             <Typography scale="h2" color="base">
               {currentFileName}
             </Typography>
@@ -40,16 +37,15 @@ const Page = async ({ params }: any) => {
           <Article pathSegments={currentFilePathSegments} />
         </div>
 
-        {/*  */}
-        <div className="absolute right-0 h-full hidden xl:block">
-          <div className="sticky top-96 flex justify-center overflow-x-hidden">
-            <HeaderLinks pathSegments={currentFilePathSegments} />
+        <div className="flex-1 self-stretch  hidden lg:block  ">
+          <div className="h-full  ">
+            <div className="sticky top-72  pt-20  ">
+              <HeaderLinks pathSegments={currentFilePathSegments} />
+            </div>
           </div>
         </div>
-      </Container>
-
-      <h1 id="">Siblings 여기 카드로 대체하자</h1>
-    </main>
+      </main>
+    </div>
   );
 };
 
