@@ -48,7 +48,7 @@ const Page = async ({ params, searchParams }: TPageProps) => {
                 role="tab"
                 aria-controls="article"
               >
-                <Typography variant="h4" color="base" hover="base">
+                <Typography scale="h6" color="base" hover="base">
                   Article
                 </Typography>
               </Link>
@@ -63,7 +63,7 @@ const Page = async ({ params, searchParams }: TPageProps) => {
                 role="tab"
                 aria-controls="series"
               >
-                <Typography variant="h4" color="base" hover="base">
+                <Typography scale="h6" color="base" hover="base">
                   Series
                 </Typography>
               </Link>

@@ -14,7 +14,7 @@ const Breadcrumbs = ({ pathSegments }: TProps) => {
     <div>
       <div className="flex  items-center  px-3 rounded-full ring-1 ring-white/10 hover:ring-white/20 w-fit ">
         <Link href={'/'} className="group  h-full py-1">
-          <Typography color="muted" hover="base">
+          <Typography scale="body2" color="muted" hover="base">
             Home
           </Typography>
         </Link>
@@ -25,17 +25,17 @@ const Breadcrumbs = ({ pathSegments }: TProps) => {
               key={path}
               className=" h-full py-1  ml-2"
             >
-              <Typography color="muted" hover="base">
-                <Typography color="muted">{'>'}</Typography>
-                <span>{decodeURIComponent(path)}</span>
+              <Typography scale="body2" color="muted">
+                <Typography>{'>'}</Typography>
+                <Typography hover="base">{decodeURIComponent(path)}</Typography>
               </Typography>
             </Link>
           ))}
 
           <div className="cursor-pointer  ml-2">
-            <Typography color="base">
-              <Typography color="muted">{'>'}</Typography>
-              <span>{decodeURIComponent(currentPath)}</span>
+            <Typography scale="body2" color="muted">
+              <Typography>{'>'}</Typography>
+              <Typography color="base">{decodeURIComponent(currentPath)}</Typography>
             </Typography>
           </div>
         </>

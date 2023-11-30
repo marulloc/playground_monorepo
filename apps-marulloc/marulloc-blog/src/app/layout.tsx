@@ -34,7 +34,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Paper as={'header'} defaultProps={{ className: classNames('flex items-center h-16 z-50 px-8') }}>
             <div className="flex-1">
               <Link href="/" className=" text-2xl font-semibold">
-                <Typography variant="h3" color="base" hover="base">
+                <Typography scale="h5" color="base" hover="base">
                   marullog
                 </Typography>
               </Link>

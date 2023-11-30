@@ -23,15 +23,11 @@ const NavItem = ({ href, type, children }: TProps) => {
         className={classNames('relative block px-3 py-2  group ')}
       >
         <Typography
-          variant="span"
+          scale="body2"
           color="base"
-          defaultProps={{
-            className: classNames(
-              isActive
-                ? 'text-pink-500 dark:text-pink-400'
-                : 'group-hover:text-pink-500 dark:group-hover:text-pink-400',
-            ),
-          }}
+          className={classNames(
+            isActive ? 'text-pink-500 dark:text-pink-400' : 'group-hover:text-pink-500 dark:group-hover:text-pink-400',
+          )}
         >
           {children}
         </Typography>

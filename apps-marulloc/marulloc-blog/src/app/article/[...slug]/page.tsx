@@ -31,9 +31,9 @@ const Page = async ({ params }: any) => {
         </div>
 
         {/*  */}
-        <div className="w-full md:max-w-3xl  xl:max-w-2xl mx-auto relative  ">
+        <div className="w-full md:max-w-3xl  xl:max-w-3xl mx-auto relative  ">
           <div className=" mb-20 ">
-            <Typography variant="h1" color="base">
+            <Typography scale="h2" color="base">
               {currentFileName}
             </Typography>
           </div>

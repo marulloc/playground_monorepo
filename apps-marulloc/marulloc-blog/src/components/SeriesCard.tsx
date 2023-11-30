@@ -9,6 +9,7 @@ import Image from 'next/image';
 import MarkdownContents from '@/components/MarkdownContents';
 import Typography from './Marulloc-UI/common/Typography';
 import { RESPONSIVE_THEME } from './Marulloc-UI/config';
+import { SCALE_SET } from './Marulloc-UI/theme-config';
 
 const SeriesCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof getSeriesList>>[number] }) => {
   return (
@@ -32,17 +33,17 @@ const SeriesCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof g
       {/*  */}
       <div className=" mt-4 ">
         <div className="tracking-wide ">
-          <Typography variant="h3" color="base" hover="base">
+          <Typography scale="h6" color="base" hover="base">
             {node.name}
           </Typography>
         </div>
 
-        <div className={classNames('  line-clamp-3   min-h-[20px] -my-2', RESPONSIVE_THEME.Typography.span)}>
+        <div className={classNames('  line-clamp-3   min-h-[20px] -my-2', SCALE_SET.text.caption)}>
           <MarkdownContents markdown={node.readmeWithoutFirstImg} />
         </div>
 
         <div className=" text-xs    ">
-          <Typography variant="span" color="base" hover="accent">
+          <Typography scale="caption" color="base" hover="accent">
             {`view ${node.childDir.filter(({ name }) => name.toLowerCase() !== 'readme.md').length} articles`}{' '}
             {/* xs */}
           </Typography>

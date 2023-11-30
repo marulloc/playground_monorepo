@@ -9,6 +9,7 @@ import Image from 'next/image';
 import MarkdownContents from '@/components/MarkdownContents';
 import Typography from './Marulloc-UI/common/Typography';
 import { RESPONSIVE_THEME } from './Marulloc-UI/config';
+import { SCALE_SET } from './Marulloc-UI/theme-config';
 
 const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof getArticleList>>[number] }) => {
   return (
@@ -32,17 +33,17 @@ const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof 
       {/*  */}
       <div className=" mt-4  ">
         <div className="tracking-wide ">
-          <Typography variant="h3" color="base" hover="base">
+          <Typography scale="h6" color="base" hover="base">
             {node.name}
           </Typography>
         </div>
 
-        <div className={classNames('  line-clamp-3   min-h-[20px]  mb-2', RESPONSIVE_THEME.Typography.span)}>
+        <div className={classNames('  line-clamp-3   min-h-[20px]  mb-2', SCALE_SET.text.caption)}>
           <MarkdownContents markdown={node.contentDescription} />
         </div>
 
         <div className="text-xs absolute bottom-2  mt-4">
-          <Typography variant="span" color="base" hover="accent">
+          <Typography scale="caption" color="base" hover="accent">
             read more {/* xs */}
           </Typography>
         </div>

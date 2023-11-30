@@ -1,37 +1,38 @@
 import { COLOR_THEME, RESPONSIVE_THEME } from '../config';
+import { COLOR_SET, SCALE_SET } from '../theme-config';
 import { classNames } from '../utils/classNames';
 
-type TypographyProps<T extends React.ElementType> = {
-  color?: 'base' | 'muted' | 'accent' | 'disabled';
-  hover?: 'base' | 'muted' | 'accent';
-  variant?: 'span' | 'p' | 'a' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'code';
-  as?: 'span' | 'p' | 'a' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'code';
-  children?: React.ReactNode;
-  defaultProps?: Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
-};
+type TypographyElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'p' | 'code';
+type TypographyScales = keyof typeof SCALE_SET.text;
+type TypographyDefaultColors = keyof typeof COLOR_SET.text.default;
+type TypographyHoverColors = keyof typeof COLOR_SET.text.hover;
 
-const Typography = <T extends React.ElementType>({
-  color = 'muted',
-  variant = 'span',
-  hover,
-  children,
-  as,
-  defaultProps,
-}: TypographyProps<T>) => {
-  const Component = as ?? variant ?? 'span';
+type TypographyProps<T extends TypographyElement> = {
+  scale?: TypographyScales;
+  color?: TypographyDefaultColors;
+  hover?: TypographyHoverColors;
+  as?: T;
+} & React.ComponentPropsWithoutRef<T>;
+
+const Typography = <T extends TypographyElement>(props: TypographyProps<T>) => {
+  const { color, scale, hover, as, className, ...restProps } = props;
 
   const classes = classNames(
-    RESPONSIVE_THEME.Typography[variant],
-    COLOR_THEME.text[color],
-    hover && COLOR_THEME.text[`${hover}_hover`],
-
-    defaultProps?.className,
+    scale && SCALE_SET.text[scale],
+    color && COLOR_SET.text.default[color],
+    hover && COLOR_SET.text.hover[hover],
+    'space-x-2',
+    className,
   );
 
+  const Component = as ?? 'span';
   return (
-    <Component {...defaultProps} className={classes}>
-      {['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(variant) && <span className="sr-only">{children}</span>}
-      {children}
+    <Component {...restProps} className={classes}>
+      {['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(Component) && (
+        <span className="sr-only"> {restProps.children}</span>
+      )}
+
+      {restProps.children}
     </Component>
   );
 };
