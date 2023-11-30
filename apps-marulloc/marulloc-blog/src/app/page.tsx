@@ -10,7 +10,7 @@ import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 export default function Home() {
   return (
     <>
-      <Container as={'main'} defaultProps={{ className: 'w-full flex-1  flex  flex-col pb-8 ' }}>
+      <Container as={'main'} className=" w-full flex-1  flex  flex-col ">
         <Paper as="section" bgColor="base" bgGlassy className="isolate flex-1">
           <div className="flex flex-col">
             <Typography scale="h1" color="accent" className=" text-blue-500">

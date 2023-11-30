@@ -5,7 +5,7 @@ import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 const Layout = ({ children, params }: { children: React.ReactNode; params: any }) => {
   return (
     <div className="space-y-4  ">
-      <Container py>
+      <Container>
         <Breadcrumbs pathSegments={params.slug} />
       </Container>
       {/* <div className="flex-1 flex flex-col w-full ">

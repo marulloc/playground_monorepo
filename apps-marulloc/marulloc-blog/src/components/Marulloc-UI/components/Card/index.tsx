@@ -7,7 +7,7 @@ type CardProps = {};
 const Card = ({}: CardProps) => {
   return (
     <Paper>
-      <Container defaultProps={{ className: classNames('p-12') }}>
+      <Container>
         <></>
       </Container>
     </Paper>

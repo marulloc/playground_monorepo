@@ -26,11 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       >
         <Background />
 
-        <Container
-          defaultProps={{
-            className: classNames('isolate sticky  w-full z-30', 'pb-4 pt-4 -top-4'),
-          }}
-        >
+        <Container className={classNames('isolate sticky  w-full z-30', 'pb-4 pt-4 -top-4')}>
           <Paper as={'header'} bgGlassy bgColor="base" className="flex items-center h-16 z-50 px-8">
             <div className="flex-1">
               <Link href="/" className=" text-2xl font-semibold">
