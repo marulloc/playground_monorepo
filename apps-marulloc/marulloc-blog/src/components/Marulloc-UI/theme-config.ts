@@ -34,13 +34,18 @@ export const COLOR_SET = {
   },
 
   fill: {
-    base: classNames('bg-zinc-700 bg-opacity-40 backdrop-blur-lg'), // base(primary) bg color
-    accent: classNames('bg-pink-600'), // inverted from base(primary) bg color
+    default: {
+      base: classNames('bg-zinc-700'), // base(primary) bg color
+      muted: classNames('bg-zinc-500'),
+      accent: classNames('bg-pink-600'), // inverted from base(primary) bg color
+      disabled: '', // disabled bg color
+    },
 
-    base_hover: classNames('hover:bg-zinc-400 hover:bg-opacity-10 group-hover:bg-zinc-400 group-hover:bg-opacity-10'),
-    accent_hover: classNames('hover:bg-pink-400 group-hover:bg-pink-400'),
-
-    disabled: '', // disabled bg color
+    hover: {
+      base: classNames('hover:bg-zinc-600 group-hover:bg-zinc-600'),
+      muted: classNames('hover:bg-zinc-300 group-hover:bg-zinc-300'),
+      accent: classNames('hover:bg-pink-400 group-hover:bg-pink-400'),
+    },
   },
 
   border: {
@@ -49,5 +54,4 @@ export const COLOR_SET = {
     inverted: '',
     disabled: '',
   },
-  opacity: {},
 };

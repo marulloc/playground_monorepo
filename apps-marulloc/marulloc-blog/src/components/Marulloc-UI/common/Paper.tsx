@@ -1,43 +1,41 @@
 import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import { COLOR_THEME, RESPONSIVE_THEME } from '../config';
+import { COLOR_SET, SCALE_SET } from '../theme-config';
 
-type PaperProps<T extends React.ElementType> = {
-  children?: React.ReactNode;
+type PaperElement = 'div' | 'main' | 'section' | 'article' | 'header' | 'footer' | 'aside';
+type PaperDefaultColors = keyof typeof COLOR_SET.fill.default;
+type PaperHoverColors = keyof typeof COLOR_SET.fill.hover;
+
+type PaperProps<T extends PaperElement> = {
+  bgColor?: PaperDefaultColors;
+  bgHoverColor?: PaperHoverColors;
+  bgGlassy?: boolean;
   as?: T;
-  defaultProps?: Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
-};
+} & React.ComponentPropsWithoutRef<T>;
 
-/**
- * @todo background level 조절
- * @param param0
- * @returns
- */
-const Paper = <T extends React.ElementType>({ children, as, defaultProps }: PaperProps<T>) => {
+const Paper = <T extends PaperElement>(props: PaperProps<T>) => {
+  const { as, bgColor, bgHoverColor, bgGlassy, className, ...restProps } = props;
   const Component = as ?? 'div';
 
   const classes = classNames(
-    COLOR_THEME.fill.base,
-    RESPONSIVE_THEME.px,
-    RESPONSIVE_THEME.py,
+    bgColor && COLOR_SET.fill.default[bgColor],
+
+    bgHoverColor && COLOR_SET.fill.hover[bgHoverColor],
+    bgGlassy && 'isolate bg-opacity-40  backdrop-blur-lg',
+    bgGlassy && bgHoverColor && 'hover:bg-opacity-10 group-hover:bg-opacity-10 ',
+
+    // COLOR_THEME.fill.base,
+    // RESPONSIVE_THEME.px,
+    // RESPONSIVE_THEME.py,
     'rounded-lg ',
-    defaultProps?.className,
+    className,
   );
 
   return (
-    <Component {...defaultProps} className={classes}>
-      {children}
+    <Component {...restProps} className={classes}>
+      {restProps.children}
     </Component>
   );
 };
 
 export default Paper;
-
-/**
- *
- * root layout - header  backdrop-blur-xl bg-zinc-700 bg-opacity-40     rounded-lg ====> done
- * root layout - main bg-zinc-700 bg-opacity-40 backdrop-blur-lg  rounded-lg ====> done
- *
- * article card  hover:bg-zinc-400 hover:bg-opacity-10  border border-transparent hover:border-zinc-800 rounded-md
- * series card   hover:bg-zinc-400 hover:bg-opacity-10  border border-transparent hover:border-zinc-800 rounded-md
- *
- */

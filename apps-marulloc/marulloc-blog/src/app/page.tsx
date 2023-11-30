@@ -11,12 +11,7 @@ export default function Home() {
   return (
     <>
       <Container as={'main'} defaultProps={{ className: 'w-full flex-1  flex  flex-col pb-8 ' }}>
-        <Paper
-          as="section"
-          defaultProps={{
-            className: classNames('isolate  flex-1'),
-          }}
-        >
+        <Paper as="section" bgColor="base" bgGlassy className="isolate flex-1">
           <div className="flex flex-col">
             <Typography scale="h1" color="accent" className=" text-blue-500">
               h1 들어갑니다

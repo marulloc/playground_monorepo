@@ -35,7 +35,7 @@ const Page = async ({ params, searchParams }: TPageProps) => {
 
   return (
     <Container as={'main'} defaultProps={{ className: 'w-full flex-1  flex  flex-col  pb-8  ' }}>
-      <Paper defaultProps={{ className: 'flex-1' }}>
+      <Paper bgGlassy bgColor="base" className="flex-1">
         <div className="mb-4 border-b dark:border-zinc-700">
           <ul className="flex flex-wrap text-lg   text-center text-zinc-200">
             <li className={classNames(hasArticle ? 'block' : 'hidden')}>
