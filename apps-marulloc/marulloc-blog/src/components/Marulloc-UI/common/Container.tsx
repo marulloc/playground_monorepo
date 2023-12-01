@@ -1,36 +1,26 @@
-import { RESPONSIVE_THEME } from '../config';
 import { classNames } from '../utils/classNames';
 
 type ContainerElement = 'div' | 'main' | 'section' | 'article' | 'header' | 'footer' | 'aside';
+type ConatinerLevel = 'max-w-5xl' | 'max-w-6xl' | 'max-w-7xl' | 'max-w-full';
 
 type ContainerProps<T extends ContainerElement> = {
-  centered?: 'x' | 'y' | 'xy';
-  fixed?: boolean;
+  centered?: 'x' | 'y' | 'xy' | false;
+  maxWidth?: ConatinerLevel;
   as?: T;
-} & React.ComponentPropsWithoutRef<T>;
+} & React.ComponentPropsWithoutRef<T>; //&  SpacingScales;
 
 const Container = <T extends ContainerElement>(props: ContainerProps<T>) => {
-  const { as, centered = 'x', fixed, className, ...restProps } = props;
+  const { as, maxWidth = 'max-w-7xl', className, ...restProps } = props;
 
   const Component = as ?? 'div';
-  const classes = classNames(
-    ' max-w-7xl',
-    ' w-full',
-
-    fixed && 'fixed z-10 ',
-    centered === 'x' && 'mx-auto left-0 right-0',
-    centered === 'y' && 'my-auto top-0 bottom-0',
-    centered === 'xy' && 'mx-auto my-auto left-0 right-0  top-0 bottom-0',
-
-    // RESPONSIVE_THEME.px,
-    // py && RESPONSIVE_THEME.py,
-    className,
-  );
+  const classes = classNames(maxWidth, 'mx-auto  w-full left-0 right-0', className);
 
   return (
-    <Component {...restProps} className={classes}>
-      {restProps.children}
-    </Component>
+    <div className="">
+      <Component {...restProps} className={classes}>
+        {restProps.children}
+      </Component>
+    </div>
   );
 };
 

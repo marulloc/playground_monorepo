@@ -5,7 +5,6 @@ import FallbackBtn from '../../../components/Fallbackbtn';
 import Link from 'next/link';
 import Container from '@/components/Marulloc-UI/common/Container';
 import { classNames } from '@/components/Marulloc-UI/utils/classNames';
-import { RESPONSIVE_THEME } from '@/components/Marulloc-UI/config';
 import Paper from '@/components/Marulloc-UI/common/Paper';
 import Typography from '@/components/Marulloc-UI/common/Typography';
 
@@ -15,7 +14,13 @@ const Page = async ({ params }: any) => {
   const currentFileName = decodeURIComponent(currentFilePathSegments.at(-1) as string);
 
   return (
-    <div className={classNames('relative', RESPONSIVE_THEME.px, RESPONSIVE_THEME.py, 'pt-0 sm:pt-0 lg:pt-0')}>
+    <div
+      className={classNames(
+        'relative',
+        //  RESPONSIVE_THEME.px, RESPONSIVE_THEME.py,
+        'pt-0 sm:pt-0 lg:pt-0',
+      )}
+    >
       <main className={classNames('flex gap-4 sm:gap-4 lg:gap-4 ')}>
         <div className="flex-1 self-stretch hidden lg:block  ">
           <div className="h-full  ">

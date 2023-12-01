@@ -9,7 +9,7 @@ import Avatar from '@/components/Avatar';
 import Navigation from '@/components/Navigation';
 import Paper from '@/components/Marulloc-UI/common/Paper';
 import Container from '@/components/Marulloc-UI/common/Container';
-import { COLOR_THEME } from '@/components/Marulloc-UI/config';
+// import { COLOR_THEME } from '@/components/Marulloc-UI/config';
 import Typography from '@/components/Marulloc-UI/common/Typography';
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +22,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="kr" className=" h-full  scroll-smooth ">
       <body
-        className={classNames('relative min-h-full  flex flex-col    bg-black', COLOR_THEME.text.base, inter.className)}
+        className={classNames(
+          'relative min-h-full  flex flex-col   bg-black',
+          // COLOR_THEME.text.base,
+          inter.className,
+        )}
       >
         <Background />
 

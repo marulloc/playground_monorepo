@@ -8,8 +8,7 @@ import { AsyncFunctionValueType } from '@/utils/conditionalType';
 import Image from 'next/image';
 import MarkdownContents from '@/components/MarkdownContents';
 import Typography from './Marulloc-UI/common/Typography';
-import { RESPONSIVE_THEME } from './Marulloc-UI/config';
-import { SCALE_SET } from './Marulloc-UI/theme-config';
+// import { SCALE_SET } from './Marulloc-UI/theme-config';
 import Paper from './Marulloc-UI/common/Paper';
 
 const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof getArticleList>>[number] }) => {
@@ -40,7 +39,12 @@ const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof 
             </Typography>
           </div>
 
-          <div className={classNames('  line-clamp-3   min-h-[20px]  mb-2', SCALE_SET.text.caption)}>
+          <div
+            className={classNames(
+              '  line-clamp-3   min-h-[20px]  mb-2',
+              //  SCALE_SET.text.caption
+            )}
+          >
             <MarkdownContents markdown={node.contentDescription} />
           </div>
 
