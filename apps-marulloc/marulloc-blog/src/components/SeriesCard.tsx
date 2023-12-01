@@ -34,7 +34,7 @@ const SeriesCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof g
         {/*  */}
         <div className=" mt-4 ">
           <div className="tracking-wide ">
-            <Typography scale="h6" color="base" hover="base">
+            <Typography size="h6" color="base" hover="base">
               {node.name}
             </Typography>
           </div>
@@ -49,7 +49,7 @@ const SeriesCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof g
           </div>
 
           <div className=" text-xs    ">
-            <Typography scale="caption" color="base" hover="accent">
+            <Typography size="caption" color="base" hover="primary" responsive={false}>
               {`view ${node.childDir.filter(({ name }) => name.toLowerCase() !== 'readme.md').length} articles`}{' '}
               {/* xs */}
             </Typography>

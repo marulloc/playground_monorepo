@@ -34,8 +34,8 @@ const Page = async ({ params, searchParams }: TPageProps) => {
   }
 
   return (
-    <Container as={'main'} className="w-full flex-1  flex  flex-col   px-0  xs:px-0   ">
-      <Paper bgGlassy bgColor="base" className="flex-1">
+    <Container as={'main'} spacing={[{ type: 'mx', level: '0' }]}>
+      <Paper background="base" className="flex-1">
         <div className="mb-4 border-b dark:border-zinc-700">
           <ul className="flex flex-wrap text-lg   text-center text-zinc-200">
             <li className={classNames(hasArticle ? 'block' : 'hidden')}>
@@ -48,7 +48,7 @@ const Page = async ({ params, searchParams }: TPageProps) => {
                 role="tab"
                 aria-controls="article"
               >
-                <Typography scale="h6" color="base" hover="base">
+                <Typography size="h6" color="base" hover="base">
                   Article
                 </Typography>
               </Link>
@@ -63,7 +63,7 @@ const Page = async ({ params, searchParams }: TPageProps) => {
                 role="tab"
                 aria-controls="series"
               >
-                <Typography scale="h6" color="base" hover="base">
+                <Typography size="h6" color="base" hover="base">
                   Series
                 </Typography>
               </Link>

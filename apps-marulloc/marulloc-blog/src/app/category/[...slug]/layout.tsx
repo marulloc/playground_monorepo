@@ -15,7 +15,7 @@ const Layout = async ({ params, children }: any) => {
       </Container>
 
       <Container className="">
-        <Paper bgGlassy bgColor="base" className="  w-full">
+        <Paper background="base" className="  w-full">
           <div className="  py-4">
             <CategorySummary url={readmeFirstImg} pathSegments={params.slug} readme={readmeWithoutFirstImg} />
           </div>

@@ -6,7 +6,8 @@ import remarkGfm from 'remark-gfm';
 
 import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import { COLOR_SET, SCALE_SET } from './Marulloc-UI/theme-config';
+import FONT_THEME from './Marulloc-UI/font-theme';
+import COLOR_THEME from './Marulloc-UI/color-theme';
 
 type TProps = {
   markdown: string;
@@ -67,18 +68,43 @@ const MarkdownContents = ({ markdown }: TProps) => {
 export default MarkdownContents;
 
 const markdown_styles = {
-  h1: classNames(SCALE_SET.text.h2, COLOR_SET.text.default.base, 'mt-20 mb-8 scroll-m-24 '),
-  h2: classNames(SCALE_SET.text.h3, COLOR_SET.text.default.base, 'mt-16 mb-8 scroll-m-24'),
-  h3: classNames(SCALE_SET.text.h4, COLOR_SET.text.default.base, 'mt-12 mb-8 scroll-m-24'),
-  h4: classNames(SCALE_SET.text.h5, COLOR_SET.text.default.base, 'mt-8 mb-2'),
-  h5: classNames(SCALE_SET.text.h6, COLOR_SET.text.default.base, 'my-4  '),
-  h6: classNames(SCALE_SET.text.body1, COLOR_SET.text.default.base, 'my-4'),
+  h1: classNames(
+    FONT_THEME.h2.default,
+    FONT_THEME.h2.responsive,
+    COLOR_THEME.text.base.default,
+    'mt-20 mb-8 scroll-m-24 ',
+  ),
+  h2: classNames(
+    FONT_THEME.h3.default,
+    FONT_THEME.h3.responsive,
+    COLOR_THEME.text.base.default,
+    'mt-16 mb-8 scroll-m-24',
+  ),
+  h3: classNames(
+    FONT_THEME.h4.default,
+    FONT_THEME.h4.responsive,
+    COLOR_THEME.text.base.default,
+    'mt-12 mb-8 scroll-m-24',
+  ),
+  h4: classNames(FONT_THEME.h5.default, FONT_THEME.h5.responsive, COLOR_THEME.text.base.default, 'mt-8 mb-2'),
+  h5: classNames(FONT_THEME.h6.default, FONT_THEME.h6.responsive, COLOR_THEME.text.base.default, 'my-4  '),
+  h6: classNames(FONT_THEME.body1.default, FONT_THEME.body1.responsive, COLOR_THEME.text.base.default, 'my-4'),
 
-  p: classNames(SCALE_SET.text.body2, COLOR_SET.text.default.muted, 'my-4 leading-6  '),
-  a: classNames(' text-indigo-400 hover:text-indigo-600 cursor-pointer'),
+  p: classNames(
+    FONT_THEME.body2.default,
+    FONT_THEME.body2.responsive,
+    COLOR_THEME.text.muted.default,
+    'my-4 leading-6  ',
+  ),
+  a: classNames(
+    FONT_THEME.body2.default,
+    FONT_THEME.body2.responsive,
+    ' text-indigo-400 hover:text-indigo-600 cursor-pointer',
+  ),
   blockquote: classNames(
-    SCALE_SET.text.body2,
-    COLOR_SET.text.default.muted,
+    FONT_THEME.body2.default,
+    FONT_THEME.body2.responsive,
+    COLOR_THEME.text.muted.default,
     'border-indigo-400 border-l-4 bg-zinc-800 ',
     'my-8 [&>p]:m-0 p-6 py-4 ',
     '[&>h1]:mt-0 [&>h2]:mt-0 [&>h3]:mt-0 [&>h4]:mt-0',

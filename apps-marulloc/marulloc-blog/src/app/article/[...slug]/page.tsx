@@ -35,7 +35,7 @@ const Page = async ({ params }: any) => {
 
         <div className="w-full md:max-w-3xl  xl:max-w-3xl mx-auto       ">
           <div className=" mb-12 lg:mb-16  ">
-            <Typography scale="h2" color="base">
+            <Typography size="h2" color="base">
               {currentFileName}
             </Typography>
           </div>

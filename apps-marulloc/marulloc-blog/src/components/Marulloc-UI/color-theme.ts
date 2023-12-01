@@ -24,16 +24,16 @@ const COLOR_THEME = {
 
   fill: {
     base: {
-      default: 'bg-zinc-700',
-      hover: 'hover:bg-zinc-600 group-hover:bg-zinc-600',
+      default: 'bg-zinc-700 bg-opacity-40  backdrop-blur-lg',
+      hover: 'hover:bg-zinc-600 group-hover:bg-zinc-600 hover:bg-opacity-10 group-hover:bg-opacity-10',
     },
     muted: {
-      default: 'bg-zinc-500',
-      hover: 'hover:bg-zinc-300 group-hover:bg-zinc-300',
+      default: 'bg-zinc-500 bg-opacity-40  backdrop-blur-lg',
+      hover: 'hover:bg-zinc-300 group-hover:bg-zinc-300 hover:bg-opacity-10 group-hover:bg-opacity-10',
     },
     primary: {
       default: 'bg-pink-600',
-      hover: 'hover:bg-pink-400 group-hover:bg-pink-400',
+      hover: 'hover:bg-pink-400 group-hover:bg-pink-400 hover:bg-opacity-10 group-hover:bg-opacity-10',
     },
     secondary: {
       default: '',
@@ -52,3 +52,5 @@ const COLOR_THEME = {
     disabled: { default: '', hover: '' },
   },
 } as const;
+
+export default COLOR_THEME;

@@ -34,7 +34,7 @@ const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof 
         {/*  */}
         <div className=" mt-4  ">
           <div className="tracking-wide ">
-            <Typography scale="h6" color="base" hover="base">
+            <Typography size="h6" color="base" hover="base">
               {node.name}
             </Typography>
           </div>
@@ -49,7 +49,7 @@ const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof 
           </div>
 
           <div className="text-xs absolute bottom-2  mt-4">
-            <Typography scale="caption" color="base" hover="accent">
+            <Typography size="caption" color="base" hover="primary" responsive={false}>
               read more {/* xs */}
             </Typography>
           </div>
