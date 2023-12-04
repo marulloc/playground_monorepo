@@ -6,8 +6,8 @@ import remarkGfm from 'remark-gfm';
 
 import { Prism as SyntaxHighlighter, SyntaxHighlighterProps } from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import FONT_THEME from './Marulloc-UI/font-theme';
-import COLOR_THEME from './Marulloc-UI/color-theme';
+import FONT_THEME from './Marulloc-UI/theme/font-theme';
+import COLOR_THEME from './Marulloc-UI/theme/color-theme';
 
 type TProps = {
   markdown: string;
@@ -19,7 +19,6 @@ const MarkdownContents = ({ markdown }: TProps) => {
         className={classNames(' text-zinc-400  font-light  ')}
         remarkPlugins={[remarkGfm]}
         components={{
-          //  ID 다시 삽입해줘야됨 ;;
           h1: ({ node, ...props }) => <h1 {...props} id={`level-1-${props.children}`} className={markdown_styles.h1} />,
           h2: ({ node, ...props }) => <h2 {...props} id={`level-2-${props.children}`} className={markdown_styles.h2} />,
           h3: ({ node, ...props }) => <h3 {...props} id={`level-3-${props.children}`} className={markdown_styles.h3} />,

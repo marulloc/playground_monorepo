@@ -1,30 +1,26 @@
-import COLOR_THEME from '../color-theme';
-import FONT_THEME from '../font-theme';
+import { ColorType, FontType, getColorTheme, getFontTheme } from '@/components/Marulloc-UI/theme/getTheme';
 import { classNames } from '../utils/classNames';
 
-type TypographyElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'p' | 'code';
-type TypographySize = keyof typeof FONT_THEME;
-type TypographyDefaultColors = keyof typeof COLOR_THEME.text;
-type TypographyHoverColors = keyof typeof COLOR_THEME.text; // true거나 찝거나
+type TypographyHeadingElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+type TypographyInlineElement = 'span' | 'p' | 'code';
+type TypographyElement = TypographyHeadingElement | TypographyInlineElement;
 
 type TypographyProps<T extends TypographyElement> = {
-  size?: TypographySize;
-  responsive?: boolean; //=> scale이 있을때만 유효함
-  color?: TypographyDefaultColors;
-  hover?: TypographyHoverColors;
+  variants?: { size: FontType; responsive?: boolean };
+  theme?: { color?: ColorType<'text'>; hoverColor?: ColorType<'text'> };
   as?: T;
 } & React.ComponentPropsWithoutRef<T>;
 
 const Typography = <T extends TypographyElement>(props: TypographyProps<T>) => {
-  const { size, responsive = true, color, hover, as, className, ...restProps } = props;
+  const { as, className, variants, theme, ...restProps } = props;
 
   const Component = as ?? 'span';
   const classes = classNames(
-    size && FONT_THEME[size].default,
-    size && responsive && FONT_THEME[size].responsive,
+    theme?.color && getColorTheme('text', [{ type: theme?.color, name: 'default' }]),
+    theme?.hoverColor && getColorTheme('text', [{ type: theme?.hoverColor, name: 'hover' }]),
 
-    color && COLOR_THEME.text[color].default,
-    hover && COLOR_THEME.text[hover].hover,
+    variants?.size && getFontTheme([{ type: variants.size, name: 'default' }]),
+    variants?.responsive && getFontTheme([{ type: variants.size, name: 'responsive' }]),
 
     'space-x-2',
     className,

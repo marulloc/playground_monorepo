@@ -17,8 +17,7 @@ const Page = async ({ params }: any) => {
     <div
       className={classNames(
         'relative',
-        //  RESPONSIVE_THEME.px, RESPONSIVE_THEME.py,
-        'pt-0 sm:pt-0 lg:pt-0',
+        // 'pt-0 sm:pt-0 lg:pt-0'
       )}
     >
       <main className={classNames('flex gap-4 sm:gap-4 lg:gap-4 ')}>
@@ -35,7 +34,7 @@ const Page = async ({ params }: any) => {
 
         <div className="w-full md:max-w-3xl  xl:max-w-3xl mx-auto       ">
           <div className=" mb-12 lg:mb-16  ">
-            <Typography size="h2" color="base">
+            <Typography theme={{ color: 'base' }} variants={{ size: 'h2', responsive: true }}>
               {currentFileName}
             </Typography>
           </div>

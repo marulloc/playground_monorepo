@@ -9,16 +9,14 @@ const Layout = async ({ params, children }: any) => {
   const { readme, readmeWithoutFirstImg, readmeFirstImg } = await getReadmeData(params.slug.join('/'));
 
   return (
-    <div className="space-y-4 flex-1 flex flex-col w-full  ">
+    <div className="  ">
       <Container>
         <Breadcrumbs pathSegments={params.slug} />
       </Container>
 
       <Container className="">
-        <Paper background="base" className="  w-full">
-          <div className="  py-4">
-            <CategorySummary url={readmeFirstImg} pathSegments={params.slug} readme={readmeWithoutFirstImg} />
-          </div>
+        <Paper theme={{ color: 'base' }} className={classNames('px-4 md:px-6 lg:px-8', 'py-4 md:py-6 lg:py-8')}>
+          <CategorySummary url={readmeFirstImg} pathSegments={params.slug} readme={readmeWithoutFirstImg} />
         </Paper>
       </Container>
 

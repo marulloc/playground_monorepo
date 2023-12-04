@@ -1,21 +1,23 @@
 import Link from 'next/link';
 import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import { getSeriesList } from '@/services/getSeriesList';
-import { getArticleList } from '@/services/getArticleList';
-import { redirect } from 'next/navigation';
-import ConsoleCompo from '@/components/ConsoleCompo';
 import { AsyncFunctionValueType } from '@/utils/conditionalType';
 import Image from 'next/image';
 import MarkdownContents from '@/components/MarkdownContents';
 import Typography from './Marulloc-UI/common/Typography';
-// import { SCALE_SET } from './Marulloc-UI/theme-config';
 import Paper from './Marulloc-UI/common/Paper';
 
 const SeriesCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof getSeriesList>>[number] }) => {
   return (
     <Paper
       as="article"
-      className=" relative group  hover:bg-zinc-400 hover:bg-opacity-10  border border-transparent hover:border-zinc-800 rounded-md"
+      className={classNames(
+        'px-4 md:px-6 lg:px-8',
+        'py-4 md:py-6 lg:py-8',
+        'rounded-md',
+        'relative group   hover:border-zinc-800 ',
+      )}
+      theme={{ hoverColor: 'muted' }}
     >
       <Link href={`/category/${node.path}`} className="   ">
         <div className="flex  items-start justify-between">
@@ -34,7 +36,7 @@ const SeriesCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof g
         {/*  */}
         <div className=" mt-4 ">
           <div className="tracking-wide ">
-            <Typography size="h6" color="base" hover="base">
+            <Typography theme={{ color: 'base', hoverColor: 'base' }} variants={{ size: 'h6', responsive: true }}>
               {node.name}
             </Typography>
           </div>
@@ -49,7 +51,7 @@ const SeriesCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof g
           </div>
 
           <div className=" text-xs    ">
-            <Typography size="caption" color="base" hover="primary" responsive={false}>
+            <Typography variants={{ size: 'caption' }} theme={{ color: 'base', hoverColor: 'primary' }}>
               {`view ${node.childDir.filter(({ name }) => name.toLowerCase() !== 'readme.md').length} articles`}{' '}
               {/* xs */}
             </Typography>

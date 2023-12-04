@@ -11,7 +11,7 @@ const CategorySummary = ({ url, pathSegments, readme }: { url?: string; pathSegm
       </div>
 
       <div>
-        <Typography size="h3" color="base">
+        <Typography theme={{ color: 'base' }} variants={{ size: 'h3', responsive: true }}>
           {decodeURIComponent(pathSegments[pathSegments.length - 1])}
         </Typography>
 

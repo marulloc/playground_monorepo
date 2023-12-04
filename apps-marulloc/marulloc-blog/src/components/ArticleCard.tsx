@@ -1,9 +1,6 @@
 import Link from 'next/link';
 import { classNames } from '@/components/Marulloc-UI/utils/classNames';
-import { getSeriesList } from '@/services/getSeriesList';
 import { getArticleList } from '@/services/getArticleList';
-import { redirect } from 'next/navigation';
-import ConsoleCompo from '@/components/ConsoleCompo';
 import { AsyncFunctionValueType } from '@/utils/conditionalType';
 import Image from 'next/image';
 import MarkdownContents from '@/components/MarkdownContents';
@@ -15,7 +12,13 @@ const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof 
   return (
     <Paper
       as="article"
-      className="  relative group   hover:bg-zinc-400 hover:bg-opacity-10   border border-transparent hover:border-zinc-800 rounded-md "
+      className={classNames(
+        'px-4 md:px-6 lg:px-8',
+        'py-4 md:py-6 lg:py-8',
+        'rounded-md',
+        'relative group   hover:border-zinc-800 ',
+      )}
+      theme={{ hoverColor: 'muted' }}
     >
       <Link href={`/article/${node.path}`} className="   ">
         <div className="flex  items-start justify-between">
@@ -34,23 +37,18 @@ const ArticleCard = ({ node }: { node: AsyncFunctionValueType<ReturnType<typeof 
         {/*  */}
         <div className=" mt-4  ">
           <div className="tracking-wide ">
-            <Typography size="h6" color="base" hover="base">
+            <Typography theme={{ color: 'base', hoverColor: 'base' }} variants={{ size: 'h6', responsive: true }}>
               {node.name}
             </Typography>
           </div>
 
-          <div
-            className={classNames(
-              '  line-clamp-3   min-h-[20px]  mb-2',
-              //  SCALE_SET.text.caption
-            )}
-          >
+          <div className={classNames('  line-clamp-3   min-h-[20px]  mb-2')}>
             <MarkdownContents markdown={node.contentDescription} />
           </div>
 
-          <div className="text-xs absolute bottom-2  mt-4">
-            <Typography size="caption" color="base" hover="primary" responsive={false}>
-              read more {/* xs */}
+          <div className="text-xs absolute bottom-4  mt-4">
+            <Typography variants={{ size: 'caption' }} theme={{ color: 'base', hoverColor: 'primary' }}>
+              read more
             </Typography>
           </div>
         </div>

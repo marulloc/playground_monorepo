@@ -31,7 +31,14 @@ const Page = async ({ params, searchParams }: TPageProps) => {
 
   return (
     <Container as={'main'}>
-      <Paper background="base" className="flex-1">
+      <Paper
+        className={classNames(
+          //
+          'px-4 md:px-6 lg:px-8',
+          'py-4 md:py-6 lg:py-8',
+        )}
+        theme={{ color: 'base' }}
+      >
         <div className="mb-4 border-b dark:border-zinc-700">
           <ul className="flex flex-wrap text-lg   text-center text-zinc-200">
             <li className={classNames(hasArticle ? 'block' : 'hidden')}>
@@ -44,7 +51,7 @@ const Page = async ({ params, searchParams }: TPageProps) => {
                 role="tab"
                 aria-controls="article"
               >
-                <Typography size="h6" color="base" hover="base">
+                <Typography theme={{ color: 'base', hoverColor: 'base' }} variants={{ size: 'h6', responsive: true }}>
                   Article
                 </Typography>
               </Link>
@@ -59,7 +66,7 @@ const Page = async ({ params, searchParams }: TPageProps) => {
                 role="tab"
                 aria-controls="series"
               >
-                <Typography size="h6" color="base" hover="base">
+                <Typography theme={{ color: 'base', hoverColor: 'base' }} variants={{ size: 'h6', responsive: true }}>
                   Series
                 </Typography>
               </Link>
@@ -69,14 +76,24 @@ const Page = async ({ params, searchParams }: TPageProps) => {
 
         <div>
           {curTabQuery === 'article' && (
-            <section className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mt-12   gap-y-16">
+            <section
+              className={classNames(
+                ' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  mt-12  ',
+                // ' gap-12 gap-y-16',
+              )}
+            >
               {articleList.map((node) => (
                 <ArticleCard key={node.path} node={node} />
               ))}
             </section>
           )}
           {curTabQuery === 'series' && (
-            <section className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mt-12   gap-y-16">
+            <section
+              className={classNames(
+                ' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  mt-12  ',
+                // ' gap-12 gap-y-16',
+              )}
+            >
               {seriesList?.map((node, idx) => <SeriesCard node={node} key={`${node.path}-${idx}`} />)}
             </section>
           )}

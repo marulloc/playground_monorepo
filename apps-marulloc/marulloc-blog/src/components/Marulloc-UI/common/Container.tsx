@@ -1,11 +1,11 @@
-import { SpacingMaxWidthLevels } from '../space-theme';
+// import { SpacingMaxWidthLevels } from '../spacing-theme';
 import { classNames } from '../utils/classNames';
 
 type ContainerElement = 'div' | 'main' | 'section' | 'article' | 'header' | 'footer' | 'aside';
 
 type ContainerProps<T extends ContainerElement> = {
   centered?: 'x' | 'y' | 'xy' | false;
-  maxWidth?: SpacingMaxWidthLevels;
+  maxWidth?: 'max-w-full' | 'max-w-7xl' | 'max-w-6xl' | 'max-w-5xl';
 
   as?: T;
 } & React.ComponentPropsWithoutRef<T>;

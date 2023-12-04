@@ -11,6 +11,7 @@ import Paper from '@/components/Marulloc-UI/common/Paper';
 import Container from '@/components/Marulloc-UI/common/Container';
 // import { COLOR_THEME } from '@/components/Marulloc-UI/config';
 import Typography from '@/components/Marulloc-UI/common/Typography';
+import { getColorTheme } from '@/components/Marulloc-UI/theme/getTheme';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -24,17 +25,30 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body
         className={classNames(
           'relative min-h-full  flex flex-col   bg-black',
-          // COLOR_THEME.text.base,
+          getColorTheme('text', [{ type: 'muted', name: 'default' }]),
           inter.className,
         )}
       >
         <Background />
 
-        <Container className={classNames('isolate sticky  w-full z-30', 'pb-4 pt-4 -top-4')}>
-          <Paper as={'header'} background="base" className="flex items-center h-16 z-50 px-8">
+        <Container
+          className={classNames(
+            'isolate sticky  w-full z-30',
+            //  'pb-4 pt-4 -top-4'
+          )}
+        >
+          <Paper
+            as={'header'}
+            theme={{ color: 'base' }}
+            className={classNames(
+              'flex items-center h-16 z-50',
+
+              'px-4 md:px-6 lg:px-8',
+            )}
+          >
             <div className="flex-1">
               <Link href="/" className=" text-2xl font-semibold">
-                <Typography size="h5" color="base" hover="base">
+                <Typography theme={{ color: 'base', hoverColor: 'base' }} variants={{ size: 'h5', responsive: true }}>
                   marullog
                 </Typography>
               </Link>

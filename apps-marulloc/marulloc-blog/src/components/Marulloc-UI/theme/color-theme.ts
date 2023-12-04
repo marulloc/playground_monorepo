@@ -54,17 +54,3 @@ const COLOR_THEME = {
 } as const;
 
 export default COLOR_THEME;
-
-type ThemeType = typeof COLOR_THEME;
-type ThemeColorKeys<T extends keyof ThemeType> = keyof ThemeType[T];
-type ThemeColorTypes<T extends keyof ThemeType> = keyof ThemeType[T][ThemeColorKeys<T>];
-
-export const getThemeColor = <T extends keyof ThemeType>(
-  themeType: T,
-  colors: { key: ThemeColorKeys<T>; type: ThemeColorTypes<T> }[],
-) => {
-  const theme = COLOR_THEME[themeType];
-
-  const classesArr = colors.map(({ key, type }) => theme[key][type]);
-  return classesArr.join(' ');
-};
