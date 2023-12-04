@@ -4,12 +4,10 @@ import { Inter } from 'next/font/google';
 import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import Link from 'next/link';
 import Background from '@/components/Background';
-import FallbackBtn from '../components/Fallbackbtn';
 import Avatar from '@/components/Avatar';
 import Navigation from '@/components/Navigation';
 import Paper from '@/components/Marulloc-UI/common/Paper';
 import Container from '@/components/Marulloc-UI/common/Container';
-// import { COLOR_THEME } from '@/components/Marulloc-UI/config';
 import Typography from '@/components/Marulloc-UI/common/Typography';
 import { getColorTheme } from '@/components/Marulloc-UI/theme/getTheme';
 const inter = Inter({ subsets: ['latin'] });
@@ -21,31 +19,24 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="kr" className=" h-full  scroll-smooth ">
+    <html lang="kr" className="   scroll-smooth ">
       <body
         className={classNames(
-          'relative min-h-full  flex flex-col   bg-black',
+          'relative  flex flex-col   bg-black  ',
           getColorTheme('text', [{ type: 'muted', name: 'default' }]),
           inter.className,
         )}
       >
         <Background />
 
-        <Container
-          className={classNames(
-            'isolate sticky  w-full z-30',
-            //  'pb-4 pt-4 -top-4'
-          )}
-        >
-          <Paper
-            as={'header'}
-            theme={{ color: 'base' }}
-            className={classNames(
-              'flex items-center h-16 z-50',
+        {/* <div className="h-48 bg-red-50 sticky top-0">a</div> */}
 
-              'px-4 md:px-6 lg:px-8',
-            )}
-          >
+        <Paper
+          as={'header'}
+          theme={{ color: 'base' }}
+          className={classNames('sticky top-0  z-50', 'px-4 md:px-6 lg:px-8', 'py-4 md:py-4 lg:py-6')}
+        >
+          <Container className={classNames('flex items-center')}>
             <div className="flex-1">
               <Link href="/" className=" text-2xl font-semibold">
                 <Typography theme={{ color: 'base', hoverColor: 'base' }} variants={{ size: 'h5', responsive: true }}>
@@ -57,8 +48,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               <Navigation />
               <Avatar />
             </div>
-          </Paper>
-        </Container>
+          </Container>
+        </Paper>
 
         <>{children}</>
       </body>

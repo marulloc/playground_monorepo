@@ -14,13 +14,8 @@ const Page = async ({ params }: any) => {
   const currentFileName = decodeURIComponent(currentFilePathSegments.at(-1) as string);
 
   return (
-    <div
-      className={classNames(
-        'relative',
-        // 'pt-0 sm:pt-0 lg:pt-0'
-      )}
-    >
-      <main className={classNames('flex gap-4 sm:gap-4 lg:gap-4 ')}>
+    <div className={classNames('relative', 'px-4 md:px-6 lg:px-8')}>
+      <main className={classNames('flex gap-4 sm:gap-6 lg:gap-8 ')}>
         <div className="flex-1 self-stretch hidden lg:block  ">
           <div className="h-full  ">
             <div className="sticky top-72 flex flex-col gap-2 items-end  pl-4 pt-20 ">
