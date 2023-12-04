@@ -18,6 +18,7 @@ type TypographyProps<T extends TypographyElement> = {
 const Typography = <T extends TypographyElement>(props: TypographyProps<T>) => {
   const { size, responsive = true, color, hover, as, className, ...restProps } = props;
 
+  const Component = as ?? 'span';
   const classes = classNames(
     size && FONT_THEME[size].default,
     size && responsive && FONT_THEME[size].responsive,
@@ -29,7 +30,6 @@ const Typography = <T extends TypographyElement>(props: TypographyProps<T>) => {
     className,
   );
 
-  const Component = as ?? 'span';
   return (
     <Component {...restProps} className={classes}>
       {['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(Component) && (

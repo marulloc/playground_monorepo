@@ -3,10 +3,6 @@ import { classNames } from '@/components/Marulloc-UI/utils/classNames';
 import { getSeriesList } from '@/services/getSeriesList';
 import { getArticleList } from '@/services/getArticleList';
 import { redirect } from 'next/navigation';
-import ConsoleCompo from '@/components/ConsoleCompo';
-import { AsyncFunctionValueType } from '@/utils/conditionalType';
-import Image from 'next/image';
-import MarkdownContents from '@/components/MarkdownContents';
 import ArticleCard from '@/components/ArticleCard';
 import SeriesCard from '@/components/SeriesCard';
 import Container from '@/components/Marulloc-UI/common/Container';
@@ -34,7 +30,7 @@ const Page = async ({ params, searchParams }: TPageProps) => {
   }
 
   return (
-    <Container as={'main'} spacing={[{ type: 'mx', level: '0' }]}>
+    <Container as={'main'}>
       <Paper background="base" className="flex-1">
         <div className="mb-4 border-b dark:border-zinc-700">
           <ul className="flex flex-wrap text-lg   text-center text-zinc-200">

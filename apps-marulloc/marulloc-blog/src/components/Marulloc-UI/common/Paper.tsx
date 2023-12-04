@@ -8,14 +8,14 @@ type PaperHoverColors = keyof typeof COLOR_THEME.fill;
 type PaperProps<T extends PaperElement> = {
   background?: PaperDefaultColors;
   backgroundHover?: PaperHoverColors;
-  // bgGlassy?: boolean;
+
   as?: T;
 } & React.ComponentPropsWithoutRef<T>;
 
 const Paper = <T extends PaperElement>(props: PaperProps<T>) => {
   const { as, background, backgroundHover, className, ...restProps } = props;
-  const Component = as ?? 'div';
 
+  const Component = as ?? 'div';
   const classes = classNames(
     'isolate',
     background && COLOR_THEME.fill[background].default,

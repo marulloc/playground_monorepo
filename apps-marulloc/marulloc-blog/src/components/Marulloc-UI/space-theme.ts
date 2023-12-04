@@ -1,11 +1,11 @@
 import { classNames } from './utils/classNames';
 
-const NONE = '0';
-const LOW = '4';
-const BASE = '6';
-const HIGH = '8';
-const EXTRA_HIGH = '12';
-const SUPER_HIGH = '16';
+const NONE = 0;
+const LOW = 4;
+const BASE = 6;
+const HIGH = 8;
+const EXTRA_HIGH = 12;
+const SUPER_HIGH = 16;
 
 export type SpacingGeneralTypes = keyof Omit<typeof SPACE_THEME, 'maxWidth'>;
 export type SpacingGeneralLevels =
@@ -117,5 +117,17 @@ const SPACE_THEME = {
     },
   },
 } as const;
+
+export type GetSpacingThemeParams =
+  | { type: SpacingGeneralTypes; level: SpacingGeneralLevels; responsive?: boolean }[]
+  | undefined;
+
+export const getSpacingTheme = (params: GetSpacingThemeParams = []) => {
+  const classesArray = params.map(({ type, level, responsive = true }) => {
+    return classNames(SPACE_THEME[type].level[level].default, responsive && SPACE_THEME[type].level[level].responsive);
+  });
+
+  return classesArray.join(' ');
+};
 
 export default SPACE_THEME;
