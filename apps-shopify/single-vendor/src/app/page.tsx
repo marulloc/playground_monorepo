@@ -1,5 +1,17 @@
+import ConsoleCompo from '@/components/Marulloc-UI-v2/components/ConsoleCompo';
+import { getShop } from '@/services/getShop';
 import { Card } from 'ui';
+import ClientCompo from './ClientCompo';
 
-export default function Home() {
-  return <main className="">asd</main>;
-}
+const Home = async () => {
+  const response = await getShop();
+  return (
+    <main className="">
+      asd
+      <ConsoleCompo data={response} />
+      <ClientCompo />
+    </main>
+  );
+};
+
+export default Home;
