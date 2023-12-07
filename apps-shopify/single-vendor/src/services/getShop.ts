@@ -1,25 +1,26 @@
+import gql from 'graphql-tag';
 import test from './getShop.gql';
 import { loc } from './getShop.gql';
+import { mytmpgql, shopifyTmpApi } from './graphql/common';
+
+const query = mytmpgql`
+query getShopDetails {
+  shop {
+    name
+    primaryDomain {
+      host
+      url
+    }
+    paymentSettings {
+      currencyCode
+      acceptedCardBrands
+      enabledPresentmentCurrencies
+    }
+  }
+}
+`;
 
 export const getShop = async () => {
-  const store = 'headless-maker';
-  const version = '2023-10';
-  const url = `https://${store}.myshopify.com/api/${version}/graphql.json`;
-
-  console.log('!!!', loc);
-  const response = await (
-    await fetch(url, {
-      method: 'POST',
-      headers: {
-        'X-Shopify-Storefront-Access-Token': process.env.NEXT_PUBLIC_STORE_FRONT_PUBLIC as string,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        query: test.loc.source.body,
-      }),
-      next: { revalidate: 10 },
-    })
-  ).json();
-
+  const response = await shopifyTmpApi({ query }, { revalidate: 10 });
   return response;
 };

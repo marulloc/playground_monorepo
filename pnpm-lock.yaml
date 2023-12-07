@@ -265,6 +265,9 @@ importers:
 
   apps-shopify/single-vendor:
     dependencies:
+      graphql:
+        specifier: ^16.8.1
+        version: 16.8.1
       graphql-tag:
         specifier: ^2.12.6
         version: 2.12.6(graphql@16.8.1)
