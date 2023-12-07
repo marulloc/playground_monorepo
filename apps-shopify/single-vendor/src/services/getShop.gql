@@ -1,5 +1,0 @@
-query getShopDetails {
-  shop {
-    name
-  }
-}

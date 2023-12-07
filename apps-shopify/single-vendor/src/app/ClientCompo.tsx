@@ -1,12 +1,12 @@
 'use client';
 
-import { getShop } from '@/services/getShop';
+import { getShopDetail } from '@/services/getShopDetails';
 import { useEffect } from 'react';
 
 const ClientCompo = () => {
   useEffect(() => {
     (async () => {
-      const response = await getShop();
+      const response = await getShopDetail();
       console.log('!@#!@#!@#!@#', response);
     })();
   }, []);

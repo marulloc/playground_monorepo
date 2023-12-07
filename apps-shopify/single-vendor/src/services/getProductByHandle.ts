@@ -1,8 +1,8 @@
 import { mytmpgql, shopifyTmpApi } from './graphql/common';
 
 const query = mytmpgql`
-query getProductRecommendations($productId: ID!) {
-  productRecommendations(productId: $productId, intent: RELATED) {
+query getProductByHandle($handle: String!) {
+  product(handle:  $handle) {
     id
     title
     description
@@ -26,11 +26,11 @@ query getProductRecommendations($productId: ID!) {
 
 /**
  *
- * @param variables.productId product's id
- * @example getProductRecommendations({productId: "gid://shopify/Product/8323316973870"})
+ * @param variables.handle product's handle
+ * @example getProductByHandle({handle: "the-collection-snowboard-hydrogen"})
  * @returns
  */
-export const getProductRecommendations = async (variables: { productId: string }) => {
+export const getProductByHandle = async (variables: { handle: string }) => {
   const response = await shopifyTmpApi({ query, variables }, { revalidate: 10 });
   return response;
 };
