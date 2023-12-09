@@ -11,4 +11,8 @@ module.exports = {
 
     return config;
   },
+
+  images: {
+    domains: ['cdn.shopify.com'],
+  },
 };

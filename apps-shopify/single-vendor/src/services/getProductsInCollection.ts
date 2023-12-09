@@ -10,6 +10,7 @@ query getProductsInCollection($handle: String!) {
         node {
           id
           title
+          handle
           vendor
           productType
           availableForSale
