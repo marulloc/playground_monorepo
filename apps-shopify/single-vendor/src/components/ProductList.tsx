@@ -14,8 +14,8 @@ const ProductList = ({ productList }: { productList: any[] }) => {
                   <div className="relative h-72 w-full overflow-hidden rounded-lg">
                     <Image
                       fill
-                      src={product.images.edges[0].node.url}
-                      alt={product.images.edges[0].node.altText}
+                      src={product.images.edges[0]?.node?.url}
+                      alt={product.images.edges[0]?.node?.altText}
                       className="h-full w-full object-cover object-center"
                     />
                   </div>

@@ -1,16 +1,22 @@
+import { getProductByHandle } from '@/services/getProductByHandle';
 import ImageGallery from './ImageGallery';
 import ProductInfo from './ProductInfo';
 import Recommendations from './Recommendations';
 import Reviews from './Reviews';
+import ConsoleCompo from '@/components/Marulloc-UI-v2/components/ConsoleCompo';
 
 const Page = async ({ params }: { params: { [key: string]: string } }) => {
-  console.log(params);
+  const { handle } = params;
+
+  const response = await getProductByHandle({ handle });
+  console.log(response);
 
   return (
     <main>
-      <ImageGallery />
+      {/* <ConsoleCompo data={response} /> */}
+      <ImageGallery handle={handle} />
 
-      <ProductInfo />
+      <ProductInfo detail={response.data.product} />
 
       <Recommendations />
     </main>

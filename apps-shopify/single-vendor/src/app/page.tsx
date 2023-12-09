@@ -6,7 +6,7 @@ import Hero from '@/components/Hero';
 import Image from 'next/image';
 import ProductList from '@/components/ProductList';
 const Home = async () => {
-  const response = await getProductsInCollection({ handle: 'automated-collection' });
+  const response = await getProductsInCollection({ handle: 'frontpage' });
   // const resp = await getProducts;
   const list = response.data.collection.products.edges;
   return (
@@ -15,7 +15,7 @@ const Home = async () => {
 
       <ProductList productList={list} />
       {/* <Image fill alt="..." src="/background.jpg" /> */}
-      <ConsoleCompo data={response} />
+      {/* <ConsoleCompo data={response} /> */}
     </main>
   );
 };

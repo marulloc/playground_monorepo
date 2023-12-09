@@ -6,6 +6,16 @@ query getProductByHandle($handle: String!) {
     id
     title
     description
+    descriptionHtml
+    images(first:4){
+      nodes {
+        altText
+        height
+        width
+        id
+        url
+      }
+    }
     variants(first: 3) {
       edges {
         cursor

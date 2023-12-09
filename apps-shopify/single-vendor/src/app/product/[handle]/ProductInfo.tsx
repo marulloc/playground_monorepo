@@ -7,22 +7,27 @@ import { Bars3Icon, MagnifyingGlassIcon, ShoppingCartIcon, UserIcon, XMarkIcon }
 import { ChevronDownIcon, StarIcon } from '@heroicons/react/20/solid';
 import Reviews from './Reviews';
 
-const ProductInfo = () => {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+const ProductInfo = ({ detail }: { detail: any }) => {
+  console.log(detail);
+
+  const product = detail;
+
+  // const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  // const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+
   return (
     <div className="mx-auto max-w-2xl px-4 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16">
       <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.title}</h1>
       </div>
 
       {/* Options */}
       <div className="mt-4 lg:row-span-3 lg:mt-0">
-        <h2 className="sr-only">Product information</h2>
-        <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
+        {/* <h2 className="sr-only">Product information</h2>
+        <p className="text-3xl tracking-tight text-gray-900">{product.price}</p> */}
 
         {/* Reviews */}
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <h3 className="sr-only">Reviews</h3>
           <div className="flex items-center">
             <div className="flex items-center">
@@ -42,11 +47,11 @@ const ProductInfo = () => {
               {reviews.totalCount} reviews
             </a>
           </div>
-        </div>
+        </div> */}
 
         <form className="mt-10">
           {/* Colors */}
-          <div>
+          {/* <div>
             <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
             <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
@@ -76,10 +81,10 @@ const ProductInfo = () => {
                 ))}
               </div>
             </RadioGroup>
-          </div>
+          </div> */}
 
           {/* Sizes */}
-          <div className="mt-10">
+          {/* <div className="mt-10">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-medium text-gray-900">Size</h3>
               <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
@@ -138,7 +143,7 @@ const ProductInfo = () => {
                 ))}
               </div>
             </RadioGroup>
-          </div>
+          </div> */}
 
           <button
             type="submit"
@@ -154,12 +159,13 @@ const ProductInfo = () => {
         <div>
           <h3 className="sr-only">Description</h3>
 
-          <div className="space-y-6">
-            <p className="text-base text-gray-900">{product.description}</p>
-          </div>
+          <div
+            className="text-base text-gray-900 space-y-6"
+            dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+          ></div>
         </div>
 
-        <div className="mt-10">
+        {/* <div className="mt-10">
           <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
 
           <div className="mt-4">
@@ -181,7 +187,7 @@ const ProductInfo = () => {
           <div className="mt-4 space-y-6">
             <p className="text-sm text-gray-600">{product.details}</p>
           </div>
-        </section>
+        </section> */}
       </div>
       <Reviews />
     </div>
