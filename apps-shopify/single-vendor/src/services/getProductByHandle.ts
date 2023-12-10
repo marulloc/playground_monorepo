@@ -7,7 +7,7 @@ query getProductByHandle($handle: String!) {
     title
     description
     descriptionHtml
-    images(first:4){
+    images(first:5){
       nodes {
         altText
         height
@@ -16,12 +16,28 @@ query getProductByHandle($handle: String!) {
         url
       }
     }
-    variants(first: 3) {
+    featuredImage {
+      url
+      altText
+      width
+      height
+    }
+    options(first:30){
+      id
+      name
+      values
+    }
+
+    variants(first: 20) {
       edges {
         cursor
         node {
           id
           title
+          selectedOptions {
+            name
+            value
+          }
           quantityAvailable
           price {
             amount

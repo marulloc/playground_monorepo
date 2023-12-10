@@ -12,6 +12,10 @@ const ProductInfo = ({ detail }: { detail: any }) => {
 
   const product = detail;
 
+  product.options.map((option: any) => ({ name: option.name, value: option.values[0] }));
+
+  const [selectedOption, setSelectedOption] = useState();
+
   // const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   // const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
 
