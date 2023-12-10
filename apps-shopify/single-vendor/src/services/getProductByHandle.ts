@@ -5,8 +5,10 @@ query getProductByHandle($handle: String!) {
   product(handle:  $handle) {
     id
     title
+    handle
     description
     descriptionHtml
+
     images(first:5){
       nodes {
         altText
@@ -28,24 +30,7 @@ query getProductByHandle($handle: String!) {
       values
     }
 
-    variants(first: 20) {
-      edges {
-        cursor
-        node {
-          id
-          title
-          selectedOptions {
-            name
-            value
-          }
-          quantityAvailable
-          price {
-            amount
-            currencyCode
-          }
-        }
-      }
-    }
+ 
   }
 }
 `;

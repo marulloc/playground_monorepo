@@ -8,7 +8,7 @@ import { ChevronDownIcon, StarIcon } from '@heroicons/react/20/solid';
 import Reviews from './Reviews';
 
 const ProductInfo = ({ detail }: { detail: any }) => {
-  console.log(detail);
+  // console.log(detail);
 
   const product = detail;
 
@@ -149,12 +149,12 @@ const ProductInfo = ({ detail }: { detail: any }) => {
             </RadioGroup>
           </div> */}
 
-          <button
+          {/* <button
             type="submit"
             className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Add to bag
-          </button>
+          </button> */}
         </form>
       </div>
 

@@ -11,15 +11,17 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
-    "@tailwindcss/forms": "^0.5.7", 
+    "@tailwindcss/forms": "^0.5.7",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
+    "lodash": "^4.17.21",
     "next": "^13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "ui": "workspace:*"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.202",
     "@types/node": "20.6.3",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",

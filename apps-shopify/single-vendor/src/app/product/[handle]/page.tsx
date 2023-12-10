@@ -11,7 +11,7 @@ const Page = async ({ params }: { params: { [key: string]: string } }) => {
   const { handle } = params;
 
   const response = await getProductByHandle({ handle });
-  console.log(response);
+  // console.log(response);
 
   return (
     <main>
