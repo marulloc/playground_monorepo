@@ -45,6 +45,8 @@ const ProductCard = ({ product }: { product: any }) => {
     })();
   }, [options.length, product.handle, searchParams]);
 
+  const [hoveredImage, setHoveredImage] = useState<any>(null);
+
   return (
     <div className="mx-auto max-w-2xl lg:max-w-7xl mt-6 lg:px-8">
       <div className=" ">
@@ -52,10 +54,7 @@ const ProductCard = ({ product }: { product: any }) => {
           {/* Image Gallery */}
           <div className=" col-span-3 lg:col-span-2      ">
             <div className="w-full  flex  space-x-2 ">
-              <div
-                className="   max-h-[490px] overflow-scroll"
-                //  onMouseOut={() => handleHoverImage(null)}
-              >
+              <div className="   max-h-[490px] overflow-scroll" onMouseOut={() => setHoveredImage(null)}>
                 {product.images.nodes?.map((image: any) => (
                   <Image
                     key={image.url}
@@ -64,7 +63,7 @@ const ProductCard = ({ product }: { product: any }) => {
                     alt={image.altText || ''}
                     width={image.width}
                     height={image.height}
-                    // onMouseOver={() => handleHoverImage(image)}
+                    onMouseOver={() => setHoveredImage(image)}
                     // onMouseOut={(e) => e.stopPropagation()}
                   />
                 ))}
@@ -73,7 +72,7 @@ const ProductCard = ({ product }: { product: any }) => {
               <div>
                 <Image
                   className="flex-1 aspect-square rounded-lg"
-                  src={selectedVariant?.image.url || product.featuredImage.url}
+                  src={hoveredImage?.url || selectedVariant?.image.url || product.featuredImage.url}
                   alt={selectedVariant?.image.altText || product.featuredImage.altText || ''}
                   width={selectedVariant?.image.width || product.featuredImage.width}
                   height={selectedVariant?.image.height || product.featuredImage.height}
