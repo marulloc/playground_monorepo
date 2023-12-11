@@ -3,9 +3,9 @@ import { StarIcon } from '@heroicons/react/20/solid';
 
 const Reviews = () => {
   return (
-    <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+    <div className=" ">
       {/* Reviews */}
-      <section aria-labelledby="reviews-heading" className="border-t border-gray-200 pt-10 lg:pt-16">
+      <section aria-labelledby="reviews-heading" className="  pt-10 lg:pt-16">
         <h2 id="reviews-heading" className="sr-only">
           Reviews
         </h2>

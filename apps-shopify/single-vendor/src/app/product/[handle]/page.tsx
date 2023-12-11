@@ -1,27 +1,28 @@
 import { getProductByHandle } from '@/services/getProductByHandle';
-import ImageGallery from './ImageGallery';
-import ProductInfo from './ProductInfo';
 import Recommendations from './Recommendations';
 import Reviews from './Reviews';
-import ConsoleCompo from '@/components/Marulloc-UI-v2/components/ConsoleCompo';
-import { classNames } from '@/components/Marulloc-UI-v2/utils/classNames';
-import ProductCard from './Detail';
+import ProductHero from './ProductHero';
+import ProductDetail from './ProductDetail';
 
 const Page = async ({ params }: { params: { [key: string]: string } }) => {
   const { handle } = params;
 
   const response = await getProductByHandle({ handle });
-  // console.log(response);
 
   return (
     <main>
-      <ProductCard product={response.data.product} />
-      {/* <ConsoleCompo data={response} /> */}
-      {/* <ImageGallery handle={handle} /> */}
+      <div className="mx-auto max-w-2xl lg:max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-16">
+        <ProductHero product={response.data.product} />
+      </div>
 
-      <ProductInfo detail={response.data.product} />
+      <div className="mx-auto max-w-2xl lg:max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-16">
+        <ProductDetail product={response.data.product} />
+        <Reviews />
+      </div>
 
-      <Recommendations />
+      <div className="mx-auto max-w-2xl lg:max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-16">
+        <Recommendations />
+      </div>
     </main>
   );
 };
