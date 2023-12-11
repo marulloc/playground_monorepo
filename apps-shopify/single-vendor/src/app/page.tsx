@@ -5,9 +5,11 @@ import { getProductsInCollection } from '@/services/getProductsInCollection';
 import Hero from '@/components/Hero';
 import Image from 'next/image';
 import ProductList from '@/components/ProductList';
+import { Shop, Customer } from '@shopify/hydrogen-react/storefront-api-types';
+import { flattenConnection } from '@shopify/hydrogen-react';
+
 const Home = async () => {
   const response = await getProductsInCollection({ handle: 'frontpage' });
-  // const resp = await getProducts;
   const list = response.data.collection.products.edges;
   return (
     <main className="h-screen relative">

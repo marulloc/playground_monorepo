@@ -3,7 +3,7 @@ import Recommendations from './Recommendations';
 import Reviews from './Reviews';
 import ProductHero from './ProductHero';
 import ProductDetail from './ProductDetail';
-
+import type { Product, Collection } from '@shopify/hydrogen-react/storefront-api-types';
 const Page = async ({ params }: { params: { [key: string]: string } }) => {
   const { handle } = params;
 
