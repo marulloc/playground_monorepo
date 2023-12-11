@@ -1,25 +1,26 @@
-import { getProductByHandle } from '@/services/getProductByHandle';
 import Recommendations from './Recommendations';
 import Reviews from './Reviews';
 import ProductHero from './ProductHero';
 import ProductDetail from './ProductDetail';
-import type { Product, Collection } from '@shopify/hydrogen-react/storefront-api-types';
+import { productQL } from '@/services/product';
 import ConsoleCompo from '@/components/Marulloc-UI-v2/components/ConsoleCompo';
+import { gidParser } from '@/services/parsers/gidParser';
+
 const Page = async ({ params }: { params: { [key: string]: string } }) => {
-  const { handle } = params;
+  const { id } = params;
 
-  const response = await getProductByHandle({ handle });
-
-  // const t = await getProductByHandlev2({ handle });
+  const gid = gidParser.comibne(id, 'Product');
+  const product = await productQL.getProductById({ id: gid });
 
   return (
     <main>
+      <ConsoleCompo data={product} />
       <div className="mx-auto max-w-2xl lg:max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-16">
-        <ProductHero product={response.data.product} />
+        <ProductHero product={product} />
       </div>
 
       <div className="mx-auto max-w-2xl lg:max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-16">
-        <ProductDetail product={response.data.product} />
+        <ProductDetail product={product} />
         <Reviews />
       </div>
 

@@ -9,7 +9,7 @@ import { collectionQuery } from './graphql/collection';
  * @returns
  */
 export const getProductsInCollection = async (variables: { id: Collection['id'] }) => {
-  const { collection } = await storefrontApi<Partial<Collection>>(
+  const { collection } = await storefrontApi<Collection>(
     { query: collectionQuery.getProductsInCollection, variables },
     { revalidate: 10 },
   );

@@ -13,8 +13,8 @@ export const storefrontApi = async <T>(
   params: StorefrontAPIParams,
   next?: NextFetchRequestConfig,
 ): Promise<{ [key: string]: T }> => {
-  const url = `https://${process.env.API_STORE}.myshopify.com/api/${process.env.API_VERSION}/graphql.json`;
-  const token = process.env.API_PUBLIC as string;
+  const url = `https://${process.env.NEXT_PUBLIC_API_STORE}.myshopify.com/api/${process.env.NEXT_PUBLIC_API_VERSION}/graphql.json`;
+  const token = process.env.NEXT_PUBLIC_API_PUBLIC as string;
 
   const method = 'POST';
   const headers = { 'X-Shopify-Storefront-Access-Token': token, 'Content-Type': 'application/json' };

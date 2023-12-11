@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { classNames } from './Marulloc-UI-v2/utils/classNames';
 import Image from 'next/image';
 import { ProductConnection } from '@shopify/hydrogen-react/storefront-api-types';
-import { gidParser } from '@/service/parsers/gidParser';
+import { gidParser } from '@/services/parsers/gidParser';
 
 const ProductList = ({ productList }: { productList: ProductConnection['edges'] }) => {
   return (
@@ -12,7 +12,9 @@ const ProductList = ({ productList }: { productList: ProductConnection['edges'] 
           {productList.map(({ node: product }) => (
             <div key={product.id}>
               <Link
-                href={`/${gidParser.extract(product.id)?.resource as 'product'}/${gidParser.extract(product.id)?.id}`}
+                href={`/${gidParser.extract(product.id)?.resource.toLowerCase() as 'product'}/${gidParser.extract(
+                  product.id,
+                )?.id}`}
               >
                 <div className="relative">
                   <div className="relative h-72 w-full overflow-hidden rounded-lg">

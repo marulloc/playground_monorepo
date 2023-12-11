@@ -4,10 +4,11 @@ import { classNames } from '@/components/Marulloc-UI-v2/utils/classNames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import { getProductVariantBySelectedOption } from '@/services/getProductVariantBySelectedOption';
 import useQueryString from '@/hooks/useQueryString';
+import { productQL } from '@/services/product';
+import { Product } from '@shopify/hydrogen-react/storefront-api-types';
 
-const ProductHero = ({ product }: { product: any }) => {
+const ProductHero = ({ product }: { product: Product }) => {
   const searchParams = useQueryString();
   const options = useMemo(() => {
     return product.options.map((option: any) => ({
@@ -16,21 +17,30 @@ const ProductHero = ({ product }: { product: any }) => {
     }));
   }, [product.options, searchParams]);
 
+  /**
+   *
+   *
+   *
+   *
+   *
+   */
+
   // => loading state
   const [selectedVariant, setSelectedVariant] = useState<any>(null);
   useEffect(() => {
-    const selectedOption = Object.entries(searchParams).reduce((result, current) => {
+    const selectedOptions = Object.entries(searchParams).reduce((result, current) => {
       const [name, value] = current;
       return [...result, { name, value }];
     }, [] as any);
 
-    if (selectedOption.length !== options.length) return;
+    if (selectedOptions.length !== options.length) return;
 
     (async () => {
-      const response = await getProductVariantBySelectedOption({ handle: product.handle, selectedOption });
-      setSelectedVariant(response?.data?.product?.variantBySelectedOptions ?? null);
+      const { variantBySelectedOptions } = await productQL.getVariantByOptions({ id: product.id, selectedOptions });
+
+      setSelectedVariant(variantBySelectedOptions ?? null);
     })();
-  }, [options.length, product.handle, searchParams]);
+  }, [options.length, product.handle, product.id, searchParams]);
 
   const [hoveredImage, setHoveredImage] = useState<any>(null);
 
