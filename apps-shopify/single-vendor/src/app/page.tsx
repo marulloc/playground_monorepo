@@ -1,23 +1,22 @@
 import ConsoleCompo from '@/components/Marulloc-UI-v2/components/ConsoleCompo';
 import { Card } from 'ui';
-import { getCollectionByHandle } from '@/services/getCollectionByHandle';
-import { getProductsInCollection } from '@/services/getProductsInCollection';
 import Hero from '@/components/Hero';
-import Image from 'next/image';
 import ProductList from '@/components/ProductList';
-import { Shop, Customer } from '@shopify/hydrogen-react/storefront-api-types';
-import { flattenConnection } from '@shopify/hydrogen-react';
+import { getProductsInCollection } from '@/service/collection';
 
 const Home = async () => {
-  const response = await getProductsInCollection({ handle: 'frontpage' });
-  const list = response.data.collection.products.edges;
+  const homeCollection = await getProductsInCollection({ id: 'gid://shopify/Collection/445727310126' });
+
+  const productList = homeCollection.products!.edges;
+
   return (
     <main className="h-screen relative">
       <Hero />
 
-      <ProductList productList={list} />
+      <ProductList productList={productList} />
+
       {/* <Image fill alt="..." src="/background.jpg" /> */}
-      {/* <ConsoleCompo data={response} /> */}
+      <ConsoleCompo data={homeCollection} />
     </main>
   );
 };

@@ -1,21 +1,25 @@
 import Link from 'next/link';
 import { classNames } from './Marulloc-UI-v2/utils/classNames';
 import Image from 'next/image';
+import { ProductConnection } from '@shopify/hydrogen-react/storefront-api-types';
 
-const ProductList = ({ productList }: { productList: any[] }) => {
+const ProductList = ({ productList }: { productList: ProductConnection['edges'] }) => {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
           {productList.map(({ node: product }) => (
             <div key={product.id}>
-              <Link href={`/product/${product.handle}`}>
+              <Link
+                //  href={`/product/${product.handle}`}
+                href={`/product/${product.id}`}
+              >
                 <div className="relative">
                   <div className="relative h-72 w-full overflow-hidden rounded-lg">
                     <Image
                       fill
-                      src={product.images.edges[0]?.node?.url}
-                      alt={product.images.edges[0]?.node?.altText}
+                      src={product.images.edges[0]?.node?.url || ''}
+                      alt={product.images.edges[0]?.node?.altText || ''}
                       className="h-full w-full object-cover object-center"
                     />
                   </div>

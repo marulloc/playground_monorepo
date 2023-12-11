@@ -4,10 +4,13 @@ import Reviews from './Reviews';
 import ProductHero from './ProductHero';
 import ProductDetail from './ProductDetail';
 import type { Product, Collection } from '@shopify/hydrogen-react/storefront-api-types';
+import ConsoleCompo from '@/components/Marulloc-UI-v2/components/ConsoleCompo';
 const Page = async ({ params }: { params: { [key: string]: string } }) => {
   const { handle } = params;
 
   const response = await getProductByHandle({ handle });
+
+  // const t = await getProductByHandlev2({ handle });
 
   return (
     <main>
