@@ -20,8 +20,8 @@ const ProductList = ({ productList }: { productList: ProductConnection['edges'] 
                   <div className="relative h-72 w-full overflow-hidden rounded-lg">
                     <Image
                       fill
-                      src={product.images.edges[0]?.node?.url || ''}
-                      alt={product.images.edges[0]?.node?.altText || ''}
+                      src={product.featuredImage?.url || ''}
+                      alt={product.featuredImage?.altText || ''}
                       className="h-full w-full object-cover object-center"
                     />
                   </div>

@@ -34,4 +34,6 @@ export const productQL = {
 
     return product;
   },
+
+  getProductRecommendations: async () => {},
 };

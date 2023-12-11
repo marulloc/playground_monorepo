@@ -1,3 +1,5 @@
+import { ShopifyQLFragment } from './_shopifyQL-fragments';
+
 export const productQuery = {
   getProductById: `
     query getProductById($id: ID!) {
@@ -57,6 +59,15 @@ export const productQuery = {
         }
       }
     }
+  `,
+
+  getProductRecommendations: `
+    query getProductRecommendations($productId: ID!, intent:$intent) {
+      productRecommendations(productId: $productId, intent: intent) {
+        ...productCard
+      }
+    }
+    ${ShopifyQLFragment.productCard}
   `,
 } as const;
 

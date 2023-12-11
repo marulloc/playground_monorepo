@@ -14,14 +14,14 @@ const Page = async ({ params }: { params: { [key: string]: string } }) => {
 
   return (
     <main>
-      <ConsoleCompo data={product} />
+      {/* <ConsoleCompo data={product} /> */}
       <div className="mx-auto max-w-2xl lg:max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-16">
         <ProductHero product={product} />
       </div>
 
       <div className="mx-auto max-w-2xl lg:max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-16">
         <ProductDetail product={product} />
-        <Reviews />
+        {/* <Reviews /> */}
       </div>
 
       <div className="mx-auto max-w-2xl lg:max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-16">
