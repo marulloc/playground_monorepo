@@ -2,9 +2,16 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useRecoilState, useRecoilStateLoadable } from 'recoil';
+import { localCartState } from '@/recoils/cart';
+import React from 'react';
 
 const SideCart = () => {
   const [open, setOpen] = useState(false);
+
+  const [localCart, setLocalCart] = useRecoilState(localCartState);
+
+  console.log('!@#!@#!@#', localCart);
 
   const products = [
     {

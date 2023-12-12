@@ -1,15 +1,16 @@
 'use client';
 
+import { cartQL } from '@/services/cart';
 import { Cart } from '@shopify/hydrogen-react/storefront-api-types';
 import { AtomEffect, atom } from 'recoil';
 
-/**
- * @mvp1 add to cart, update line,
- */
-
 const getLocalStorage = <T>(key: string) => {
   const memoizedValue = localStorage.getItem(key);
-  return memoizedValue as T | null;
+  return JSON.parse(memoizedValue || 'null') as T | null;
+};
+
+const setLocalStorage = <T extends any>(key: string, value: T) => {
+  localStorage.setItem(key, JSON.stringify(value));
 };
 
 export const localCartState = atom<Cart | null>({
@@ -17,15 +18,29 @@ export const localCartState = atom<Cart | null>({
   default: null,
   effects: [
     ({ setSelf, onSet, trigger }) => {
-      if (trigger === 'get') {
-        const memoizedCart = getLocalStorage<Cart>('local-cart');
+      const key = 'local-cart';
 
-        setSelf(memoizedCart);
-      }
+      const initCart = async () => {
+        console.log('>>>>>>> Load cart start \n');
+        const memoizedCart = getLocalStorage<Cart>(key);
+
+        if (memoizedCart) {
+          console.log('<<<1>>> Memoized cart \n', memoizedCart);
+          setSelf(memoizedCart);
+        } else {
+          const { cart: newCart } = await cartQL.createCart({ cartInput: {} });
+          console.log('<<<2>>> Created cart \n', newCart);
+          localStorage.setItem(key, JSON.stringify(newCart));
+          setSelf(newCart as Cart);
+        }
+      };
+
+      // init
+      if (trigger === 'get') initCart();
 
       // effect
       onSet((newValue, _, isReset) => {
-        isReset ? '' : '';
+        isReset ? localStorage.removeItem(key) : setLocalStorage(key, newValue);
       });
     },
   ],

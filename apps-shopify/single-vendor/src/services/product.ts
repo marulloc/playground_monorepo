@@ -5,7 +5,6 @@ import {
 } from '@shopify/hydrogen-react/storefront-api-types';
 import { storefrontApi } from './api/shopify-api';
 import { productQuery } from './graphql/product';
-import { Maybe } from 'graphql/jsutils/Maybe';
 
 export const productQL = {
   /**
