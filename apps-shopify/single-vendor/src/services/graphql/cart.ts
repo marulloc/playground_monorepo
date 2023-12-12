@@ -13,4 +13,20 @@ export const cartMutation = {
     }
     ${ShopifyQLFragment.cartContents}    
   `,
+
+  addCartLines: `
+    mutation addCartLines($cartId: ID!, $lines: [CartLineInput!]!) {
+      cartLinesAdd(cartId: $cartId, lines: $lines) {
+        cart {
+          ...cartContents
+        }
+        
+        userErrors {
+          field
+          message
+        }
+      }
+    }
+    ${ShopifyQLFragment.cartContents}    
+  `,
 };

@@ -6,9 +6,32 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import useQueryString from '@/hooks/useQueryString';
 import { productQL } from '@/services/product';
-import { Product } from '@shopify/hydrogen-react/storefront-api-types';
+import { Cart, Product, ProductVariant } from '@shopify/hydrogen-react/storefront-api-types';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { localCartState } from '@/recoils/cart';
+import { cartQL } from '@/services/cart';
 
 const ProductHero = ({ product }: { product: Product }) => {
+  // const setLocalCart = useSetRecoilState(localCartState);
+  const [localCart, setLocalCart] = useRecoilState(localCartState);
+
+  const handleAddToCart = async () => {
+    if (!localCart || !selectedVariant) return;
+
+    const { cart: updatedCart } = await cartQL.addCartLines({
+      cartId: localCart.id,
+      lines: [{ quantity: 1, merchandiseId: selectedVariant.id }],
+    });
+
+    setLocalCart(updatedCart as Cart);
+  };
+
+  /**
+   *
+   *
+   *
+   */
+
   const searchParams = useQueryString();
   const options = useMemo(() => {
     return product.options.map((option: any) => ({
@@ -26,7 +49,8 @@ const ProductHero = ({ product }: { product: Product }) => {
    */
 
   // => loading state
-  const [selectedVariant, setSelectedVariant] = useState<any>(null);
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
+
   useEffect(() => {
     const selectedOptions = Object.entries(searchParams).reduce((result, current) => {
       const [name, value] = current;
@@ -68,8 +92,8 @@ const ProductHero = ({ product }: { product: Product }) => {
               className="flex-1 aspect-square rounded-lg"
               src={hoveredImage?.url || selectedVariant?.image?.url || product.featuredImage?.url}
               alt={selectedVariant?.image?.altText || product.featuredImage?.altText || ''}
-              width={selectedVariant?.image?.width || product.featuredImage?.width}
-              height={selectedVariant?.image?.height || product.featuredImage?.height}
+              width={selectedVariant?.image?.width || (product.featuredImage?.width as number)}
+              height={selectedVariant?.image?.height || (product.featuredImage?.height as number)}
             />
           </div>
         </div>
@@ -82,7 +106,15 @@ const ProductHero = ({ product }: { product: Product }) => {
         </div>
         <h2 className="sr-only">Product information</h2>
 
-        <form className="mt-10  " onSubmit={(e) => e.preventDefault()}>
+        <form
+          className="mt-10  "
+          onSubmit={(e) => {
+            e.preventDefault();
+            // const data = new FormData(e.target);
+            // console.log('@@@@ submit');
+            handleAddToCart();
+          }}
+        >
           {options.map((option: any) => (
             <div className="mt-10" key={option.name}>
               <div className="flex items-center justify-between">

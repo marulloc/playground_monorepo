@@ -46,7 +46,6 @@ export const ShopifyQLFragment = {
       createdAt
       updatedAt
       checkoutUrl
-
       buyerIdentity {
         customer {
           email
@@ -54,25 +53,42 @@ export const ShopifyQLFragment = {
         countryCode
         walletPreferences
       }
-
       lines(first: 10) {
         edges {
           node {
             id
+            quantity
+            cost {
+              amountPerQuantity {
+                amount
+                currencyCode
+              }
+              totalAmount {
+                amount
+                currencyCode
+              }
+            }
             merchandise {
               ... on ProductVariant {
-                id
+                product {
+                  title
+                }
+                title
+                image {
+                  url
+                  width
+                  height
+                  altText
+                }
               }
             }
           }
         }
       }
-
       attributes {
         key
         value
       }
-
       cost {
         totalAmount {
           amount
@@ -92,7 +108,5 @@ export const ShopifyQLFragment = {
         }
       }
     }
-  
-  
   `,
 };
