@@ -1,4 +1,8 @@
-import { Product, SelectedOptionInput } from '@shopify/hydrogen-react/storefront-api-types';
+import {
+  Product,
+  ProductRecommendationIntent,
+  SelectedOptionInput,
+} from '@shopify/hydrogen-react/storefront-api-types';
 import { storefrontApi } from './api/shopify-api';
 import { productQuery } from './graphql/product';
 import { Maybe } from 'graphql/jsutils/Maybe';
@@ -35,5 +39,12 @@ export const productQL = {
     return product;
   },
 
-  getProductRecommendations: async () => {},
+  getProductRecommendations: async (variables: { productId: Product['id']; intent: ProductRecommendationIntent }) => {
+    const { productRecommendations } = await storefrontApi<Product[]>(
+      { query: productQuery.getProductRecommendations, variables },
+      { revalidate: 10 },
+    );
+
+    return productRecommendations;
+  },
 };

@@ -25,7 +25,7 @@ const Page = async ({ params }: { params: { [key: string]: string } }) => {
       </div>
 
       <div className="mx-auto max-w-2xl lg:max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-16">
-        <Recommendations />
+        <Recommendations productId={product.id} />
       </div>
     </main>
   );

@@ -5,6 +5,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { classNames } from './Marulloc-UI-v2/utils/classNames';
+import Link from 'next/link';
 
 const Navigation = () => {
   return (
@@ -15,7 +16,9 @@ const Navigation = () => {
             <div className="flex h-16 justify-between">
               <div className="flex px-2 lg:px-0">
                 <div className="flex flex-shrink-0 items-center">
-                  <div className=" text-2xl font-semibold bg-emerald-800 text-white p-1 px-2 rounded-md ">Shopify</div>
+                  <Link href={'/'} className=" text-2xl font-semibold bg-emerald-800 text-white p-1 px-2 rounded-md ">
+                    Shopify
+                  </Link>
                   {/* <img
                     className="h-8 w-auto"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"

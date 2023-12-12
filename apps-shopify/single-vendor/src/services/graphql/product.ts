@@ -62,8 +62,8 @@ export const productQuery = {
   `,
 
   getProductRecommendations: `
-    query getProductRecommendations($productId: ID!, intent:$intent) {
-      productRecommendations(productId: $productId, intent: intent) {
+    query getProductRecommendations($productId: ID!, $intent:ProductRecommendationIntent) {
+      productRecommendations(productId: $productId, intent: $intent) {
         ...productCard
       }
     }
