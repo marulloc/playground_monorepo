@@ -36,4 +36,63 @@ export const ShopifyQLFragment = {
       }
     }
   `,
+
+  /**
+   * @description cart 내용물
+   */
+  cartContents: `
+    fragment cartContents on Cart {
+      id
+      createdAt
+      updatedAt
+      checkoutUrl
+
+      buyerIdentity {
+        customer {
+          email
+        }
+        countryCode
+        walletPreferences
+      }
+
+      lines(first: 10) {
+        edges {
+          node {
+            id
+            merchandise {
+              ... on ProductVariant {
+                id
+              }
+            }
+          }
+        }
+      }
+
+      attributes {
+        key
+        value
+      }
+
+      cost {
+        totalAmount {
+          amount
+          currencyCode
+        }
+        subtotalAmount {
+          amount
+          currencyCode
+        }
+        totalTaxAmount {
+          amount
+          currencyCode
+        }
+        totalDutyAmount {
+          amount
+          currencyCode
+        }
+      }
+    }
+  
+  
+  `,
 };

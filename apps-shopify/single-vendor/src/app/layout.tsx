@@ -7,6 +7,8 @@ import Banner from '@/components/Banner';
 import { classNames } from '@/components/Marulloc-UI-v2/utils/classNames';
 import Navigation from '@/components/Navigation';
 import ConsoleCompo from '@/components/Marulloc-UI-v2/components/ConsoleCompo';
+import SideCart from '@/components/SideCart';
+import RecoilProvider from '@/recoils/_RecoilProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,13 +25,16 @@ const test = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={classNames(inter.className, ' ')}>
-        <Banner />
-        <div className="">
-          <Navigation />
-        </div>
-        {children}
-      </body>
+      <RecoilProvider>
+        <body className={classNames(inter.className, ' ')}>
+          <Banner />
+          <div className="">
+            <SideCart />
+            <Navigation />
+          </div>
+          {children}
+        </body>
+      </RecoilProvider>
     </html>
   );
 }
