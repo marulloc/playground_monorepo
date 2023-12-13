@@ -72,6 +72,7 @@ export const ShopifyQLFragment = {
               ... on ProductVariant {
                 product {
                   title
+                  id
                 }
                 title
                 image {

@@ -1,42 +1,47 @@
 'use client';
-import { Fragment, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useRecoilState, useRecoilStateLoadable } from 'recoil';
 import { localCartState } from '@/recoils/cart';
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { gidParser } from '@/services/parsers/gidParser';
+import { cartQL } from '@/services/cart';
+import { Cart, CartLine } from '@shopify/hydrogen-react/storefront-api-types';
 
 const SideCart = () => {
   const [open, setOpen] = useState(false);
 
   const [localCart, setLocalCart] = useRecoilState(localCartState);
 
-  console.log('!@#!@#!@#', localCart);
+  const cartLines = useMemo(() => {
+    return localCart?.lines.edges.map(({ node }) => node) || [];
+  }, [localCart]);
 
-  const products = [
-    {
-      id: 1,
-      name: 'Throwback Hip Bag',
-      href: '#',
-      color: 'Salmon',
-      price: '$90.00',
-      quantity: 1,
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-      imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-    },
-    {
-      id: 2,
-      name: 'Medium Stuff Satchel',
-      href: '#',
-      color: 'Blue',
-      price: '$32.00',
-      quantity: 1,
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-      imageAlt:
-        'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-    },
-    // More products...
-  ];
+  const handleUpdateLine = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { id: cartLineId, value } = e.target;
+    if (!localCart || !cartLineId || !value) return;
+
+    const { cart: updatedCart } = await cartQL.updateCartLines({
+      cartId: localCart?.id,
+      lines: [{ id: cartLineId, quantity: Number(value) }],
+    });
+
+    setLocalCart(updatedCart as Cart);
+  };
+
+  const handleDeleteLine = async (cartLine: CartLine) => {
+    if (!localCart || !cartLine.id) return;
+
+    const { cart: updatedCart } = await cartQL.removeCartLines({
+      cartId: localCart?.id,
+      lineIds: [cartLine.id],
+    });
+
+    setLocalCart(updatedCart as Cart);
+  };
 
   return (
     <>
@@ -98,12 +103,14 @@ const SideCart = () => {
                         <div className="mt-8">
                           <div className="flow-root">
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
-                              {products.map((product) => (
-                                <li key={product.id} className="flex py-6">
+                              {cartLines.map((cartLine) => (
+                                <li key={cartLine.id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                    <img
-                                      src={product.imageSrc}
-                                      alt={product.imageAlt}
+                                    <Image
+                                      src={cartLine.merchandise.image?.url || ''}
+                                      alt={cartLine.merchandise.image?.altText || ''}
+                                      width={cartLine.merchandise.image?.width as number}
+                                      height={cartLine.merchandise.image?.height as number}
                                       className="h-full w-full object-cover object-center"
                                     />
                                   </div>
@@ -112,21 +119,56 @@ const SideCart = () => {
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
                                         <h3>
-                                          <a href={product.href}>{product.name}</a>
+                                          <Link
+                                            href={`/${
+                                              gidParser
+                                                .extract(cartLine.merchandise.product.id)
+                                                ?.resource.toLowerCase() as 'product'
+                                            }/${gidParser.extract(cartLine.merchandise.product.id)?.id}`}
+                                          >
+                                            {cartLine.merchandise.product.title}
+                                          </Link>
                                         </h3>
-                                        <p className="ml-4">{product.price}</p>
+                                        <p className="ml-4">
+                                          <span>{cartLine.cost.totalAmount.currencyCode}</span>
+                                          <span>{cartLine.cost.totalAmount.amount}</span>
+                                        </p>
                                       </div>
-                                      <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                                      <p className="mt-1 text-sm text-gray-500">{cartLine.merchandise.title}</p>
                                     </div>
-                                    <div className="flex flex-1 items-end justify-between text-sm">
-                                      <p className="text-gray-500">Qty {product.quantity}</p>
 
-                                      <div className="flex">
+                                    <div className="flex flex-1 items-end justify-between text-sm">
+                                      <label htmlFor={`quantity-${cartLine.id}`} className="sr-only">
+                                        Quantity, {cartLine.quantity}
+                                      </label>
+                                      <select
+                                        onChange={(e) => handleUpdateLine(e)}
+                                        id={cartLine.id}
+                                        name={'quantity'}
+                                        defaultValue={cartLine.quantity}
+                                        className="max-w-full rounded-md border border-gray-300 py-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                                      >
+                                        <option value={1}>1</option>
+                                        <option value={2}>2</option>
+                                        <option value={3}>3</option>
+                                        <option value={4}>4</option>
+                                        <option value={5}>5</option>
+                                        <option value={6}>6</option>
+                                        <option value={7}>7</option>
+                                        <option value={8}>8</option>
+                                      </select>
+
+                                      <div className=" ">
                                         <button
                                           type="button"
-                                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                                          className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500 space-x-2"
+                                          onClick={() => handleDeleteLine(cartLine as CartLine)}
                                         >
-                                          Remove
+                                          <span className="sr-only">Remove</span>
+                                          <span className="font-medium text-indigo-600 hover:text-indigo-500">
+                                            Remove
+                                          </span>
+                                          <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                                         </button>
                                       </div>
                                     </div>
@@ -145,12 +187,12 @@ const SideCart = () => {
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                         <div className="mt-6">
-                          <a
-                            href="#"
+                          <Link
+                            href={localCart?.checkoutUrl as string}
                             className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                           >
                             Checkout
-                          </a>
+                          </Link>
                         </div>
                         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                           <p>
