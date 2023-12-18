@@ -5,75 +5,8 @@ import { Product } from '@shopify/hydrogen-react/storefront-api-types';
 import { FormEvent, useMemo } from 'react';
 import { classNames } from '../Marulloc-UI-v2/utils/classNames';
 import Link from 'next/link';
-
-type RadioGroupProps = {
-  label: string;
-} & React.ComponentPropsWithoutRef<'fieldset'>;
-const RadioGroup = ({ label, children, ...restProps }: RadioGroupProps) => {
-  return (
-    <fieldset {...restProps}>
-      <legend className="sr-only">{label}</legend>
-      {children}
-    </fieldset>
-  );
-};
-
-type RadioProps = {
-  inputProps?: React.ComponentPropsWithoutRef<'input'>;
-  children: React.ReactNode;
-} & React.ComponentPropsWithoutRef<'label'>;
-const Radio = ({ children, inputProps, ...labelProps }: RadioProps) => {
-  return (
-    <label className={classNames(labelProps.className)} {...labelProps}>
-      <input
-        type="radio"
-        className={classNames('sr-only', inputProps?.className)}
-        value={inputProps?.value}
-        name={inputProps?.name}
-        defaultChecked={inputProps?.defaultChecked}
-        disabled={inputProps?.disabled}
-        required={inputProps?.required}
-        {...inputProps}
-      />
-      {children}
-    </label>
-  );
-};
-
-type FormProps = {
-  handleSubmitReturnType: 'json' | 'form';
-  onSubmit?: (e: FormEvent<HTMLFormElement>, values: any) => void;
-} & Omit<React.ComponentPropsWithoutRef<'form'>, 'onSubmit'>;
-
-const Form = (props: FormProps) => {
-  const { children, handleSubmitReturnType, onSubmit, ...restProps } = props;
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!onSubmit) return;
-
-    const formData = new FormData(e.target as HTMLFormElement);
-
-    switch (handleSubmitReturnType) {
-      case 'json':
-        const jsonData: any = {};
-        for (const [key, value] of formData.entries()) jsonData[key] = value;
-        await onSubmit(e, jsonData);
-        return;
-
-      case 'form':
-      default:
-        await onSubmit(e, formData);
-        return;
-    }
-  };
-
-  return (
-    <form {...restProps} onSubmit={handleSubmit}>
-      {children}
-    </form>
-  );
-};
+import { RadioGroup } from '../headless-component/Form/RadioGroup';
+import Form from '../headless-component/Form';
 
 const ProductVariantSelector = ({ product }: { product: Product }) => {
   const searchParams = useQueryString();
@@ -97,37 +30,47 @@ const ProductVariantSelector = ({ product }: { product: Product }) => {
 
       <div className="  h-full col-span-3 lg:col-span-1  ">
         <Form className="mt-10  " handleSubmitReturnType="json" onSubmit={handleAddtoCart}>
-          {options.map((option: any) => (
-            <RadioGroup className="mt-10" key={option.name} label={option.name}>
-              <div className="flex items-center justify-between">
-                <h3 className="text-sm font-medium text-gray-900">{option.name}</h3>
-              </div>
+          {options.map((option) => (
+            <RadioGroup name={option.name} key={option.name} required className="mt-10">
+              {(optionProps) => (
+                <>
+                  <RadioGroup.Title legend={`Choose ${option.name}`}>
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-sm font-medium text-gray-900">{option.name}</h3>
+                    </div>
+                  </RadioGroup.Title>
 
-              <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                {option.values.map(({ value, active }: any) => (
-                  <Link
-                    key={`${option.name}-${value}`}
-                    href={{ query: { ...searchParams, [option.name]: value } }}
-                    scroll={false}
-                  >
-                    <Radio
-                      className={classNames(
-                        'group relative flex items-center justify-center',
-                        'rounded-md border py-3 px-4 text-sm font-medium uppercase',
-                        'hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm undefined',
-                      )}
-                    >
-                      <span>{value}</span>
-                      {active && (
-                        <span className="pointer-events-none absolute -inset-px rounded-md border-2 border-indigo-500"></span>
-                      )}
-                    </Radio>
-                  </Link>
-                ))}
-              </div>
+                  <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
+                    {option.values.map(({ value, active }: any) => (
+                      <Link
+                        key={`${option.name}-${value}`}
+                        href={{ query: { ...searchParams, [option.name]: value } }}
+                        scroll={false}
+                      >
+                        <RadioGroup.Option
+                          value={value}
+                          checked={active}
+                          className={classNames(
+                            'group relative flex items-center justify-center',
+                            'rounded-md border py-3 px-4 text-sm font-medium uppercase',
+                            'hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm undefined',
+                          )}
+                          {...optionProps}
+                        >
+                          <span>{value}</span>
+                          {active && (
+                            <span className="pointer-events-none absolute -inset-px rounded-md border-2 border-indigo-500"></span>
+                          )}
+                        </RadioGroup.Option>
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              )}
             </RadioGroup>
           ))}
 
+          <button type="submit">Submit</button>
           {/* Price */}
           <p className="text-2xl  text-gray-900 mt-10 space-x-2">
             {/* <span className="text-lg">{selectedVariant?.price?.currencyCode}</span>
