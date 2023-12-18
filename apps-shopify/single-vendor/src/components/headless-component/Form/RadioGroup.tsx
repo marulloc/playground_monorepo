@@ -53,13 +53,12 @@ type RadioOptionProps = {
 const RadioOption = ({ value, children, ...labelProps }: RadioOptionProps) => {
   const [{ name, disabled, required, checkedValue }, setContext] = useRadioContext();
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleClick = (e: React.ChangeEvent) => {
     setContext((prev) => ({ ...prev, checkedValue: value }));
   };
 
   return (
-    <label {...labelProps} onClick={handleClick}>
+    <label {...labelProps}>
       <input
         type="radio"
         name={name}
@@ -67,6 +66,7 @@ const RadioOption = ({ value, children, ...labelProps }: RadioOptionProps) => {
         disabled={disabled}
         value={value}
         checked={checkedValue === value}
+        onChange={handleClick}
         className={classNames('sr-only')}
       />
       {children({ checked: checkedValue === value, value, disabled })}

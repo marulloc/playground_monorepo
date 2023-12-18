@@ -9,14 +9,6 @@ import { RadioGroup } from '../headless-component/Form/RadioGroup';
 import Form from '../headless-component/Form';
 
 const ProductVariantSelector = ({ product }: { product: Product }) => {
-  const searchParams = useQueryString();
-  const options = useMemo(() => {
-    return product.options.map((option: any) => ({
-      ...option,
-      values: option.values.map((value: any) => ({ value, active: searchParams[option.name] === value })),
-    }));
-  }, [product.options, searchParams]);
-
   const handleAddtoCart = (_e: FormEvent<HTMLFormElement>, values: { [key: string]: string }) => {
     console.log('@@@', values);
   };
@@ -31,13 +23,13 @@ const ProductVariantSelector = ({ product }: { product: Product }) => {
       <div className="  h-full col-span-3 lg:col-span-1  ">
         <Form
           className="mt-10  "
-          handleSubmitReturnType="json"
+          handlerReturnType="json"
           onSubmit={handleAddtoCart}
-          onChange={(e) => {
-            console.log(e.target);
+          onChange={(e, values) => {
+            console.log(e.target, values);
           }}
         >
-          {options.map((option) => (
+          {product.options.map((option) => (
             <RadioGroup name={option.name} key={option.name} required className="mt-10">
               <RadioGroup.Title>
                 <div className="flex items-center justify-between">
@@ -46,8 +38,8 @@ const ProductVariantSelector = ({ product }: { product: Product }) => {
               </RadioGroup.Title>
 
               <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                {option.values.map(({ value, active }: any) => (
-                  <RadioGroup.Option key={`${option.name}-${value}`} value={value}>
+                {option.values.map((value) => (
+                  <RadioGroup.Option key={`${option.name}-${value}-?`} value={value}>
                     {({ checked, value, disabled }) => (
                       <div
                         className={classNames(

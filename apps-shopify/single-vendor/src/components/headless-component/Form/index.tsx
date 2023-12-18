@@ -1,20 +1,24 @@
 'use client';
 
+import { useRef } from 'react';
+
 type FormRootProps = {
-  handleSubmitReturnType: 'json' | 'form';
+  handlerReturnType: 'json' | 'form';
   onSubmit?: (e: React.FormEvent<HTMLFormElement>, values: any) => void;
-} & Omit<React.ComponentPropsWithoutRef<'form'>, 'onSubmit'>;
+  onChange?: (e: React.ChangeEvent, values: any) => void;
+} & Omit<React.ComponentPropsWithoutRef<'form'>, 'onSubmit' | 'onChange'>;
 
 const Form = (props: FormRootProps) => {
-  const { children, handleSubmitReturnType, onSubmit, ...restProps } = props;
+  const formRef = useRef<HTMLFormElement>(null);
+  const { children, handlerReturnType, onSubmit, onChange, ...restProps } = props;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!onSubmit) return;
 
-    const formData = new FormData(e.target as HTMLFormElement);
+    const formData = new FormData(formRef.current as HTMLFormElement);
 
-    switch (handleSubmitReturnType) {
+    switch (handlerReturnType) {
       case 'json':
         const jsonData: any = {};
         for (const [key, value] of formData.entries()) jsonData[key] = value;
@@ -28,8 +32,27 @@ const Form = (props: FormRootProps) => {
     }
   };
 
+  const handleChange = async (e: any) => {
+    if (!onChange) return;
+
+    const formData = new FormData(formRef.current as HTMLFormElement);
+
+    switch (handlerReturnType) {
+      case 'json':
+        const jsonData: any = {};
+        for (const [key, value] of formData.entries()) jsonData[key] = value;
+        await onChange(e, jsonData);
+        return;
+
+      case 'form':
+      default:
+        await onChange(e, formData);
+        return;
+    }
+  };
+
   return (
-    <form {...restProps} onSubmit={handleSubmit}>
+    <form ref={formRef} {...restProps} onSubmit={handleSubmit} onChange={handleChange}>
       {children}
     </form>
   );
