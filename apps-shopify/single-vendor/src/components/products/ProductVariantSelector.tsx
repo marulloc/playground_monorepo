@@ -29,44 +29,42 @@ const ProductVariantSelector = ({ product }: { product: Product }) => {
       <h2 className="sr-only">Product information</h2>
 
       <div className="  h-full col-span-3 lg:col-span-1  ">
-        <Form className="mt-10  " handleSubmitReturnType="json" onSubmit={handleAddtoCart}>
+        <Form
+          className="mt-10  "
+          handleSubmitReturnType="json"
+          onSubmit={handleAddtoCart}
+          onChange={(e) => {
+            console.log(e.target);
+          }}
+        >
           {options.map((option) => (
             <RadioGroup name={option.name} key={option.name} required className="mt-10">
-              {(optionProps) => (
-                <>
-                  <RadioGroup.Title legend={`Choose ${option.name}`}>
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-medium text-gray-900">{option.name}</h3>
-                    </div>
-                  </RadioGroup.Title>
+              <RadioGroup.Title>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-medium text-gray-900">{option.name}</h3>
+                </div>
+              </RadioGroup.Title>
 
-                  <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                    {option.values.map(({ value, active }: any) => (
-                      <Link
-                        key={`${option.name}-${value}`}
-                        href={{ query: { ...searchParams, [option.name]: value } }}
-                        scroll={false}
+              <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
+                {option.values.map(({ value, active }: any) => (
+                  <RadioGroup.Option key={`${option.name}-${value}`} value={value}>
+                    {({ checked, value, disabled }) => (
+                      <div
+                        className={classNames(
+                          'group relative flex items-center justify-center',
+                          'rounded-md border py-3 px-4 text-sm font-medium uppercase',
+                          'hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm undefined',
+                        )}
                       >
-                        <RadioGroup.Option
-                          value={value}
-                          checked={active}
-                          className={classNames(
-                            'group relative flex items-center justify-center',
-                            'rounded-md border py-3 px-4 text-sm font-medium uppercase',
-                            'hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm undefined',
-                          )}
-                          {...optionProps}
-                        >
-                          <span>{value}</span>
-                          {active && (
-                            <span className="pointer-events-none absolute -inset-px rounded-md border-2 border-indigo-500"></span>
-                          )}
-                        </RadioGroup.Option>
-                      </Link>
-                    ))}
-                  </div>
-                </>
-              )}
+                        <span>{value}</span>
+                        {checked && (
+                          <span className="pointer-events-none absolute -inset-px rounded-md border-2 border-indigo-500"></span>
+                        )}
+                      </div>
+                    )}
+                  </RadioGroup.Option>
+                ))}
+              </div>
             </RadioGroup>
           ))}
 

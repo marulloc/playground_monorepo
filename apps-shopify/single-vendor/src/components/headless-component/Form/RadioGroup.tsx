@@ -1,68 +1,75 @@
 import { classNames } from '@/components/Marulloc-UI-v2/utils/classNames';
+import { ValueOf } from 'next/dist/shared/lib/constants';
+import { Dispatch, SetStateAction, createContext, useContext, useEffect, useReducer, useState } from 'react';
+
+type TRadioContext = {
+  name: string;
+  checkedValue: string | null;
+  required?: boolean;
+  disabled?: boolean;
+};
+type TRadioState = [TRadioContext, Dispatch<SetStateAction<TRadioContext>>];
+
+const RadioContext = createContext<TRadioState | null>(null);
+
+const useRadioContext = () => {
+  const context = useContext(RadioContext);
+  if (!context) throw new Error('<RadioGroup.*> component must be rendered as child of <RadioGroup> compoent');
+
+  return context;
+};
 
 type RadioGroupRootProps = {
-  name: React.ComponentPropsWithoutRef<'input'>['name'];
-  required?: React.ComponentPropsWithoutRef<'input'>['required'];
-  disabled?: React.ComponentPropsWithoutRef<'input'>['disabled'];
+  defaultValue?: string;
+  name: string;
+  required?: boolean;
+  disabled?: boolean;
+} & React.ComponentPropsWithoutRef<'fieldset'>;
 
-  children: (props: {
-    name: RadioGroupRootProps['name'];
-    required: RadioGroupRootProps['required'];
-    disabled: RadioGroupRootProps['disabled'];
-  }) => React.ReactNode;
-} & Omit<React.ComponentPropsWithoutRef<'fieldset'>, 'children'>;
-
-const RadioGroupRoot = (props: RadioGroupRootProps) => {
-  const { name, required, disabled, children, ...restProps } = props;
+const RadioGroupRoot = ({ name, required, disabled, children, defaultValue, ...restProps }: RadioGroupRootProps) => {
+  const context = useState<TRadioContext>({ name, checkedValue: defaultValue ?? null, required, disabled });
 
   return (
-    <fieldset {...restProps} className={classNames(restProps.className)}>
-      <>{children({ name, required, disabled })}</>
-    </fieldset>
+    <RadioContext.Provider value={context}>
+      <fieldset {...restProps} className={classNames(restProps.className)}>
+        {children}
+      </fieldset>
+    </RadioContext.Provider>
   );
 };
 
-type RadioGroupLegendProps = {
-  legendElSrOnly?: boolean;
-  legend: string;
-} & React.ComponentPropsWithoutRef<'legend'>;
+type RadioGroupLegendProps = React.ComponentPropsWithoutRef<'legend'>;
 
-const RadioGroupTitle = (props: RadioGroupLegendProps) => {
-  const { children, legendElSrOnly = true, legend, ...restProps } = props;
-
-  return (
-    <>
-      <legend {...restProps} className={classNames(legendElSrOnly ? 'sr-only' : '', restProps.className)}>
-        {legend}
-      </legend>
-      <>{children}</>
-    </>
-  );
+const RadioGroupTitle = ({ children, ...restProps }: RadioGroupLegendProps) => {
+  const [{ name }] = useRadioContext();
+  return <legend {...restProps}>{children ?? `Choose ${name}`}</legend>;
 };
 
 type RadioOptionProps = {
-  name: React.ComponentPropsWithoutRef<'input'>['name'];
-  value: React.ComponentPropsWithoutRef<'input'>['value'];
-  checked: React.ComponentPropsWithoutRef<'input'>['checked'];
-  required?: React.ComponentPropsWithoutRef<'input'>['required'];
-  disabled?: React.ComponentPropsWithoutRef<'input'>['disabled'];
-} & React.ComponentPropsWithoutRef<'label'>;
+  value: string;
+  children: (props: { checked: boolean; value?: string; disabled?: boolean }) => React.ReactNode;
+} & Omit<React.ComponentPropsWithoutRef<'label'>, 'children' | 'onClick'>;
 
-const RadioOption = (props: RadioOptionProps) => {
-  const { name, required, disabled, value, children, checked, ...labelProps } = props;
+const RadioOption = ({ value, children, ...labelProps }: RadioOptionProps) => {
+  const [{ name, disabled, required, checkedValue }, setContext] = useRadioContext();
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setContext((prev) => ({ ...prev, checkedValue: value }));
+  };
+
   return (
-    <label {...labelProps}>
+    <label {...labelProps} onClick={handleClick}>
       <input
         type="radio"
         name={name}
         required={required}
         disabled={disabled}
         value={value}
-        checked={checked}
-        onChange={() => {}}
+        checked={checkedValue === value}
         className={classNames('sr-only')}
       />
-      <>{children}</>
+      {children({ checked: checkedValue === value, value, disabled })}
     </label>
   );
 };
