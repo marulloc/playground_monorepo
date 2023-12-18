@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, createContext, useContext, useEffect, useRedu
 
 type TRadioContext = {
   name: string;
-  checkedValue: string | null;
+  checkedValue?: string | null;
   required?: boolean;
   disabled?: boolean;
 };
@@ -20,17 +20,21 @@ const useRadioContext = () => {
 };
 
 type RadioGroupRootProps = {
-  defaultValue?: string;
   name: string;
+  checkedValue?: string;
   required?: boolean;
   disabled?: boolean;
 } & React.ComponentPropsWithoutRef<'fieldset'>;
 
-const RadioGroupRoot = ({ name, required, disabled, children, defaultValue, ...restProps }: RadioGroupRootProps) => {
-  const context = useState<TRadioContext>({ name, checkedValue: defaultValue ?? null, required, disabled });
+const RadioGroupRoot = ({ name, required, disabled, children, checkedValue, ...restProps }: RadioGroupRootProps) => {
+  const [context, setContext] = useState<TRadioContext>({ name, checkedValue, required, disabled });
+
+  useEffect(() => {
+    setContext({ name, required, disabled, checkedValue });
+  }, [name, required, disabled, checkedValue]);
 
   return (
-    <RadioContext.Provider value={context}>
+    <RadioContext.Provider value={[context, setContext]}>
       <fieldset {...restProps} className={classNames(restProps.className)}>
         {children}
       </fieldset>

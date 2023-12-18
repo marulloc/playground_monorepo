@@ -9,6 +9,7 @@ import { RadioGroup } from '../headless-component/Form/RadioGroup';
 import Form from '../headless-component/Form';
 
 const ProductVariantSelector = ({ product }: { product: Product }) => {
+  const searchParams = useQueryString();
   const handleAddtoCart = (_e: FormEvent<HTMLFormElement>, values: { [key: string]: string }) => {
     console.log('@@@', values);
   };
@@ -25,12 +26,16 @@ const ProductVariantSelector = ({ product }: { product: Product }) => {
           className="mt-10  "
           handlerReturnType="json"
           onSubmit={handleAddtoCart}
-          onChange={(e, values) => {
-            console.log(e.target, values);
-          }}
+          onChange={(e, values) => console.log(e.target, values)}
         >
           {product.options.map((option) => (
-            <RadioGroup name={option.name} key={option.name} required className="mt-10">
+            <RadioGroup
+              name={option.name}
+              checkedValue={searchParams[option.name]}
+              key={option.name}
+              required
+              className="mt-10"
+            >
               <RadioGroup.Title>
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-medium text-gray-900">{option.name}</h3>
@@ -41,18 +46,20 @@ const ProductVariantSelector = ({ product }: { product: Product }) => {
                 {option.values.map((value) => (
                   <RadioGroup.Option key={`${option.name}-${value}-?`} value={value}>
                     {({ checked, value, disabled }) => (
-                      <div
-                        className={classNames(
-                          'group relative flex items-center justify-center',
-                          'rounded-md border py-3 px-4 text-sm font-medium uppercase',
-                          'hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm undefined',
-                        )}
-                      >
-                        <span>{value}</span>
-                        {checked && (
-                          <span className="pointer-events-none absolute -inset-px rounded-md border-2 border-indigo-500"></span>
-                        )}
-                      </div>
+                      <Link href={{ query: { ...searchParams, [option.name]: value } }} scroll={false}>
+                        <div
+                          className={classNames(
+                            'group relative flex items-center justify-center',
+                            'rounded-md border py-3 px-4 text-sm font-medium uppercase',
+                            'hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm undefined',
+                          )}
+                        >
+                          <span>{value}</span>
+                          {checked && (
+                            <span className="pointer-events-none absolute -inset-px rounded-md border-2 border-indigo-500"></span>
+                          )}
+                        </div>
+                      </Link>
                     )}
                   </RadioGroup.Option>
                 ))}
