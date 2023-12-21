@@ -5,8 +5,8 @@ import { useCallback, useMemo } from 'react';
 
 export const useSyncDataUrl = (): [
   {
-    dataMap: { [key: string]: string };
-    dataArr: [string, string][];
+    dataUrlMap: { [key: string]: string };
+    dataUrlArr: [string, string][];
     get: () => {
       queryStringArr: [string, string][];
       queryStringMap: { [key: string]: string };
@@ -43,7 +43,7 @@ export const useSyncDataUrl = (): [
 
   const dataFromUrl = useMemo(() => {
     const { queryStringArr, queryStringMap } = getQueryString();
-    return { dataArr: queryStringArr, dataMap: queryStringMap };
+    return { dataUrlArr: queryStringArr, dataUrlMap: queryStringMap };
   }, [getQueryString]);
 
   return [{ ...dataFromUrl, get: getQueryString }, setQueryString];
