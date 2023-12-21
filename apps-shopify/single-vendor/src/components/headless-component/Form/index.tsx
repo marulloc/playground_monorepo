@@ -5,7 +5,7 @@ import { useRef } from 'react';
 type FormRootProps = {
   handlerReturnType: 'json' | 'form';
   onSubmit?: (e: React.FormEvent<HTMLFormElement>, values: any) => void;
-  onChange?: (e: React.ChangeEvent, values: any) => void;
+  onChange?: (e: React.ChangeEvent<HTMLFormElement>, values: any) => void;
 } & Omit<React.ComponentPropsWithoutRef<'form'>, 'onSubmit' | 'onChange'>;
 
 const Form = (props: FormRootProps) => {
@@ -32,7 +32,7 @@ const Form = (props: FormRootProps) => {
     }
   };
 
-  const handleChange = async (e: any) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLFormElement>) => {
     if (!onChange) return;
 
     const formData = new FormData(formRef.current as HTMLFormElement);

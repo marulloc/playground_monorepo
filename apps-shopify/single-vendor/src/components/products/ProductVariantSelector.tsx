@@ -1,17 +1,25 @@
 'use client';
 
-import useQueryString from '@/hooks/useQueryString';
+import { useSyncDataUrl } from '@/hooks/useSyncDataUrl';
 import { Product } from '@shopify/hydrogen-react/storefront-api-types';
-import { FormEvent, useMemo } from 'react';
 import { classNames } from '../Marulloc-UI-v2/utils/classNames';
 import Link from 'next/link';
 import { RadioGroup } from '../headless-component/Form/RadioGroup';
 import Form from '../headless-component/Form';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const ProductVariantSelector = ({ product }: { product: Product }) => {
-  const searchParams = useQueryString();
-  const handleAddtoCart = (_e: FormEvent<HTMLFormElement>, values: { [key: string]: string }) => {
+  const [{ dataMap }, setQueryString] = useSyncDataUrl();
+
+  const handleAddtoCart = (_e: React.FormEvent<HTMLFormElement>, values: { [key: string]: string }) => {
     console.log('@@@', values);
+  };
+
+  const handleSelect = (e: React.ChangeEvent<HTMLFormElement>, values: any) => {
+    const name = e.target.name;
+    const value = values[name] as undefined | string;
+
+    setQueryString(name, value);
   };
 
   return (
@@ -22,16 +30,11 @@ const ProductVariantSelector = ({ product }: { product: Product }) => {
       <h2 className="sr-only">Product information</h2>
 
       <div className="  h-full col-span-3 lg:col-span-1  ">
-        <Form
-          className="mt-10  "
-          handlerReturnType="json"
-          onSubmit={handleAddtoCart}
-          onChange={(e, values) => console.log(e.target, values)}
-        >
+        <Form className="mt-10  " handlerReturnType="json" onSubmit={handleAddtoCart} onChange={handleSelect}>
           {product.options.map((option) => (
             <RadioGroup
               name={option.name}
-              checkedValue={searchParams[option.name]}
+              checkedValue={dataMap[option.name]}
               key={option.name}
               required
               className="mt-10"
@@ -46,20 +49,18 @@ const ProductVariantSelector = ({ product }: { product: Product }) => {
                 {option.values.map((value) => (
                   <RadioGroup.Option key={`${option.name}-${value}-?`} value={value}>
                     {({ checked, value, disabled }) => (
-                      <Link href={{ query: { ...searchParams, [option.name]: value } }} scroll={false}>
-                        <div
-                          className={classNames(
-                            'group relative flex items-center justify-center',
-                            'rounded-md border py-3 px-4 text-sm font-medium uppercase',
-                            'hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm undefined',
-                          )}
-                        >
-                          <span>{value}</span>
-                          {checked && (
-                            <span className="pointer-events-none absolute -inset-px rounded-md border-2 border-indigo-500"></span>
-                          )}
-                        </div>
-                      </Link>
+                      <div
+                        className={classNames(
+                          'group relative flex items-center justify-center',
+                          'rounded-md border py-3 px-4 text-sm font-medium uppercase',
+                          'hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm undefined',
+                        )}
+                      >
+                        <span>{value}</span>
+                        {checked && (
+                          <span className="pointer-events-none absolute -inset-px rounded-md border-2 border-indigo-500"></span>
+                        )}
+                      </div>
                     )}
                   </RadioGroup.Option>
                 ))}

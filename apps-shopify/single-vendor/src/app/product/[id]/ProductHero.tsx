@@ -4,7 +4,6 @@ import { classNames } from '@/components/Marulloc-UI-v2/utils/classNames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import useQueryString from '@/hooks/useQueryString';
 import { productQL } from '@/services/product';
 import { Cart, Product, ProductVariant } from '@shopify/hydrogen-react/storefront-api-types';
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -32,13 +31,13 @@ const ProductHero = ({ product }: { product: Product }) => {
    *
    */
 
-  const searchParams = useQueryString();
-  const options = useMemo(() => {
-    return product.options.map((option: any) => ({
-      ...option,
-      values: option.values.map((value: any) => ({ value, active: searchParams[option.name] === value })),
-    }));
-  }, [product.options, searchParams]);
+  // const searchParams = useQueryString();
+  // const options = useMemo(() => {
+  //   return product.options.map((option: any) => ({
+  //     ...option,
+  //     values: option.values.map((value: any) => ({ value, active: searchParams[option.name] === value })),
+  //   }));
+  // }, [product.options, searchParams]);
 
   /**
    *
@@ -51,20 +50,20 @@ const ProductHero = ({ product }: { product: Product }) => {
   // => loading state
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
 
-  useEffect(() => {
-    const selectedOptions = Object.entries(searchParams).reduce((result, current) => {
-      const [name, value] = current;
-      return [...result, { name, value }];
-    }, [] as any);
+  // useEffect(() => {
+  //   const selectedOptions = Object.entries(searchParams).reduce((result, current) => {
+  //     const [name, value] = current;
+  //     return [...result, { name, value }];
+  //   }, [] as any);
 
-    if (selectedOptions.length !== options.length) return;
+  //   if (selectedOptions.length !== options.length) return;
 
-    (async () => {
-      const { variantBySelectedOptions } = await productQL.getVariantByOptions({ id: product.id, selectedOptions });
+  //   (async () => {
+  //     const { variantBySelectedOptions } = await productQL.getVariantByOptions({ id: product.id, selectedOptions });
 
-      setSelectedVariant(variantBySelectedOptions ?? null);
-    })();
-  }, [options.length, product.handle, product.id, searchParams]);
+  //     setSelectedVariant(variantBySelectedOptions ?? null);
+  //   })();
+  // }, [options.length, product.handle, product.id, searchParams]);
 
   const [hoveredImage, setHoveredImage] = useState<any>(null);
 
@@ -115,7 +114,7 @@ const ProductHero = ({ product }: { product: Product }) => {
             handleAddToCart();
           }}
         >
-          {options.map((option: any) => (
+          {/* {options.map((option: any) => (
             <div className="mt-10" key={option.name}>
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-medium text-gray-900">{option.name}</h3>
@@ -143,7 +142,7 @@ const ProductHero = ({ product }: { product: Product }) => {
                 </div>
               </fieldset>
             </div>
-          ))}
+          ))} */}
 
           {/* Price */}
           <p className="text-2xl  text-gray-900 mt-10 space-x-2">
