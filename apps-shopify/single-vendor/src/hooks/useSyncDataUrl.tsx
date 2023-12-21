@@ -4,7 +4,14 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 
 export const useSyncDataUrl = (): [
-  { dataMap: { [key: string]: string }; dataArr: [string, string][] },
+  {
+    dataMap: { [key: string]: string };
+    dataArr: [string, string][];
+    get: () => {
+      queryStringArr: [string, string][];
+      queryStringMap: { [key: string]: string };
+    };
+  },
   (name: string, value: undefined | string) => void,
 ] => {
   const router = useRouter();
@@ -39,5 +46,5 @@ export const useSyncDataUrl = (): [
     return { dataArr: queryStringArr, dataMap: queryStringMap };
   }, [getQueryString]);
 
-  return [dataFromUrl, setQueryString];
+  return [{ ...dataFromUrl, get: getQueryString }, setQueryString];
 };
