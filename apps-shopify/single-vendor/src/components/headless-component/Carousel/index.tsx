@@ -1,4 +1,5 @@
 import { classNames } from '@/components/Marulloc-UI-v2/utils/classNames';
+import { isNumber } from 'lodash';
 import React, { Dispatch, SetStateAction, useCallback, useContext, useEffect, useRef } from 'react';
 import { createContext, useState } from 'react';
 
@@ -6,6 +7,7 @@ type TCarouselContext = {
   carouselItems: React.ReactNode[];
   currentIdx: number;
   carouselContainer: React.RefObject<HTMLDivElement> | null;
+  autoDuration: number | false;
 };
 
 type TCarouselState = [TCarouselContext, Dispatch<SetStateAction<TCarouselContext>>];
@@ -29,11 +31,12 @@ const useCarouselContext = () => {
  * @param param0
  * @returns
  */
-const CarouselRoot = ({ children }: { children: React.ReactNode }) => {
+const CarouselRoot = ({ children, autoDuration }: { autoDuration?: number | false; children: React.ReactNode }) => {
   const [context, setContext] = useState<TCarouselContext>({
     carouselItems: [],
     currentIdx: 0,
     carouselContainer: null,
+    autoDuration: autoDuration ?? false,
   });
 
   return (
@@ -55,7 +58,7 @@ const CarouselRoot = ({ children }: { children: React.ReactNode }) => {
  */
 const CarouselContainer = ({ children }: { children: React.ReactNode }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [{ currentIdx, carouselItems }, setContext] = useCarouselContext();
+  const [{ currentIdx, carouselItems, autoDuration }, setContext] = useCarouselContext();
 
   useEffect(() => {
     setContext((context) => {
@@ -66,12 +69,28 @@ const CarouselContainer = ({ children }: { children: React.ReactNode }) => {
       // const fakeEndItem = React.cloneElement(<>{realCarouselItems[0]}</>);
 
       return {
+        ...context,
         carouselItems: [...realCarouselItems],
         currentIdx: 0,
         carouselContainer: containerRef,
       };
     });
   }, [children, setContext]);
+
+  useEffect(() => {
+    if (!containerRef?.current || !isNumber(autoDuration)) return;
+
+    const interval = setInterval(() => {
+      setContext((context) => ({
+        ...context,
+        currentIdx: currentIdx === context.carouselItems.length - 1 ? 0 : context.currentIdx + 1,
+      }));
+    }, autoDuration);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [autoDuration, currentIdx, setContext]);
 
   useEffect(() => {
     if (!containerRef?.current) return;

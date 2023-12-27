@@ -3,40 +3,57 @@
 import { Image as TImage, Product } from '@shopify/hydrogen-react/storefront-api-types';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
-import { useState } from 'react';
 import { classNames } from '../Marulloc-UI-v2/utils/classNames';
 import { Carousel } from '../headless-component/Carousel';
+import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from '@heroicons/react/20/solid';
 
 const ProductImageGallery = ({ product }: { product: Product }) => {
-  const [mainImg, setMainImg] = useState<TImage | null>(product.featuredImage || null);
-
   return (
     <div className="w-full">
-      <Carousel>
+      <Carousel autoDuration={3000}>
         <Carousel.Controller direction="left">
-          <div className="absolute left-0 z-10 h-full">
-            <button
-              className={classNames(
-                'h-full px-4',
-                'bg-gray-600 text-white backdrop-blur-sm bg-opacity-10 rounded-r-3xl shadow-md',
-                'hover:bg-opacity-30 hover:shadow-2xl',
-              )}
-            >
-              Left
-            </button>
+          <div className={classNames('absolute left-0 z-10 ', 'group cursor-pointer', 'h-full')}>
+            <div className="relative h-full flex items-center">
+              <button
+                className={classNames(
+                  'px-2 ml-2',
+                  'rounded-full aspect-square ',
+                  'bg-black text-white backdrop-blur-sm bg-opacity-20 shadow-xl',
+                  'group-hover:bg-opacity-30   ',
+                )}
+              >
+                <ChevronDoubleLeftIcon className="h-6 w-6" />
+              </button>
+
+              <div
+                className={classNames(
+                  'absolute inset-0 -z-10',
+                  'bg-gradient-to-l from-transparent group-hover:to-gray-400 opacity-40',
+                )}
+              />
+            </div>
           </div>
         </Carousel.Controller>
         <Carousel.Controller direction="right">
-          <div className="absolute right-0 z-10 h-full">
-            <button
-              className={classNames(
-                'h-full px-4',
-                'bg-black text-white backdrop-blur-sm bg-opacity-10 rounded-l-3xl shadow-2xl',
-                'hover:bg-opacity-30 hover:shadow-2xl',
-              )}
-            >
-              Right
-            </button>
+          <div className={classNames('absolute right-0 z-10 ', 'group cursor-pointer', 'h-full')}>
+            <div className="relative h-full flex items-center">
+              <button
+                className={classNames(
+                  'px-2 mr-2',
+                  'rounded-full aspect-square ',
+                  'bg-black text-white backdrop-blur-sm bg-opacity-20 shadow-xl',
+                  'group-hover:bg-opacity-30   ',
+                )}
+              >
+                <ChevronDoubleRightIcon className="h-6 w-6" />
+              </button>
+              <div
+                className={classNames(
+                  'absolute inset-0 -z-10',
+                  'bg-gradient-to-r from-transparent group-hover:to-gray-400 opacity-40',
+                )}
+              />
+            </div>
           </div>
         </Carousel.Controller>
         <Carousel.Container>
