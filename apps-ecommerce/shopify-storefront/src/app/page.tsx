@@ -1,9 +1,139 @@
 import { Card } from 'ui';
 import Image from 'next/image';
+import { storeFetch } from '@/shopify';
+import ConsoleCompo from './Console';
+const imageFragment = /* GraphQL */ `
+  fragment image on Image {
+    url
+    altText
+    width
+    height
+  }
+`;
+const seoFragment = /* GraphQL */ `
+  fragment seo on SEO {
+    description
+    title
+  }
+`;
 
-export default function Home() {
+const productFragment = /* GraphQL */ `
+  fragment product on Product {
+    id
+    handle
+    availableForSale
+    title
+    description
+    descriptionHtml
+    options {
+      id
+      name
+      values
+    }
+    priceRange {
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    variants(first: 250) {
+      edges {
+        node {
+          id
+          title
+          availableForSale
+          selectedOptions {
+            name
+            value
+          }
+          price {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }
+    featuredImage {
+      ...image
+    }
+    images(first: 20) {
+      edges {
+        node {
+          ...image
+        }
+      }
+    }
+    seo {
+      ...seo
+    }
+    tags
+    updatedAt
+  }
+  ${imageFragment}
+  ${seoFragment}
+`;
+
+/**
+ *
+ *
+ *
+ */
+const getCollectionProductsQuery = `
+  query getCollectionProducts(
+    $handle: String!
+    $sortKey: ProductCollectionSortKeys
+    $reverse: Boolean
+  ) {
+    collection(handle: $handle) {
+      products(sortKey: $sortKey, reverse: $reverse, first: 100) {
+        edges {
+          node {
+            ...product
+          }
+        }
+      }
+    }
+  }
+
+  ${productFragment}
+`;
+const TAGS = {
+  collections: 'collections',
+  products: 'products',
+  cart: 'cart',
+};
+export const getCollectionProducts = async ({
+  collection,
+  reverse,
+  sortKey,
+}: {
+  collection: string;
+  reverse?: boolean;
+  sortKey?: string;
+}) => {
+  const res = await storeFetch<any>({
+    query: getCollectionProductsQuery,
+    tags: [TAGS.collections, TAGS.products],
+    variables: {
+      handle: collection,
+      reverse,
+      sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey,
+    },
+  });
+
+  return res;
+};
+
+export default async function Home() {
+  const resp = await getCollectionProducts({ collection: 'automated-collection' });
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <ConsoleCompo data={resp} />
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
