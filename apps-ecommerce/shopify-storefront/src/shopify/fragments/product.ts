@@ -1,6 +1,9 @@
 import imageFragment from './image';
 import seoFragment from './seo';
 
+const productDetailFragment = ``;
+const productLightFragment = ``;
+
 const productFragment = /* GraphQL */ `
   fragment product on Product {
     id
