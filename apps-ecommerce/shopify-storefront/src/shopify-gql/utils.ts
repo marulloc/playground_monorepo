@@ -10,7 +10,7 @@ export const extractGid = (gid: ShopifyGid['hash']) => {
     const [_, resource, id] = match;
     return { resource, id };
   } else {
-    return null;
+    return { resource: 'undefined', id: 'undefined' };
   }
 };
 
