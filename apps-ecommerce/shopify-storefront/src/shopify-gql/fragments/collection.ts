@@ -1,6 +1,6 @@
-import seoFragment from './seo';
+import { seoFragment } from './common';
 
-const collectionFragment = /* GraphQL */ `
+export const collectionFragment = /* GraphQL */ `
   fragment collection on Collection {
     id
     handle
@@ -13,5 +13,3 @@ const collectionFragment = /* GraphQL */ `
   }
   ${seoFragment}
 `;
-
-export default collectionFragment;

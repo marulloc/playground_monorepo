@@ -1,6 +1,5 @@
-import collectionFragment from '../fragments/collection';
-import productFragment from '../fragments/product';
-import seoFragment from '../fragments/seo';
+import { collectionFragment } from '../fragments/collection';
+import { productFragment } from '../fragments/product';
 
 export const getCollectionQuery = /* GraphQL */ `
   query getCollection($handle: String!) {

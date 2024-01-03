@@ -1,10 +1,9 @@
-import imageFragment from './image';
-import seoFragment from './seo';
+import { imageFragment, seoFragment } from './common';
 
 const productDetailFragment = ``;
 const productLightFragment = ``;
 
-const productFragment = /* GraphQL */ `
+export const productFragment = /* GraphQL */ `
   fragment product on Product {
     id
     handle
@@ -63,5 +62,3 @@ const productFragment = /* GraphQL */ `
   ${imageFragment}
   ${seoFragment}
 `;
-
-export default productFragment;
