@@ -1,0 +1,54 @@
+type Maybe<T> = T | null;
+
+type Connection<T> = {
+  edges: Array<Edge<T>>;
+  pageInfo: PageInfo;
+};
+
+type Edge<T> = {
+  node: T;
+  cursor: string;
+};
+
+type PageInfo = {
+  startCursor: string;
+  endCursor: string;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+};
+
+type ShopifyImage = {
+  url: string;
+  altText: string;
+  width: number;
+  height: number;
+};
+
+type ShopifyMenu = {
+  title: string;
+  path: string;
+};
+
+type ShopifyMoney = {
+  amount: string;
+  currencyCode: string;
+};
+
+type ShopifyPage = {
+  id: string;
+  title: string;
+  handle: string;
+  body: string;
+  bodySummary: string;
+  seo?: ShopifySEO;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type ShopifySEO = {
+  title: string;
+  description: string;
+};
+
+type ShopifyCountryCode = 'KR' | '...';
+type ShopifyLanguageCode = 'KO' | '...';
