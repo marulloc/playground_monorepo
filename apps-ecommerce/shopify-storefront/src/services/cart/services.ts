@@ -6,7 +6,7 @@ import {
   removeFromCartMutation,
 } from '@/shopify-gql/mutations/cart';
 import { getCartQuery } from '@/shopify-gql/queries/cart';
-import { flatConnection } from '@/shopify-gql/utils';
+import { parseCart } from './parser';
 
 /**
  *
@@ -18,10 +18,7 @@ export const createCart = async (): Promise<Cart> => {
     cache: 'no-store',
   });
 
-  return {
-    ...res.body.data.cartCreate.cart,
-    lines: flatConnection(res.body.data.cartCreate.cart.lines),
-  };
+  return parseCart(res.body.data.cartCreate.cart);
 };
 
 /**
@@ -40,10 +37,7 @@ export const addToCart = async (
     cache: 'no-store',
   });
 
-  return {
-    ...res.body.data.cartLinesAdd.cart,
-    lines: flatConnection(res.body.data.cartLinesAdd.cart.lines),
-  };
+  return parseCart(res.body.data.cartLinesAdd.cart);
 };
 
 /**
@@ -59,10 +53,7 @@ export const removeFromCart = async (cartId: string, lineIds: string[]): Promise
     cache: 'no-store',
   });
 
-  return {
-    ...res.body.data.cartLinesRemove.cart,
-    lines: flatConnection(res.body.data.cartLinesRemove.cart.lines),
-  };
+  return parseCart(res.body.data.cartLinesRemove.cart);
 };
 
 /**
@@ -81,10 +72,7 @@ export const updateCart = async (
     cache: 'no-store',
   });
 
-  return {
-    ...res.body.data.cartLinesUpdate.cart,
-    lines: flatConnection(res.body.data.cartLinesUpdate.cart.lines),
-  };
+  return parseCart(res.body.data.cartLinesUpdate.cart);
 };
 
 /**
@@ -105,8 +93,5 @@ export const getCart = async (cartId: string): Promise<Cart | undefined> => {
     return undefined;
   }
 
-  return {
-    ...res.body.data.cart,
-    lines: flatConnection(res.body.data.cart.lines),
-  };
+  return parseCart(res.body.data.cart);
 };
