@@ -17,6 +17,12 @@ type PageInfo = {
   hasPreviousPage: boolean;
 };
 
+type ShopifyGid = Pick<URL, 'search' | 'searchParams' | 'hash'> & {
+  id: string;
+  resource: string | null;
+  resourceId: string | null;
+};
+
 type ShopifyImage = {
   url: string;
   altText: string;
