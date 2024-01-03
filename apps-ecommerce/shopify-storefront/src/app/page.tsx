@@ -1,6 +1,6 @@
 import { Card } from 'ui';
 import Image from 'next/image';
-import { storeFetch } from '@/shopify';
+import { storeFetch } from '@/shopify-gql';
 import ConsoleCompo from './Console';
 const imageFragment = /* GraphQL */ `
   fragment image on Image {

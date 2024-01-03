@@ -1,14 +1,12 @@
 const endpoint = `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/api/${process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_VERSION}/graphql.json`;
 const key = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN as string;
 
-type ExtractVariables<T> = T extends { variables: object } ? T['variables'] : never;
-
 type StoreFetchParams<T> = {
   headers?: HeadersInit;
   cache?: RequestCache;
   tags?: string[];
   query: string;
-  variables?: ExtractVariables<T>;
+  variables?: T extends { variables: object } ? T['variables'] : never;
 };
 export const storeFetch = async <T>(params: StoreFetchParams<T>): Promise<{ status: number; body: T }> => {
   const method = 'POST';
