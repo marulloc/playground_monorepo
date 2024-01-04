@@ -1,13 +1,10 @@
-type Menu = ShopifyMenu;
 type Page = ShopifyPage;
+type Menu = Array<ShopifyMenuItem>;
 
 type GetMenuService = {
   data: {
     menu?: {
-      items: {
-        title: string;
-        url: string;
-      }[];
+      items: Array<ShopifyMenuItem>;
     };
   };
   variables: {

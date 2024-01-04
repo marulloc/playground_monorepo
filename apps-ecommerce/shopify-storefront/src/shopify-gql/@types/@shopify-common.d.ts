@@ -30,9 +30,9 @@ type ShopifyImage = {
   height: number;
 };
 
-type ShopifyMenu = {
+type ShopifyMenuItem = {
   title: string;
-  path: string;
+  url: string;
 };
 
 type ShopifyMoney = {

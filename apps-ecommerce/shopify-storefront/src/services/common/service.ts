@@ -1,8 +1,9 @@
 import { storeFetch } from '@/shopify-gql';
 import { getMenuQuery, getPageQuery, getPagesQuery } from '@/shopify-gql/queries/common';
 import { flatConnection } from '@/shopify-gql/utils';
+import { parseMenuRoute } from './parser';
 
-export const getMenu = async (handle: string): Promise<Menu[]> => {
+export const getMenu = async (handle: string): Promise<Menu> => {
   const res = await storeFetch<GetMenuService>({
     query: getMenuQuery,
     // tags: [TAGS.collections],
@@ -11,13 +12,7 @@ export const getMenu = async (handle: string): Promise<Menu[]> => {
     },
   });
 
-  return (
-    res.body?.data?.menu?.items.map((item: { title: string; url: string }) => ({
-      title: item.title,
-      path: '',
-      // path: item.url.replace(domain, '').replace('/collections', '/search').replace('/pages', ''),
-    })) || []
-  );
+  return parseMenuRoute(res.body.data.menu?.items);
 };
 
 export const getPage = async (handle: string): Promise<Page> => {

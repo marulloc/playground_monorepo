@@ -26,8 +26,7 @@ export const storeFetch = async <T>(params: StoreFetchParams<T>): Promise<{ stat
 
     return {
       status: response.status,
-      //  body: { data } as T ,
-      body: data,
+      body: { data } as T,
     };
   } catch (e) {
     throw { error: e, query: params.query, variables: params.variables };
