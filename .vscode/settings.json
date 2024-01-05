@@ -7,5 +7,5 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
 
-  "tailwindCSS.experimental.classRegex": [["classNames\\(([^)]*)\\)", "'([^']*)'"]]
+  "tailwindCSS.experimental.classRegex": [["classNames\\(([^)]*)\\)", "'([^']*)'", "clsx\\(([^)]*)\\)"]]
 }

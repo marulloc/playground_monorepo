@@ -1,6 +1,10 @@
+import Navbar from '@/components/Navbar';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Header from '@/components/Header';
+import { theme } from '@/styles/theme';
+import { classNames } from '@/styles/utils';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -12,7 +16,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={classNames(inter.className, theme.bg.root, ' text-white')}>
+        <Header />
+        <main>{children}</main>
+      </body>
     </html>
   );
 }
