@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className={classNames(
           //
           'font-mono',
-          'bg-zinc-900 ',
+          'bg-zinc-950 ',
         )}
       >
         <Header />
