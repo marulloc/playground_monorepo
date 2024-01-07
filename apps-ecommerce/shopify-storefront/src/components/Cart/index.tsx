@@ -3,7 +3,7 @@
 import { classNames } from '@/styles/utils';
 import ShoppingBagIcon from '@heroicons/react/24/outline/ShoppingBagIcon';
 import { useEffect, useState } from 'react';
-import { Drawer } from '../headless-compound/Drawer';
+import { Drawer } from '../compound-components/Drawer';
 
 const Cart = () => {
   const [open, setOpen] = useState(false);
