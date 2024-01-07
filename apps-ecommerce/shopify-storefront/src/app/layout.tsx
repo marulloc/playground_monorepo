@@ -1,9 +1,10 @@
-import Navbar from '@/components/Navbar';
+import Navbar from '@/components/Header/Navbar';
 import './globals.css';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
+import CartDrawer from '@/components/Cart';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,9 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           //
           'font-mono',
           'bg-zinc-950 ',
+          'relative',
         )}
       >
         <Header />
+        <CartDrawer />
         <main>{children}</main>
       </body>
     </html>
