@@ -108,6 +108,7 @@ const RefactoredCart = () => {
       </div>
 
       <Drawer anchor={anchor}>
+        <Drawer.Overlay />
         <div className="flex space-x-4 mx-auto max-w-2xl justify-center my-4">
           <Drawer.Trigger>
             {({ isOpen, open }) => (
@@ -162,8 +163,8 @@ const RefactoredCart = () => {
             )}
           </Drawer.Trigger>
 
-          <Drawer.Trigger>
-            {({ isOpen, open }) => (
+          {/* <Drawer.Trigger>
+            {({ open }) => (
               <>
                 <button
                   onClick={() => {
@@ -182,7 +183,7 @@ const RefactoredCart = () => {
                 </button>
               </>
             )}
-          </Drawer.Trigger>
+          </Drawer.Trigger> */}
         </div>
         <Drawer.Contents className=" ">
           {({ isOpen, close }) => (
@@ -191,11 +192,56 @@ const RefactoredCart = () => {
                 className={classNames(
                   'bg-black bg-opacity-70 backdrop-blur-sm  border shadow-xl',
                   'flex justify-center items-center',
-                  'w-full h-full',
+                  '  h-full  w-screen md:w-full',
                   // 'max-w-lg   h-screen w-80',
                 )}
               >
                 <span className="text-red-500   ">asdasd</span>
+                <button className="p-4 bg-red-600 m-4" onClick={() => close()}>
+                  Close
+                </button>
+              </div>
+            </>
+          )}
+        </Drawer.Contents>
+      </Drawer>
+
+      <Drawer anchor={'left'}>
+        <Drawer.Overlay />
+
+        <Drawer.Trigger>
+          {({ open }) => (
+            <>
+              <button
+                onClick={() => {
+                  console.log('???');
+                  open();
+                }}
+                className={classNames(
+                  'group',
+                  'h-10',
+                  'rounded-lg bg-zinc-800 border border-zinc-600',
+                  'p-2.5',
+                  'hover:ring-1 ring-zinc-400 ring-inse hover:text-zinc-100 text-zinc-300',
+                )}
+              >
+                <ShoppingBagIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
+              </button>
+            </>
+          )}
+        </Drawer.Trigger>
+        <Drawer.Contents className=" ">
+          {({ isOpen, close }) => (
+            <>
+              <div
+                className={classNames(
+                  'bg-black bg-opacity-70 backdrop-blur-sm  border shadow-xl',
+                  'flex justify-center items-center',
+                  '  h-full  w-screen md:w-full',
+                  // 'max-w-lg   h-screen w-80',
+                )}
+              >
+                <span className="text-red-500   ">@@@@@@@@@@</span>
                 <button className="p-4 bg-red-600 m-4" onClick={() => close()}>
                   Close
                 </button>
