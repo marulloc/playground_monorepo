@@ -3,13 +3,8 @@
 import { Fragment } from 'react';
 import { DrawerContextValue, useDrawerContext } from './context';
 
-type DrawerTriggerChildren = (props: {
-  isOpen: DrawerContextValue['isOpen'];
-  open: DrawerContextValue['open'];
-}) => React.ReactNode;
-
 type Props<T extends React.ElementType = typeof Fragment> = {
-  children: DrawerTriggerChildren;
+  children: (props: DrawerContextValue) => React.ReactNode;
   as?: T;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
 
@@ -17,7 +12,7 @@ const DrawerTrigger = <T extends React.ElementType = typeof Fragment>({ as, chil
   const [context] = useDrawerContext();
 
   const Component = as ?? Fragment;
-  return <Component {...rest}>{children({ isOpen: context.isOpen, open: context.open })}</Component>;
+  return <Component {...rest}>{children({ ...context })}</Component>;
 };
 
 export default DrawerTrigger;

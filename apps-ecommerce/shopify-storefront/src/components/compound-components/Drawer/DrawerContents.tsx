@@ -4,18 +4,13 @@ import { useMemo } from 'react';
 import { DrawerContextValue, useDrawerContext } from './context';
 import { classNames } from '@/styles/utils';
 
-type DrawerContentsChildren = (props: {
-  isOpen: DrawerContextValue['isOpen'];
-  close: DrawerContextValue['close'];
-}) => React.ReactNode;
-
 type Props<T extends React.ElementType = 'aside'> = {
-  children: DrawerContentsChildren;
+  children: (props: DrawerContextValue) => React.ReactNode;
   as?: T;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
 
 const DrawerContents = <T extends React.ElementType = 'aside'>({ as, children, className, ...rest }: Props<T>) => {
-  const [{ anchor, isOpen, close }] = useDrawerContext();
+  const [{ anchor, isOpen, close, ...restContext }] = useDrawerContext();
 
   const defaultStyle = classNames('fixed z-50', 'transition-all transform duration-300 ease-in-out');
 
@@ -54,7 +49,7 @@ const DrawerContents = <T extends React.ElementType = 'aside'>({ as, children, c
   const Component = as ?? 'aside';
   return (
     <Component {...rest} className={classNames(defaultStyle, styleWithAnchor, className)}>
-      {children({ isOpen: isOpen, close: close })}
+      {children({ anchor, isOpen, close, ...restContext })}
     </Component>
   );
 };
