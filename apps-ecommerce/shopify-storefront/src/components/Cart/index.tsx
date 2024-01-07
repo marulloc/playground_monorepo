@@ -3,6 +3,7 @@
 import { classNames } from '@/styles/utils';
 import ShoppingBagIcon from '@heroicons/react/24/outline/ShoppingBagIcon';
 import { useEffect, useState } from 'react';
+import { Drawer } from '../headless-compound/Drawer';
 
 const Cart = () => {
   const [open, setOpen] = useState(false);
@@ -86,4 +87,125 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+const RefactoredCart = () => {
+  const [anchor, setAnchor] = useState<'left' | 'top' | 'bottom' | 'right'>('left');
+
+  return (
+    <>
+      <div className="flex space-x-4 mx-auto max-w-2xl justify-center my-4">
+        <button className="p-4  bg-teal-600 rounded-md" onClick={() => setAnchor('left')}>
+          Left
+        </button>
+        <button className="p-4  bg-blue-600 rounded-md" onClick={() => setAnchor('right')}>
+          Right
+        </button>
+        <button className="p-4 bg-red-600 rounded-md" onClick={() => setAnchor('top')}>
+          Top
+        </button>
+        <button className="p-4  bg-purple-600 rounded-md" onClick={() => setAnchor('bottom')}>
+          Bottom
+        </button>
+      </div>
+
+      <Drawer anchor={anchor}>
+        <div className="flex space-x-4 mx-auto max-w-2xl justify-center my-4">
+          <Drawer.Trigger>
+            {({ isOpen, open }) => (
+              <button
+                className="p-4  bg-teal-600 rounded-md"
+                onClick={() => {
+                  setAnchor('left');
+                  open();
+                }}
+              >
+                left
+              </button>
+            )}
+          </Drawer.Trigger>
+          <Drawer.Trigger>
+            {({ isOpen, open }) => (
+              <button
+                className="p-4  bg-blue-600 rounded-md"
+                onClick={() => {
+                  setAnchor('right');
+                  open();
+                }}
+              >
+                right
+              </button>
+            )}
+          </Drawer.Trigger>
+          <Drawer.Trigger>
+            {({ isOpen, open }) => (
+              <button
+                className="p-4  bg-red-600 rounded-md"
+                onClick={() => {
+                  setAnchor('top');
+                  open();
+                }}
+              >
+                top
+              </button>
+            )}
+          </Drawer.Trigger>
+          <Drawer.Trigger>
+            {({ isOpen, open }) => (
+              <button
+                className="p-4  bg-purple-600 rounded-md"
+                onClick={() => {
+                  setAnchor('bottom');
+                  open();
+                }}
+              >
+                bottom
+              </button>
+            )}
+          </Drawer.Trigger>
+
+          <Drawer.Trigger>
+            {({ isOpen, open }) => (
+              <>
+                <button
+                  onClick={() => {
+                    console.log('???');
+                    open();
+                  }}
+                  className={classNames(
+                    'group',
+                    'h-10',
+                    'rounded-lg bg-zinc-800 border border-zinc-600',
+                    'p-2.5',
+                    'hover:ring-1 ring-zinc-400 ring-inse hover:text-zinc-100 text-zinc-300',
+                  )}
+                >
+                  <ShoppingBagIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
+                </button>
+              </>
+            )}
+          </Drawer.Trigger>
+        </div>
+        <Drawer.Contents className=" ">
+          {({ isOpen, close }) => (
+            <>
+              <div
+                className={classNames(
+                  'bg-black bg-opacity-70 backdrop-blur-sm  border shadow-xl',
+                  'flex justify-center items-center',
+                  'w-full h-full',
+                  // 'max-w-lg   h-screen w-80',
+                )}
+              >
+                <span className="text-red-500   ">asdasd</span>
+                <button className="p-4 bg-red-600 m-4" onClick={() => close()}>
+                  Close
+                </button>
+              </div>
+            </>
+          )}
+        </Drawer.Contents>
+      </Drawer>
+    </>
+  );
+};
+
+export default RefactoredCart;
