@@ -20,6 +20,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           'font-mono',
           'bg-zinc-950 ',
           'relative',
+
+          'min-h-screen',
         )}
       >
         <Header />

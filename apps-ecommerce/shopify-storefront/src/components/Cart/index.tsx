@@ -2,11 +2,15 @@
 
 import { classNames } from '@/styles/utils';
 import ShoppingBagIcon from '@heroicons/react/24/outline/ShoppingBagIcon';
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Cart = () => {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    if (open) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'visible';
+  }, [open]);
   return (
     <>
       {/* Trigger */}
@@ -30,39 +34,53 @@ const Cart = () => {
       <div
         className={classNames(
           // Overlay Default Style
-          'fixed inset-0 w-screen h-screen',
+          'fixed top-0 w-screen h-screen max-h-screen  overscroll-none  ',
 
           // Overlay Animation
           'transform transition-opacity ease-in-out',
           open ? 'opacity-100  z-40' : ' transition-all delay-200 duration-800 opacity-0 -z-50  ',
 
           // Overlay Style
-          'bg-black bg-opacity-30',
+          'bg-black bg-opacity-50',
         )}
       >
         {/* Drawer Close Trigger */}
-        <div className={classNames('w-screen h-screen', open ? 'block' : 'hidden')} onClick={() => setOpen(false)} />
+        <div className={classNames('w-screen h-screen ', open ? 'block' : 'hidden')} onClick={() => setOpen(false)} />
       </div>
 
       {/* Contents */}
       <aside
         className={classNames(
-          'absolute z-50',
+          'fixed z-50  ',
 
-          // Contents Anchor
-          'overflow-y-auto right-0 top-0 bottom-0 h-screen',
+          /* Contents Anchor */
+          // 'overflow-y-auto right-0 top-0 bottom-0 h-screen', // right
+          // 'overflow-y-auto left-0 top-0 bottom-0 h-screen', // left
+          // 'top-0 left-0 right-0 overflow-x-scroll overflow-y-auto  w-screen ', // top
+          'bottom-0 left-0 right-0 overflow-x-auto overflow-y-auto w-screen', // bot
 
-          // Contents Style
-          'bg-black bg-opacity-70 backdrop-blur-sm border-l border-gray-800 shadow-xl',
-          'max-w-lg w-full',
-
-          // Content Animation
+          /* Content Animation */
           'transition-all transform duration-300 ease-in-out',
-          open ? 'translate-x-0' : 'translate-x-full ',
+          open ? 'opacity-100' : 'opacity-0',
+
+          /* Content Animation with Anchor */
+          // open ? 'translate-x-0' : 'translate-x-full ', // right
+          // open ? 'translate-x-0' : '-translate-x-full ', // left
+          // open ? 'translate-y-0' : '-translate-y-full', // top
+          open ? 'translate-y-0' : 'translate-y-full', // bot
         )}
       >
         {/* Contents Children */}
-        <div className="text-red-500  w-full">asdasd</div>
+        <div
+          className={classNames(
+            'bg-black bg-opacity-70 backdrop-blur-sm  border shadow-xl',
+            'flex justify-center items-center',
+            // 'max-w-lg   h-screen w-80',
+            'h-80',
+          )}
+        >
+          <span className="text-red-500   ">asdasd</span>
+        </div>
       </aside>
     </>
   );
