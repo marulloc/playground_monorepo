@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
-import CartDrawer from '@/components/Cart';
+import CartDrawer from '@/components/@shopify-headless-components/ShopifyCart';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -25,7 +25,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       >
         <Header />
-        <CartDrawer />
         <main>{children}</main>
       </body>
     </html>

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { classNames } from '@/styles/utils';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { Bars3BottomLeftIcon, Bars3Icon, ShoppingBagIcon, UserIcon } from '@heroicons/react/24/outline';
+import ShopifyCart from '../@shopify-headless-components/ShopifyCart';
 
 const Header = () => {
   return (
@@ -41,17 +42,7 @@ const Header = () => {
               <span className="text-gray-300 text-lg font-extrabold">STORE</span>
             </div>
           </Link>
-          <button
-            className={classNames(
-              'group',
-              'h-10',
-              'rounded-lg bg-zinc-800 border border-zinc-600',
-              'p-2.5',
-              'hover:ring-1 ring-zinc-400 ring-inse hover:text-zinc-100 text-zinc-300',
-            )}
-          >
-            <ShoppingBagIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
-          </button>
+          <ShopifyCart />
         </div>
       </div>
     </header>
@@ -149,17 +140,7 @@ const Tools = () => {
       </button>
 
       {/* Shoping */}
-      <button
-        className={classNames(
-          'group',
-          'h-10',
-          'rounded-lg bg-zinc-800 border border-zinc-600',
-          'p-2.5',
-          'hover:ring-1 ring-zinc-400 ring-inse hover:text-zinc-100 text-zinc-300',
-        )}
-      >
-        <ShoppingBagIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
-      </button>
+      <ShopifyCart />
     </div>
   );
 };
