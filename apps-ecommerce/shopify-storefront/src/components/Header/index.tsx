@@ -4,6 +4,7 @@ import { classNames } from '@/styles/utils';
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { Bars3BottomLeftIcon, Bars3Icon, ShoppingBagIcon, UserIcon } from '@heroicons/react/24/outline';
 import ShopifyCart from '../@shopify-headless-components/ShopifyCart';
+import ShopfiyMobileNavigation from '../@shopify-headless-components/ShopifyNavigation/Mobile';
 
 const Header = () => {
   return (
@@ -24,17 +25,8 @@ const Header = () => {
       {/* Mobile */}
       <div className="px-2  py-2  md:hidden ">
         <div className="flex justify-between items-center ">
-          <button
-            className={classNames(
-              'group',
-              'h-10',
-              'rounded-lg bg-zinc-800 border border-zinc-600',
-              'p-2.5',
-              'hover:ring-1 ring-zinc-400 ring-inse hover:text-zinc-100 text-zinc-300',
-            )}
-          >
-            <Bars3Icon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
-          </button>
+          <ShopfiyMobileNavigation />
+
           <Link href="/">
             <div className="flex space-x-1 items-center ">
               <Image src={'/logo.png'} width={100} height={100} alt="marulloc-store" className="h-10 w-auto" />
@@ -42,6 +34,7 @@ const Header = () => {
               <span className="text-gray-300 text-lg font-extrabold">STORE</span>
             </div>
           </Link>
+
           <ShopifyCart />
         </div>
       </div>
@@ -126,8 +119,7 @@ const Tools = () => {
         </button>
       </div> */}
 
-      {/* User */}
-      <button
+      {/* <button
         className={classNames(
           'group',
           'h-10',
@@ -137,7 +129,7 @@ const Tools = () => {
         )}
       >
         <UserIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
-      </button>
+      </button> */}
 
       {/* Shoping */}
       <ShopifyCart />

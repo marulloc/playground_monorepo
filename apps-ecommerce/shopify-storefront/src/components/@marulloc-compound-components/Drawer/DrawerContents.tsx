@@ -12,7 +12,7 @@ type Props<T extends React.ElementType = 'aside'> = {
 const DrawerContents = <T extends React.ElementType = 'aside'>({ as, children, className, ...rest }: Props<T>) => {
   const [{ anchor, isOpen, close, ...restContext }] = useDrawerContext();
 
-  const defaultStyle = classNames('fixed z-50', 'transition-all transform duration-300 ease-in-out');
+  const defaultStyle = classNames('fixed z-30', 'transition-all transform duration-300 ease-in-out');
 
   const styleWithAnchor = useMemo(() => {
     switch (anchor) {
