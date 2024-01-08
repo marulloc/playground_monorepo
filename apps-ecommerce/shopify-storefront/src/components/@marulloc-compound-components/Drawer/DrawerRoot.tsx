@@ -20,6 +20,11 @@ const DrawerRoot = ({ anchor, defaultOpen, children }: Props) => {
     setContextState((context) => ({ ...context, anchor, defaultOpen }));
   }, [anchor, defaultOpen]);
 
+  useEffect(() => {
+    if (contextState.isOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'visible';
+  }, [contextState.isOpen]);
+
   const open = useCallback(() => setContextState((context) => ({ ...context, isOpen: true })), []);
   const close = useCallback(() => setContextState((context) => ({ ...context, isOpen: false })), []);
 
