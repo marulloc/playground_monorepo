@@ -2,6 +2,7 @@
 
 import { Drawer } from '@/components/@marulloc-compound-components/Drawer';
 import SearchBar from '@/components/Search';
+import FakeSearch from '@/components/Search/FakeSearch';
 import { classNames } from '@/styles/utils';
 import { Bars3Icon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -51,8 +52,8 @@ const ShopfiyMobileNavigation = () => {
               <XMarkIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
             </button>
 
-            <div onSubmit={(e) => close()}>
-              <SearchBar />
+            <div onClick={(e) => close()}>
+              <FakeSearch />
             </div>
 
             <nav>

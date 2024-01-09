@@ -5,7 +5,8 @@ import ShopifyCart from '../@shopify-headless-components/ShopifyCart';
 import ShopfiyMobileNavigation from '../@shopify-headless-components/ShopifyNavigation/Mobile';
 import SearchBar from '../Search';
 import Search from '../Search';
-
+import FakeSearch from '../Search/FakeSearch';
+import { MagnifyingGlassCircleIcon, MagnifyingGlassIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 const Header = () => {
   return (
     <header className="w-full">
@@ -73,8 +74,19 @@ const Menu = () => {
 const Tools = () => {
   return (
     <div className="flex justify-end items-center space-x-2 ">
-      <Search />
-
+      {/* <Search /> */}
+      <Link
+        href={'/search'}
+        className={classNames(
+          'group',
+          'h-10',
+          'rounded-lg bg-zinc-800 border border-zinc-600',
+          'p-2.5',
+          'hover:ring-1 ring-zinc-400 ring-inse hover:text-zinc-100 text-zinc-300',
+        )}
+      >
+        <MagnifyingGlassIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
+      </Link>
       <ShopifyCart />
     </div>
   );

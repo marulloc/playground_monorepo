@@ -1,10 +1,7 @@
-import Navbar from '@/components/Header/Navbar';
 import './globals.css';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
-import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
-import CartDrawer from '@/components/@shopify-headless-components/ShopifyCart';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,16 +11,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body
-        className={classNames(
-          //
-          'font-mono',
-          'bg-zinc-950 ',
-          'relative',
-
-          'min-h-screen',
-        )}
-      >
+      <body className={classNames('font-mono', 'bg-zinc-950 ', 'min-h-screen')}>
         <Header />
         <main>{children}</main>
       </body>

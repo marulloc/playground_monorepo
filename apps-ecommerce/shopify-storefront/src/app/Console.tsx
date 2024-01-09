@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import { getCollectionProducts } from './page';
 
 const ConsoleCompo = ({ data }: { data: any }) => {
   useEffect(() => {

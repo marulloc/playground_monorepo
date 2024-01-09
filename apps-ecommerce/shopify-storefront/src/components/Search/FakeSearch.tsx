@@ -1,33 +1,10 @@
-'use client';
-
 import { classNames } from '@/styles/utils';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
-const Search = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const form = e.target as HTMLFormElement;
-    const search = form.search as HTMLInputElement;
-
-    const newParams = new URLSearchParams(searchParams.toString());
-    if (search.value) {
-      newParams.set('query', search.value);
-    } else {
-      newParams.delete('query');
-    }
-
-    const paramsString = newParams.toString();
-    const queryString = `${paramsString.length ? '?' : ''}${paramsString}`;
-    router.push('/search' + queryString);
-  };
-
+const FakeSearch = () => {
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="relative w-full">
       <div className={classNames('relative group ')}>
         <div className="absolute inset-y-0 left-0 flex items-center pl-3">
           <MagnifyingGlassIcon
@@ -40,7 +17,6 @@ const Search = () => {
           name="search"
           placeholder="Search ..."
           type="search"
-          autoFocus
           className={classNames(
             'h-10 block w-full',
             'rounded-lg',
@@ -53,8 +29,12 @@ const Search = () => {
           )}
         />
       </div>
-    </form>
+
+      <Link href="/search">
+        <div className=" cursor-text absolute inset-0 z-10"></div>
+      </Link>
+    </div>
   );
 };
 
-export default Search;
+export default FakeSearch;
