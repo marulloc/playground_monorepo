@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { classNames } from '@/styles/utils';
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
-import { Bars3BottomLeftIcon, Bars3Icon, ShoppingBagIcon, UserIcon } from '@heroicons/react/24/outline';
 import ShopifyCart from '../@shopify-headless-components/ShopifyCart';
 import ShopfiyMobileNavigation from '../@shopify-headless-components/ShopifyNavigation/Mobile';
+import SearchBar from '../Search';
+import Search from '../Search';
 
 const Header = () => {
   return (
@@ -73,65 +73,8 @@ const Menu = () => {
 const Tools = () => {
   return (
     <div className="flex justify-end items-center space-x-2 ">
-      {/* Search Desktop*/}
-      <div
-        className={classNames(
-          'relative group ',
-          // 'hidden lg:block'
-        )}
-      >
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-          <MagnifyingGlassIcon
-            className={classNames('h-5 w-5', 'text-zinc-300 group-hover:text-zinc-100 group-hover:scale-110')}
-            aria-hidden="true"
-          />
-        </div>
-        <input
-          id="desktop-search"
-          name="desktop-search"
-          placeholder="Search ..."
-          type="search"
-          className={classNames(
-            'h-10 w-full max-w-md',
-            'rounded-lg',
-            // ' bg-zinc-800',
-            'bg-transparent',
-            ' border border-zinc-700',
-            'text-xs text-zinc-50',
-            'outline-none',
-            'pl-10 pr-3 py-2',
-            'focus-within:ring-1 ring-zinc-400 ring-inset',
-          )}
-        />
-      </div>
-      {/* Search Icon Tablet */}
-      {/* <div className={classNames(' lg:hidden')}>
-        <button
-          className={classNames(
-            'group',
-            'h-10',
-            'rounded-lg bg-zinc-800 border border-zinc-600',
-            'p-2.5',
-            'hover:ring-1 ring-zinc-400 ring-inse hover:text-zinc-100 text-zinc-300',
-          )}
-        >
-          <MagnifyingGlassIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
-        </button>
-      </div> */}
+      <Search />
 
-      {/* <button
-        className={classNames(
-          'group',
-          'h-10',
-          'rounded-lg bg-zinc-800 border border-zinc-600',
-          'p-2.5',
-          'hover:ring-1 ring-zinc-400 ring-inse hover:text-zinc-100 text-zinc-300',
-        )}
-      >
-        <UserIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
-      </button> */}
-
-      {/* Shoping */}
       <ShopifyCart />
     </div>
   );
