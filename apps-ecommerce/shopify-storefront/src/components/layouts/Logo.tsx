@@ -11,10 +11,8 @@ const Logo = async () => {
         <div
           className={classNames(
             'px-2 py-1',
-            'text-xs leading-3   text-teal-500 hover:text-zinc-400',
-            // 'border rounded-md border-zinc-600 hover:border-zinc-500',
-            // 'bg-zinc-800',
-
+            'text-xs md:text-sm leading-3 md:leading-3  ',
+            'text-teal-500 hover:text-zinc-400',
             'text-center',
           )}
         >

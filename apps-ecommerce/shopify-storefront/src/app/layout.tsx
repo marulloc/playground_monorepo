@@ -4,6 +4,7 @@ import { classNames } from '@/styles/utils';
 import { theme } from '@/styles/theme';
 import { getMenu } from '@/services/common/service';
 import Header from '@/components/layouts/Header';
+import Search from '@/components/Search';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,10 +17,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en" className="h-full">
-      <body className={classNames('font-mono', 'relative min-h-full', theme.bodyBackground)}>
+      <body className={classNames('font-mono', '  min-h-full', theme.bodyBackground)}>
         <Header />
 
-        <main className={classNames('min-h-full ')}>{children}</main>
+        {/* <div className="sticky top-0 h-80 bg-red-400">
+          <Search />
+        </div> */}
+        <main className={classNames('min-h-full z-0 ')}>
+          <Search />
+          {children}
+        </main>
 
         <footer className={classNames('h-40', theme.maxSize)}>
           <div className="border-t border-gray-600">
