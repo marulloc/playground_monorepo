@@ -48,6 +48,7 @@ const Search = () => {
         Search
       </button>
 
+      {/* Style Overlay */}
       <div
         id="backdrop-for-style"
         className={classNames(
@@ -57,6 +58,7 @@ const Search = () => {
         )}
       />
 
+      {/* Real Overlay */}
       <div
         id="wrapper"
         className={classNames(
@@ -67,42 +69,70 @@ const Search = () => {
         )}
         onClick={() => setActive(false)}
       >
+        {/* Real Dialog Contnets  */}
         <div
           id="dialog"
           className={classNames(
-            'w-full max-w-xl h-80',
-            ' bg-zinc-900 shadow-lg border rounded-md border-zinc-800',
-
-            'p-6',
+            'w-full max-w-3xl ',
+            ' bg-zinc-950 shadow-lg border rounded-lg border-zinc-800',
+            // 'bg-opacity-70 backdrop-blur-lg ',
+            // 'p-6',
           )}
+          onClick={(e) => e.stopPropagation()}
         >
           <form onSubmit={handleSubmit}>
             <div className={classNames('relative group ')}>
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-5">
                 <MagnifyingGlassIcon
-                  className={classNames('h-5 w-5', 'text-zinc-300 group-hover:text-zinc-100 group-hover:scale-110')}
+                  className={classNames('h-6 w-6', 'text-zinc-300 group-hover:text-zinc-100 ')}
                   aria-hidden="true"
                 />
               </div>
               <input
                 ref={inputRef}
                 id="search"
-                name="search"
+                name="search-2"
                 placeholder="Search ..."
                 type="search"
                 className={classNames(
-                  'h-10 block w-full',
-                  'rounded-lg',
+                  'h-14 block w-full',
                   'bg-transparent',
-                  'border border-zinc-700',
-                  'text-xs text-zinc-50',
+                  'border-b border-zinc-700',
+                  'text-sm text-zinc-50',
                   'outline-none',
-                  'pl-10 pr-3 py-2',
-                  'focus-within:ring-1 ring-zinc-400 ring-inset',
+                  'pl-14 pr-3 py-2',
                 )}
               />
             </div>
           </form>
+
+          {/* Recent */}
+          <div className="text-zinc-100 p-6">
+            <p className="text-xs text-zinc-400">Recent Searches</p>
+
+            <div className="py-4">Black Shirts</div>
+          </div>
+
+          {/* Result */}
+          <div className="text-zinc-300 p-6">
+            <p className="text-xs text-zinc-400">Results</p>
+
+            {/* Row */}
+            <div className="flex items-center py-4 space-x-6">
+              <div
+                className={classNames(
+                  'py-4 aspect-square h-16 bg-black',
+                  'rounded-lg flex justify-center items-center',
+                )}
+              ></div>
+
+              <div className="space-y-2">
+                <div>Black Shirts</div>
+                <div className="text-sm text-zinc-400">blah blah about Black Shirts</div>
+              </div>
+            </div>
+            {/* eof */}
+          </div>
         </div>
       </div>
     </>
