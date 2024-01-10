@@ -1,9 +1,9 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import Header from '@/components/Header';
 import { classNames } from '@/styles/utils';
 import { theme } from '@/styles/theme';
 import { getMenu } from '@/services/common/service';
+import Header from '@/components/layouts/Header';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,12 +16,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en" className="h-full">
-      <body className={classNames('font-mono', 'relative h-full', theme.bodyBackground)}>
-        <header className={classNames('fixed top-0 left-0 w-full z-30', 'h-20')}>
-          <Header />
-        </header>
+      <body className={classNames('font-mono', 'relative min-h-full', theme.bodyBackground)}>
+        <Header />
 
-        <main className={classNames('min-h-full py-20')}>{children}</main>
+        <main className={classNames('min-h-full ')}>{children}</main>
 
         <footer className={classNames('h-40', theme.maxSize)}>
           <div className="border-t border-gray-600">

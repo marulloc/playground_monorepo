@@ -1,8 +1,8 @@
 'use client';
 
 import { Drawer } from '@/components/@marulloc-compound-components/Drawer';
-import SearchBar from '@/components/Search';
-import FakeSearch from '@/components/Search/FakeSearch';
+import SearchBar from '@/components/legacy/Search';
+import FakeSearch from '@/components/legacy/Search/FakeSearch';
 import { classNames } from '@/styles/utils';
 import { Bars3Icon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 

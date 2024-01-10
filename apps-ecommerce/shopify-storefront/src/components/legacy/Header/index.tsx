@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { classNames } from '@/styles/utils';
-import ShopifyCart from '../@shopify-headless-components/ShopifyCart';
-import ShopfiyMobileNavigation from '../@shopify-headless-components/ShopifyNavigation/Mobile';
+import ShopifyCart from '../../@shopify-headless-components/ShopifyCart';
+import ShopfiyMobileNavigation from '../../@shopify-headless-components/ShopifyNavigation/Mobile';
 import SearchBar from '../Search';
 import Search from '../Search';
 import FakeSearch from '../Search/FakeSearch';
@@ -30,7 +30,7 @@ const Header = () => {
 
           <Link href="/">
             <div className="flex space-x-1 items-center ">
-              <Image src={'/logo.png'} width={100} height={100} alt="marulloc-store" className="h-10 w-auto" />
+              <Image src={'/logo.png'} width={100} height={100} alt="marulloc-store" className="h-8 w-auto" />
 
               <span className="text-gray-300 text-lg font-extrabold">STORE</span>
             </div>
@@ -50,7 +50,7 @@ const Menu = () => {
     <div className="   flex space-x-2 items-center ">
       {/* Home Logo */}
       <Link href="/">
-        <Image src={'/logo.png'} width={100} height={100} alt="marulloc-store" className="h-14 w-auto" />
+        <Image src={'/logo.png'} width={100} height={100} alt="marulloc-store" className="h-8 w-auto" />
       </Link>
 
       <nav>

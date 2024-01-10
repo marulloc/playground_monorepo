@@ -9,6 +9,8 @@ export const theme = {
   // color : text
 
   // sizing
-  maxSize: classNames('max-w-7xl mx-auto'),
-  layoutPadding: classNames('px-2 md:px-4 xl:px-8'),
+  maxSize: classNames('max-w-7xl mx-auto  '),
+  layoutPadding: classNames('px-2 md:px-4 xl:px-0 '),
+  layoutMarginRightMinus: classNames(' xl:-mr-8'),
+  layoutMarginLeftMinus: classNames(' xl:-ml-8'),
 };
