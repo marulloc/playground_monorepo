@@ -2,7 +2,7 @@
 
 import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -132,6 +132,11 @@ const Search = () => {
               </div>
             </div>
             {/* eof */}
+          </div>
+
+          <div className="border-t border-zinc-700 h-14 text-right  text-teal-600 flex space-x-2 items-center justify-end px-6 text-xs">
+            <span>Search with filters</span>
+            <ArrowRightIcon className="w-3 h-3 " />
           </div>
         </div>
       </div>
