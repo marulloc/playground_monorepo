@@ -1,53 +1,68 @@
 import { Card } from 'ui';
-import Image from 'next/image';
-import { storeFetch } from '@/shopify-gql';
-import ConsoleCompo from './Console';
-import { getMenu } from '@/services/common/service';
+import { classNames } from '@/styles/utils';
+import { theme } from '@/styles/theme';
 
 export default async function Home() {
-  const resp = await getMenu('custom-storefront-menu');
+  const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   return (
-    <main className=" ">
-      {/* Tester Overlay */}
-      {/* <div className="fixed top-0 overscroll-none bg-blue-900 w-screen h-screen z-20  overflow-hidden"></div> */}
+    <div className={classNames(' ')}>
+      {/* Hero Carousel Section */}
+      <section className={classNames(' isolate h-96', theme.mainBackground, theme.maxSize)}>
+        <div className=" h-full flex justify-center items-center   space-x-4">
+          <div className="text-zinc-300">Carousel</div>
+        </div>
+      </section>
 
-      <ConsoleCompo data={resp} />
-      <div className="max-w-7xl mx-auto px-4">
-        <div className=" isolate  h-96 bg-zinc-900 rounded-lg border border-zinc-700">
-          <div className=" h-full flex justify-center items-center   space-x-4">
-            <div className="text-zinc-300">Carousel</div>
-
-            <div>
-              <button className="px-3 py-1.5 bg-indigo-700 shadow-2xl rounded-lg text-zinc-300">Button</button>
+      {/* Product */}
+      <section className={classNames(theme.maxSize, 'mt-24')}>
+        <div className="grid gap-4  grid-cols-2 md:grid-cols-4 ">
+          {products.map((num) => (
+            <div
+              key={`product-card-${num}`}
+              className={classNames(
+                theme.mainBackground,
+                'w-full aspect-square',
+                'text-zinc-200 flex justify-center items-center',
+              )}
+            >
+              Card {num}
             </div>
+          ))}
+
+          <div className={classNames(theme.mutedBackground, ' col-span-full flex justify-center py-4')}>
+            Search More
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* <div className="max-w-7xl mx-auto px-4">
-        <div className=" isolate  h-96 bg-zinc-900 rounded-lg border border-zinc-700">
-          <div className=" h-full flex justify-center items-center   space-x-4">
-            <div className="text-zinc-300">Carousel</div>
-
-            <div>
-              <button className="px-3 py-1.5 bg-indigo-700 shadow-2xl rounded-lg text-zinc-300">Button</button>
-            </div>
+      {/* Hero */}
+      <section className={classNames(theme.maxSize, 'my-24')}>
+        <div className="relative bg-gray-800 px-6 py-32 sm:px-12 sm:py-40 lg:px-16">
+          <div className="absolute inset-0 overflow-hidden">
+            <img
+              src="https://tailwindui.com/img/ecommerce-images/home-page-03-feature-section-full-width.jpg"
+              alt=""
+              className="h-full w-full object-cover object-center"
+            />
+          </div>
+          <div aria-hidden="true" className="absolute inset-0 bg-zinc-900 bg-opacity-70" />
+          <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Long-term thinking</h2>
+            <p className="mt-3 text-xl text-white">
+              {` We're committed to responsible, sustainable, and ethical manufacturing. Our small-scale approach allows us
+              to focus on quality and reduce our impact. We're doing our best to delay the inevitable heat-death of the
+              universe.`}
+            </p>
+            <a
+              href="#"
+              className="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto"
+            >
+              Read our story
+            </a>
           </div>
         </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4">
-        <div className=" isolate  h-96 bg-zinc-900 rounded-lg border border-zinc-700">
-          <div className=" h-full flex justify-center items-center   space-x-4">
-            <div className="text-zinc-300">Carousel</div>
-
-            <div>
-              <button className="px-3 py-1.5 bg-indigo-700 shadow-2xl rounded-lg text-zinc-300">Button</button>
-            </div>
-          </div>
-        </div>
-      </div> */}
-    </main>
+      </section>
+    </div>
   );
 }

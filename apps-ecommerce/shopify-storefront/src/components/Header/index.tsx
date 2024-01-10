@@ -9,7 +9,7 @@ import FakeSearch from '../Search/FakeSearch';
 import { MagnifyingGlassCircleIcon, MagnifyingGlassIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 const Header = () => {
   return (
-    <header className="w-full">
+    <>
       <div className={classNames('max-w-7xl mx-auto px-2 md:px-4 xl:px-8  py-2 ', 'hidden md:block')}>
         {/* Desktop */}
         <div className="flex items-center justify-between   ">
@@ -39,7 +39,7 @@ const Header = () => {
           <ShopifyCart />
         </div>
       </div>
-    </header>
+    </>
   );
 };
 
