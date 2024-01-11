@@ -3,6 +3,10 @@ import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
+/**
+ * @layout -> Collection List / Search Result / Filter List
+ * @returns
+ */
 const Page = () => {
   const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
