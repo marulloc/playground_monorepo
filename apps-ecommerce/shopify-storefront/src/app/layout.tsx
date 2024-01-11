@@ -20,13 +20,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className={classNames('font-mono', '  min-h-full', theme.bodyBackground)}>
         <Header />
 
-        {/* <div className="sticky top-0 h-80 bg-red-400">
-          <Search />
-        </div> */}
-        <main className={classNames('min-h-full z-0 ')}>
-          <Search />
-          {children}
-        </main>
+        <main className={classNames('min-h-full z-0 ')}>{children}</main>
 
         <footer className={classNames('h-40', theme.maxSize)}>
           <div className="border-t border-gray-600">

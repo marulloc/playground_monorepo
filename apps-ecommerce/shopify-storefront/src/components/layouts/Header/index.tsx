@@ -7,7 +7,7 @@ import Search from '@/components/Search';
 
 const Header = () => {
   return (
-    <header className={classNames('sticky top-0 left-0 w-full z-10', 'mb-20', 'bg-black bg-opacity-80')}>
+    <header className={classNames('sticky top-0 left-0 w-full z-10', 'bg-black bg-opacity-80')}>
       {/* Desktop */}
       <div className="hidden md:block">
         <div className={classNames(theme.maxSize, theme.layoutPadding, 'flex items-center justify-between', 'py-6')}>
