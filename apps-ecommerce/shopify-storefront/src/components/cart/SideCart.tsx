@@ -2,28 +2,19 @@
 
 import { classNames } from '@/styles/utils';
 import ShoppingBagIcon from '@heroicons/react/24/outline/ShoppingBagIcon';
-import { Drawer } from '../../@marulloc-compound-components/Drawer';
 import { LockClosedIcon, MinusIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { Drawer } from '../@marulloc-compound-components/Drawer';
 
-const ShopifyCart = () => {
+const SideCart = () => {
   return (
     <Drawer anchor={'right'}>
       <Drawer.Overlay />
 
       <Drawer.Trigger>
         {({ open }) => (
-          <button
-            onClick={() => open()}
-            className={classNames(
-              'group',
-              'h-10',
-              'rounded-lg bg-zinc-800 border border-zinc-600',
-              'p-2.5',
-              'hover:ring-1 ring-zinc-400 ring-inse hover:text-zinc-100 text-zinc-300',
-            )}
-          >
-            <ShoppingBagIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
+          <button onClick={() => open()} className={classNames('rounded-lg text-zinc-400 p-1.5')}>
+            <ShoppingBagIcon className="w-6 h-6" />{' '}
           </button>
         )}
       </Drawer.Trigger>
@@ -200,4 +191,4 @@ const ShopifyCart = () => {
   );
 };
 
-export default ShopifyCart;
+export default SideCart;

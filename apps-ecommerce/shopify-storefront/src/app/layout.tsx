@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import { classNames } from '@/styles/utils';
 import { theme } from '@/styles/theme';
 import { getMenu } from '@/services/common/service';
-import Header from '@/components/layouts/Header';
-import Search from '@/components/Search';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -22,11 +22,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
         <main className={classNames('min-h-full z-0 ')}>{children}</main>
 
-        <footer className={classNames('h-40', theme.maxSize)}>
-          <div className="border-t border-gray-600">
-            <p>조병건 footer area</p>
-          </div>
-        </footer>
+        <Footer />
       </body>
     </html>
   );

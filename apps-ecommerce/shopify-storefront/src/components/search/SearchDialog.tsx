@@ -6,7 +6,7 @@ import { ArrowRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-const Search = () => {
+const SearchDialog = () => {
   const [active, setActive] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -44,8 +44,8 @@ const Search = () => {
 
   return (
     <>
-      <button className="text-white" onClick={() => setActive(true)}>
-        Search
+      <button className={classNames('rounded-lg text-zinc-400 p-1.5')} onClick={() => setActive(true)}>
+        <MagnifyingGlassIcon className="w-6 h-6" />
       </button>
 
       {/* Style Overlay */}
@@ -144,4 +144,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchDialog;

@@ -1,29 +1,19 @@
 'use client';
 
 import { Drawer } from '@/components/@marulloc-compound-components/Drawer';
-import SearchBar from '@/components/legacy/Search';
-import FakeSearch from '@/components/legacy/Search/FakeSearch';
+import FakeSearch from '@/components/search/FakeSearch';
 import { classNames } from '@/styles/utils';
-import { Bars3Icon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3BottomLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-const ShopfiyMobileNavigation = () => {
+const MobileMenu = () => {
   return (
     <Drawer anchor={'bottom'}>
       <Drawer.Overlay />
 
       <Drawer.Trigger>
         {({ open }) => (
-          <button
-            onClick={() => open()}
-            className={classNames(
-              'group',
-              'h-10',
-              'rounded-lg bg-zinc-800 border border-zinc-600',
-              'p-2.5',
-              'hover:ring-1 ring-zinc-400 ring-inse hover:text-zinc-100 text-zinc-300',
-            )}
-          >
-            <Bars3Icon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
+          <button onClick={() => open()} className={classNames('rounded-lg text-zinc-400 p-1.5')}>
+            <Bars3BottomLeftIcon className="w-6 h-6" />
           </button>
         )}
       </Drawer.Trigger>
@@ -102,4 +92,4 @@ const ShopfiyMobileNavigation = () => {
   );
 };
 
-export default ShopfiyMobileNavigation;
+export default MobileMenu;

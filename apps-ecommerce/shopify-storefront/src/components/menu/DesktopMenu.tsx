@@ -1,6 +1,6 @@
 import { classNames } from '@/styles/utils';
 
-const Menu = async () => {
+const DesktopMenu = async () => {
   // const menu = await getMenu('custom-storefront-menu');
 
   return (
@@ -21,4 +21,4 @@ const Menu = async () => {
   );
 };
 
-export default Menu;
+export default DesktopMenu;

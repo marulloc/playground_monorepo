@@ -1,7 +1,6 @@
 import { Card } from 'ui';
 import { classNames } from '@/styles/utils';
 import { theme } from '@/styles/theme';
-import Search from '@/components/Search';
 
 export default async function Home() {
   const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
