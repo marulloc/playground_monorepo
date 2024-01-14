@@ -52,34 +52,46 @@ const SearchDialog = () => {
       <div
         id="backdrop-for-style"
         className={classNames(
-          'isolate  fixed z-30  top-0 left-0 w-screen h-screen',
+          'fixed top-0 left-0 w-screen h-screen',
+          'transition-all',
+
+          'z-40 ',
+          active ? ' visible opacity-100  ' : ' invisible opacity-0  ',
+
+          // Overlay classes
+          active ? ' duration-200  opacity-100' : ' duration-300 opacity-0 - ',
           'bg-zinc-700 bg-opacity-30 backdrop-blur-sm backdrop',
-          active ? 'block' : 'hidden',
         )}
+        onClick={() => {
+          setActive(false);
+        }}
       />
 
-      {/* Real Overlay */}
       <div
-        id="wrapper"
+        id="dialog-wrapper"
         className={classNames(
-          'fixed z-30 top-0 left-0 w-screen h-screen  ',
-          'flex justify-center items-center',
-          active ? 'block' : 'hidden',
-          theme.layoutPadding,
+          'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
+          'w-full h-full flex justify-center items-center  ',
+          'overflow-hidden',
+
+          // 필수 애니메이션
+          'z-50 ',
+          'transition-all ease-in-out',
+          active ? ' visible opacity-100  ' : ' invisible opacity-0  ',
+
+          // 유저 수정 가능
+          active ? '  delay-200 duration-1000 opacity-100      ' : '   delay-0  duration-1000     ',
         )}
-        onClick={() => setActive(false)}
+        onClick={(e: any) => {
+          if (e.target?.id === 'dialog-wrapper') setActive(false);
+        }}
       >
-        {/* Real Dialog Contnets  */}
-        <div
-          id="dialog"
-          className={classNames(
-            'w-full max-w-3xl ',
-            ' bg-zinc-950 shadow-lg border rounded-lg border-zinc-800',
-            // 'bg-opacity-70 backdrop-blur-lg ',
-            // 'p-6',
-          )}
-          onClick={(e) => e.stopPropagation()}
-        >
+        {/* Developer Input */}
+
+        <div className={classNames('w-full   max-w-3xl  ', ' bg-zinc-950 shadow-lg border rounded-lg border-zinc-800')}>
+          <button onClick={() => setActive(false)} className="bg-white">
+            닫기
+          </button>
           <form onSubmit={handleSubmit}>
             <div className={classNames('relative group ')}>
               <div className="absolute inset-y-0 left-0 flex items-center pl-5">
@@ -105,7 +117,6 @@ const SearchDialog = () => {
               />
             </div>
           </form>
-
           {/* Recent */}
           <div className="text-zinc-100 p-6">
             <p className="text-xs text-zinc-400">Recent Searches</p>
