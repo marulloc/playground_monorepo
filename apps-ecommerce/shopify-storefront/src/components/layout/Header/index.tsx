@@ -5,6 +5,7 @@ import SideCart from '@/components/cart/SideCart';
 import MobileMenu from '@/components/menu/MobileMenu';
 import DesktopMenu from '@/components/menu/DesktopMenu';
 import Logo from '../Logo';
+import SearchBtn from '@/components/search/SearchBtn';
 
 const Header = () => {
   return (
@@ -19,7 +20,7 @@ const Header = () => {
 
           <div className={classNames('flex space-x-4 items-center')}>
             <div className="    ">
-              <SearchDialog />
+              <SearchBtn />
             </div>
             <div>
               <SideCart />

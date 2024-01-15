@@ -2,15 +2,21 @@
 
 import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
-import { ArrowRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Modal } from '../@marulloc-compound-components/Modal';
 import ModalTrigger from '../@marulloc-compound-components/Modal/ModalTrigger';
 
-const SearchDialog = () => {
-  // const [active, setActive] = useState(false);
+/**
+ * @todo OnChange Premitive Search & Throttle
+ * @returns
+ */
 
+type Props = {
+  Trigger: React.ReactNode;
+};
+const SearchDialog = ({ Trigger }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
@@ -38,22 +44,18 @@ const SearchDialog = () => {
 
   return (
     <Modal>
-      <ModalTrigger>
-        {({ open }) => (
-          <button className={classNames('rounded-lg text-zinc-400 p-1.5')} onClick={() => open()}>
-            <MagnifyingGlassIcon className="w-6 h-6" />
-          </button>
-        )}
-      </ModalTrigger>
+      <ModalTrigger>{({ open }) => <div onClick={() => open()}>{Trigger}</div>}</ModalTrigger>
 
       <Modal.Backdrop />
 
       <Modal.Contents>
         {({ open, close, isOpen }) => (
-          <div className={classNames('w-full max-w-4xl', 'bg-zinc-900 shadow-lg border rounded-lg border-zinc-500')}>
-            <button onClick={() => close()} className="bg-white">
-              닫기
-            </button>
+          <div
+            className={classNames(
+              'w-full max-w-4xl relative isolate',
+              'bg-zinc-900 shadow-lg border rounded-lg border-zinc-500',
+            )}
+          >
             <form onSubmit={(e) => handleSubmit(e, close)}>
               <div className={classNames('relative group ')}>
                 <div className="absolute inset-y-0 left-0 flex items-center pl-5">
@@ -62,6 +64,7 @@ const SearchDialog = () => {
                     aria-hidden="true"
                   />
                 </div>
+
                 <input
                   ref={inputRef}
                   id="search"
