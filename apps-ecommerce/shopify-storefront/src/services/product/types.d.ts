@@ -1,7 +1,9 @@
 type Product = Omit<ShopifyProduct, 'variants' | 'images'> & {
   variants: ShopifyProductVariant[];
   images: ShopifyImage[];
-  routePath: string;
+
+  handleRoute: string;
+  gidRoute: string;
 };
 
 type GetProductService = {

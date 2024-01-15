@@ -1,5 +1,5 @@
 import { flatConnection } from '@/shopify-gql/utils';
-import { generateRouteFromGID } from '../utils';
+import { generateGIDRoute, generateHandleRoute } from '../utils';
 
 export const parseProduct = (product: ShopifyProduct): Product => {
   const { images, variants, ...rest } = product;
@@ -8,7 +8,9 @@ export const parseProduct = (product: ShopifyProduct): Product => {
     ...rest,
     images: flatConnection(images),
     variants: flatConnection(variants),
-    routePath: generateRouteFromGID(rest.id),
+
+    gidRoute: generateGIDRoute(rest.id),
+    handleRoute: generateHandleRoute(rest.id, rest.handle),
   };
 };
 

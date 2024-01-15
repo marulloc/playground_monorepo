@@ -1,4 +1,8 @@
 module.exports = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   transpilePackages: ['ui'],
+
+  images: {
+    domains: ['cdn.shopify.com'],
+  },
 };

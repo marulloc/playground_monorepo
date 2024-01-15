@@ -1,9 +1,17 @@
 import { Card } from 'ui';
 import { classNames } from '@/styles/utils';
 import { theme } from '@/styles/theme';
+import { getCollectionProducts } from '@/services/collection/service';
+import Link from 'next/link';
+import ProductCard from '@/components/ProductCart';
 
+/**
+ * @ToDo Carousel -> Collection Data or My Custom
+ * @ToDo About Hero -> My Custom
+ * @returns
+ */
 export default async function Home() {
-  const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+  const products = await getCollectionProducts({ collection: 'automated-collection' });
 
   return (
     <div className={classNames(' mt-20')}>
@@ -17,22 +25,11 @@ export default async function Home() {
       {/* Product */}
       <section className={classNames(theme.maxSize, theme.layoutPadding, 'mt-24')}>
         <div className="grid gap-4  grid-cols-2 md:grid-cols-4 ">
-          {products.map((num) => (
-            <div
-              key={`product-card-${num}`}
-              className={classNames(
-                theme.mainBackground,
-                'w-full aspect-square',
-                'text-zinc-200 flex justify-center items-center',
-              )}
-            >
-              Card {num}
-            </div>
+          {products.map((product) => (
+            <Link href={product.handleRoute} key={`home-product-card-${product.handle}`}>
+              <ProductCard product={product} />
+            </Link>
           ))}
-
-          <div className={classNames(theme.mutedBackground, ' col-span-full flex justify-center py-4')}>
-            Search More
-          </div>
         </div>
       </section>
 

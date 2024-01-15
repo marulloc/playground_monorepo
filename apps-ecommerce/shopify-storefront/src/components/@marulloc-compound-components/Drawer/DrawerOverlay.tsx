@@ -15,7 +15,7 @@ const DrawerOverlay = ({ as, className, ...rest }: Props) => {
     return classNames(
       'fixed top-0 left-0 w-screen h-screen max-h-screen overscroll-none', // Default Style
       'transform transition-opacity ease-in-out', // Overlay Animation
-      isOpen ? 'opacity-100  z-20' : ' transition-all delay-200 duration-800 opacity-0 -z-50', // Overlay Animation
+      isOpen ? 'visible opacity-100  z-20' : 'invisible transition-all delay-200 duration-800 opacity-0 -z-50', // Overlay Animation
 
       'dark:bg-black dark:bg-opacity-50 bg-white bg-opacity-50', // Default color
       className,
