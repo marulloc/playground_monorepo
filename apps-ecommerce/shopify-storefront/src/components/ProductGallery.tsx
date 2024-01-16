@@ -56,7 +56,20 @@ const ProductGallery = ({ images }: Props) => {
                 onMouseOver={() => setIndex(idx)}
                 onMouseOut={() => setIndex(Number(searchParams?.get('image')))}
               >
-                <Link href={{ query: { image: idx } }} replace>
+                <Link
+                  href={{
+                    query: {
+                      ...Array.from(searchParams.entries()).reduce(
+                        (result, queryString) => ({ ...result, [queryString[0]]: queryString[1] }),
+                        {} as { [key: string]: string },
+                      ),
+
+                      image: idx,
+                    },
+                  }}
+                  replace
+                  scroll={false}
+                >
                   <Image
                     width={image.width}
                     height={image.height}
