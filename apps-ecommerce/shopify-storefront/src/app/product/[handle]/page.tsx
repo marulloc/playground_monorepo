@@ -1,7 +1,9 @@
 import ClientCompo from '@/app/ClientCompo';
-import ProductCard from '@/components/ProductCart';
+import Price from '@/components/Price';
+import ProductCard from '@/components/ProductCard';
 import ProductGallery from '@/components/ProductGallery';
-import ProductSelector from '@/components/ProductSelector';
+import VariantPrice from '@/components/VariantPrice';
+import VariantSelector from '@/components/VariantSelector';
 import { getProduct, getProductRecommendations } from '@/services/product/service';
 import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
@@ -28,38 +30,48 @@ const Page = async ({ params }: { params: { handle: string } }) => {
           {/* Product Selector */}
           <div className="basis-full lg:basis-2/6 mt-12 lg:mt-0 flex flex-col justify-between ">
             <div className="text-zinc-300  flex-1  ">
-              <div className="mb-6 flex flex-col border-b pb-6 dark:border-neutral-700">
-                <h1 className="mb-2 text-2xl font-semibold">{product?.title}</h1>
+              <div className="mb-2 flex flex-col border-b pb-2 dark:border-neutral-700">
+                <h1 className="mb-1 text-2xl font-semibold">{product?.title}</h1>
+
+                <div className="flex space-x-4 mr-auto text-sm text-zinc-400">
+                  <Price
+                    currencyCode={product?.priceRange.minVariantPrice.currencyCode as string}
+                    amount={product?.priceRange.minVariantPrice.amount as string}
+                  />
+                  <span>~</span>
+                  <Price
+                    currencyCode={product?.priceRange.maxVariantPrice.currencyCode as string}
+                    amount={product?.priceRange.maxVariantPrice.amount as string}
+                  />
+                </div>
               </div>
 
-              <ProductSelector product={product as Product} />
+              <VariantSelector product={product as Product} />
 
               <div className="mt-8 flex flex-col ">
                 <div className="text-right">
-                  <Link href={`#product-${product?.handle}-description`} className="text-sm text-teal-600">
+                  <Link
+                    href={`#product-${product?.handle}-description`}
+                    className="text-sm text-teal-800 hover:text-teal-600"
+                  >
                     View Details
                   </Link>
                   <div className="text-right ">
-                    <Link href={`#product-${product?.handle}-recommendations`} className="text-sm text-teal-600">
+                    <Link
+                      href={`#product-${product?.handle}-recommendations`}
+                      className="text-sm text-teal-800 hover:text-teal-600"
+                    >
                       View Recommendations
                     </Link>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="mr-auto w-auto rounded-full bg-blue-600 p-2 text-sm text-white">
-              <p suppressHydrationWarning={true}>
-                {`${new Intl.NumberFormat(undefined, {
-                  style: 'currency',
-                  currency: product?.priceRange.maxVariantPrice.currencyCode,
-                  currencyDisplay: 'narrowSymbol',
-                }).format(parseFloat(product?.priceRange.maxVariantPrice.amount as string))}`}
-                <span
-                  className={classNames('ml-1 inline')}
-                >{`${product?.priceRange.maxVariantPrice.currencyCode}`}</span>
-              </p>
-            </div>
 
+            {/* Selected Variant Price */}
+            <VariantPrice variants={product!.variants} />
+
+            {/* Add to Cart */}
             <div className="">
               <button
                 className={classNames(

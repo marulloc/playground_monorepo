@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 type Props = {
   product: Product;
 };
-const ProductSelector = ({ product: { variants, options } }: Props) => {
+const VariantSelector = ({ product: { variants, options } }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -63,4 +63,4 @@ const ProductSelector = ({ product: { variants, options } }: Props) => {
   );
 };
 
-export default ProductSelector;
+export default VariantSelector;

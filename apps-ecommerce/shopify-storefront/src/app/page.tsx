@@ -3,7 +3,7 @@ import { classNames } from '@/styles/utils';
 import { theme } from '@/styles/theme';
 import { getCollectionProducts } from '@/services/collection/service';
 import Link from 'next/link';
-import ProductCard from '@/components/ProductCart';
+import ProductCard from '@/components/ProductCard';
 
 /**
  * @ToDo Carousel -> Collection Data or My Custom
