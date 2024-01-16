@@ -16,9 +16,14 @@ const VariantPrice = ({ variants }: Props) => {
   }, [searchParams, variants]);
 
   return (
-    <div className="mr-auto   text-lg  md:text-xl text-teal-400 py-4">
+    <div>
       {selectedVariant && (
-        <Price currencyCode={selectedVariant.price.currencyCode} amount={selectedVariant.price.amount} />
+        <>
+          <span className="text-teal-500 text-xs pb-1 "> Selected price </span>
+          <div className="text-lg  md:text-xl text-teal-400">
+            <Price currencyCode={selectedVariant.price.currencyCode} amount={selectedVariant.price.amount} />
+          </div>
+        </>
       )}
     </div>
   );

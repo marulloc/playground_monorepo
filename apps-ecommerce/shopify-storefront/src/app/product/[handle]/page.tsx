@@ -2,6 +2,7 @@ import ClientCompo from '@/app/ClientCompo';
 import Price from '@/components/Price';
 import ProductCard from '@/components/ProductCard';
 import ProductGallery from '@/components/ProductGallery';
+import ProductPrice from '@/components/ProductPrice';
 import VariantPrice from '@/components/VariantPrice';
 import VariantSelector from '@/components/VariantSelector';
 import { getProduct, getProductRecommendations } from '@/services/product/service';
@@ -27,49 +28,49 @@ const Page = async ({ params }: { params: { handle: string } }) => {
             <ProductGallery images={product!.images} />
           </div>
 
-          {/* Product Selector */}
           <div className="basis-full lg:basis-2/6 mt-12 lg:mt-0 flex flex-col justify-between ">
             <div className="text-zinc-300  flex-1  ">
-              <div className="mb-2 flex flex-col border-b pb-2 dark:border-neutral-700">
+              <div className="mb-8 flex flex-col border-b pb-2 dark:border-neutral-700">
                 <h1 className="mb-1 text-2xl font-semibold">{product?.title}</h1>
 
-                <div className="flex space-x-4 mr-auto text-sm text-zinc-400">
-                  <Price
-                    currencyCode={product?.priceRange.minVariantPrice.currencyCode as string}
-                    amount={product?.priceRange.minVariantPrice.amount as string}
-                  />
-                  <span>~</span>
-                  <Price
-                    currencyCode={product?.priceRange.maxVariantPrice.currencyCode as string}
-                    amount={product?.priceRange.maxVariantPrice.amount as string}
-                  />
+                <div className="my-2">
+                  <ProductPrice priceRange={product!.priceRange} />
                 </div>
-              </div>
-
-              <VariantSelector product={product as Product} />
-
-              <div className="mt-8 flex flex-col ">
-                <div className="text-right">
-                  <Link
-                    href={`#product-${product?.handle}-description`}
-                    className="text-sm text-teal-800 hover:text-teal-600"
-                  >
-                    View Details
-                  </Link>
-                  <div className="text-right ">
+                {/* <div className=" mt-2 flex flex-col space-y-1 ">
+                  <div className="text-left ">
                     <Link
                       href={`#product-${product?.handle}-recommendations`}
-                      className="text-sm text-teal-800 hover:text-teal-600"
+                      className="text-base text-teal-700 hover:text-teal-600"
                     >
-                      View Recommendations
+                      Recommendations
                     </Link>
                   </div>
-                </div>
+                  <div className="text-left">
+                    <Link
+                      href={`#product-${product?.handle}-description`}
+                      className="text-base text-teal-700 hover:text-teal-600"
+                    >
+                      Details
+                    </Link>
+                  </div>
+                </div> */}
               </div>
+
+              {/* Product Variant Selector */}
+              <VariantSelector product={product as Product} />
             </div>
 
-            {/* Selected Variant Price */}
-            <VariantPrice variants={product!.variants} />
+            {/*  Price */}
+
+            <div className="  my-4">
+              {/* <div className="   ">
+                <ProductPrice priceRange={product!.priceRange} />
+              </div> */}
+
+              <div className="  ">
+                <VariantPrice variants={product!.variants} />
+              </div>
+            </div>
 
             {/* Add to Cart */}
             <div className="">

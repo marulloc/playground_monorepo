@@ -4,6 +4,12 @@ type Props = {
   currencyCode: string;
   amount: string;
 } & Omit<React.ComponentPropsWithoutRef<'p'>, 'children'>;
+
+/**
+ * @TODO Discount : Compare Price
+ * @param param0
+ * @returns
+ */
 const Price = ({ currencyCode, amount, ...rest }: Props) => {
   return (
     <p suppressHydrationWarning={true} {...rest}>
