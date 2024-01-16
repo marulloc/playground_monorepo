@@ -18,8 +18,7 @@ const Page = async ({ params }: { params: { handle: string } }) => {
 
   return (
     <div className={classNames(' mt-6')}>
-      <ClientCompo data={product} />
-      {/*  */}
+      {/* <ClientCompo data={product} />  */}
       <section className={classNames(' w-full     ', theme.maxSize, theme.layoutPadding)}>
         <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-zinc-950 md:p-12 lg:flex-row lg:gap-8">
           <div className="h-full w-full basis-full lg:basis-4/6">
@@ -30,14 +29,35 @@ const Page = async ({ params }: { params: { handle: string } }) => {
           <div className="basis-full lg:basis-2/6 mt-12 lg:mt-0 flex flex-col justify-between ">
             <div className="text-zinc-300  flex-1  ">
               <div className="mb-6 flex flex-col border-b pb-6 dark:border-neutral-700">
-                <h1 className="mb-2 text-2xl font-semibold">{'Product Title'}</h1>
+                <h1 className="mb-2 text-2xl font-semibold">{product?.title}</h1>
               </div>
 
               <ProductSelector product={product as Product} />
 
-              <div className="text-right mt-8">
-                <span className="text-sm text-teal-600">View Details</span>
+              <div className="mt-8 flex flex-col ">
+                <div className="text-right">
+                  <Link href={`#product-${product?.handle}-description`} className="text-sm text-teal-600">
+                    View Details
+                  </Link>
+                  <div className="text-right ">
+                    <Link href={`#product-${product?.handle}-recommendations`} className="text-sm text-teal-600">
+                      View Recommendations
+                    </Link>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div className="mr-auto w-auto rounded-full bg-blue-600 p-2 text-sm text-white">
+              <p suppressHydrationWarning={true}>
+                {`${new Intl.NumberFormat(undefined, {
+                  style: 'currency',
+                  currency: product?.priceRange.maxVariantPrice.currencyCode,
+                  currencyDisplay: 'narrowSymbol',
+                }).format(parseFloat(product?.priceRange.maxVariantPrice.amount as string))}`}
+                <span
+                  className={classNames('ml-1 inline')}
+                >{`${product?.priceRange.maxVariantPrice.currencyCode}`}</span>
+              </p>
             </div>
 
             <div className="">
@@ -47,8 +67,6 @@ const Page = async ({ params }: { params: { handle: string } }) => {
 
                   'py-3 px-8',
                   'relative w-full  text-center',
-
-                  // 'bg-opacity-50', // inactive
                 )}
               >
                 <PlusIcon className="w-5 h-5 text-zinc-200 absolute left-4 " />
@@ -60,7 +78,10 @@ const Page = async ({ params }: { params: { handle: string } }) => {
       </section>
 
       {/* Recommendations */}
-      <section className={classNames(' w-full   text-zinc-400   ', theme.maxSize, theme.layoutPadding)}>
+      <section
+        id={`product-${product?.handle}-recommendations`}
+        className={classNames(' w-full   text-zinc-400   ', theme.maxSize, theme.layoutPadding)}
+      >
         <div className="py-8">
           <h2 className="mb-4 text-2xl font-bold">Recommendations</h2>
           <ul className="flex w-full gap-4 overflow-x-auto pt-1">
@@ -79,7 +100,10 @@ const Page = async ({ params }: { params: { handle: string } }) => {
       </section>
 
       {/* Desecription */}
-      <section className={classNames(' w-full   text-zinc-300   ', theme.maxSize, theme.layoutPadding)}>
+      <section
+        id={`product-${product?.handle}-description`}
+        className={classNames(' w-full   text-zinc-300   ', theme.maxSize, theme.layoutPadding)}
+      >
         <h2 className="mb-4 text-2xl font-bold">Details</h2>
         <div className={classNames(theme.mainBackground, 'rounded-lg p-6 space-y-4')}>
           <p>Thanks Images are made by midjourney Description is made by ChatGPT</p>

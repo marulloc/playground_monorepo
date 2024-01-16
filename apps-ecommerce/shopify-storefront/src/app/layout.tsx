@@ -16,7 +16,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // const footerMenu = await getMenu('custom-storefront-menu');
 
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full scroll-smooth">
       <body className={classNames('font-mono', '  min-h-full', theme.bodyBackground)}>
         <Header />
 
