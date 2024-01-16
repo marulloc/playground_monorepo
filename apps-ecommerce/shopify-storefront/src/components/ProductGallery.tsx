@@ -27,7 +27,6 @@ const ProductGallery = ({ images }: Props) => {
 
   return (
     <>
-      <ClientCompo data={index} />
       {/* Gallery */}
       <div className="aspect-square text-zinc-300 bg-zinc-950 flex flex-col  gap-4 relative">
         {/* Selected Image */}

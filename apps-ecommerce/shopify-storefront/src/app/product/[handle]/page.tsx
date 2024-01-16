@@ -33,7 +33,7 @@ const Page = async ({ params }: { params: { handle: string } }) => {
                 <h1 className="mb-2 text-2xl font-semibold">{'Product Title'}</h1>
               </div>
 
-              <ProductSelector />
+              <ProductSelector product={product as Product} />
 
               <div className="text-right mt-8">
                 <span className="text-sm text-teal-600">View Details</span>
