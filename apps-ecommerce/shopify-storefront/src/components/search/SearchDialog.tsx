@@ -12,6 +12,7 @@ import { PredictiveSearch } from '@/services/search/type';
 import Link from 'next/link';
 import Image from 'next/image';
 import ProductPrice from '../ProductPrice';
+import { throttle } from '../utils';
 
 /**
  * @todo OnChange Premitive Search & Throttle
@@ -55,10 +56,11 @@ const SearchDialog = ({ Trigger }: Props) => {
     })();
   }, []);
 
-  const handlePredictive = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePredictive = throttle(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { products, collections } = await getPredictiveSearch(e.target.value);
     setPredictive({ products, collections });
-  };
+  }, 500);
+
   return (
     <Modal>
       <ModalTrigger>{({ open }) => <div onClick={() => open()}>{Trigger}</div>}</ModalTrigger>
