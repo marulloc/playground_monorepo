@@ -1,14 +1,15 @@
 import ClientCompo from '@/app/ClientCompo';
 import Price from '@/components/Price';
+import ProductAddToCart from '@/components/ProductAddToCart';
 import ProductCard from '@/components/ProductCard';
 import ProductGallery from '@/components/ProductGallery';
 import ProductPrice from '@/components/ProductPrice';
 import VariantPrice from '@/components/VariantPrice';
 import VariantSelector from '@/components/VariantSelector';
+import AddToCart from '@/components/cart/AddToCart';
 import { getProduct, getProductRecommendations } from '@/services/product/service';
 import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
-import { PlusIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 /**
@@ -21,7 +22,6 @@ const Page = async ({ params }: { params: { handle: string } }) => {
 
   return (
     <div className={classNames(' mt-6')}>
-      {/* <ClientCompo data={product} />  */}
       <section className={classNames(' w-full     ', theme.maxSize, theme.layoutPadding)}>
         <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 dark:border-neutral-800 dark:bg-zinc-950 md:p-12 lg:flex-row lg:gap-8">
           <div className="h-full w-full basis-full lg:basis-4/6">
@@ -36,24 +36,6 @@ const Page = async ({ params }: { params: { handle: string } }) => {
                 <div className="my-2">
                   <ProductPrice priceRange={product!.priceRange} />
                 </div>
-                {/* <div className=" mt-2 flex flex-col space-y-1 ">
-                  <div className="text-left ">
-                    <Link
-                      href={`#product-${product?.handle}-recommendations`}
-                      className="text-base text-teal-700 hover:text-teal-600"
-                    >
-                      Recommendations
-                    </Link>
-                  </div>
-                  <div className="text-left">
-                    <Link
-                      href={`#product-${product?.handle}-description`}
-                      className="text-base text-teal-700 hover:text-teal-600"
-                    >
-                      Details
-                    </Link>
-                  </div>
-                </div> */}
               </div>
 
               {/* Product Variant Selector */}
@@ -61,30 +43,13 @@ const Page = async ({ params }: { params: { handle: string } }) => {
             </div>
 
             {/*  Price */}
-
             <div className="  my-4">
-              {/* <div className="   ">
-                <ProductPrice priceRange={product!.priceRange} />
-              </div> */}
-
-              <div className="  ">
-                <VariantPrice variants={product!.variants} />
-              </div>
+              <VariantPrice variants={product!.variants} />
             </div>
 
             {/* Add to Cart */}
             <div className="">
-              <button
-                className={classNames(
-                  'bg-teal-700 hover:bg-teal-600 hover:scale-105 transition-all rounded-lg',
-
-                  'py-3 px-8',
-                  'relative w-full  text-center',
-                )}
-              >
-                <PlusIcon className="w-5 h-5 text-zinc-200 absolute left-4 " />
-                <span className=" text-zinc-200 text-base">Add to cart</span>
-              </button>
+              <ProductAddToCart variants={product!.variants} />
             </div>
           </div>
         </div>

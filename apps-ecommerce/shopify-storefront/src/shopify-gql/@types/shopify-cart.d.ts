@@ -32,6 +32,6 @@ type ShopifyBaseCartLine = {
     product: Product;
   };
   cost: {
-    totalAmount: Money;
+    totalAmount: ShopifyMoney;
   };
 };

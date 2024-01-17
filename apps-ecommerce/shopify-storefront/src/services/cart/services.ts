@@ -64,7 +64,7 @@ export const removeFromCart = async (cartId: string, lineIds: string[]): Promise
  */
 export const updateCart = async (
   cartId: string,
-  lines: { id: string; merchandiseId: string; quantity: number }[],
+  lines: { id: string; merchandiseId?: string; quantity: number }[],
 ): Promise<Cart> => {
   const res = await storeFetch<UpdateCartService>({
     query: editCartItemsMutation,
@@ -80,7 +80,7 @@ export const updateCart = async (
  * @param cartId
  * @returns
  */
-export const getCart = async (cartId: string): Promise<Cart | undefined> => {
+export const getCart = async (cartId: string): Promise<Cart> => {
   const res = await storeFetch<GetCartService>({
     query: getCartQuery,
     variables: { cartId },
@@ -89,9 +89,9 @@ export const getCart = async (cartId: string): Promise<Cart | undefined> => {
   });
 
   // Old carts becomes `null` when you checkout.
-  if (!res.body.data.cart) {
-    return undefined;
-  }
+  // if (!res.body.data.cart) {
+  //   return undefined;
+  // }
 
   return parseCart(res.body.data.cart);
 };

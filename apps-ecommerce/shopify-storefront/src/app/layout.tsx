@@ -5,6 +5,7 @@ import { theme } from '@/styles/theme';
 import { getMenu } from '@/services/common/service';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import CartProvider from '@/components/cart/CartProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,13 +18,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en" className="h-full scroll-smooth">
-      <body className={classNames('font-mono', '  min-h-full', theme.bodyBackground)}>
-        <Header />
+      <CartProvider>
+        <body className={classNames('font-mono', '  min-h-full', theme.bodyBackground)}>
+          <Header />
 
-        <main className={classNames('min-h-full z-0 ')}>{children}</main>
+          <main className={classNames('min-h-full z-0 ')}>{children}</main>
 
-        <Footer />
-      </body>
+          <Footer />
+        </body>
+      </CartProvider>
     </html>
   );
 }
