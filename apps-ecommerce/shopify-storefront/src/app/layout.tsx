@@ -20,6 +20,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" className="h-full scroll-smooth">
       <CartProvider>
         <body className={classNames('font-mono', '  min-h-full', theme.bodyBackground)}>
+          <div id="modal-root"></div>
+          <div id="drawer-root"></div>
+          <div id="dropdown-root"></div>
+
           <Header />
 
           <main className={classNames('min-h-full z-0 ')}>{children}</main>

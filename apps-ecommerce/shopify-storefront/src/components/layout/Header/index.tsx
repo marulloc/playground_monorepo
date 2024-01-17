@@ -1,11 +1,12 @@
 import { classNames } from '@/styles/utils';
 import { theme } from '@/styles/theme';
-import SearchDialog from '@/components/search/SearchDialog';
 import SideCart from '@/components/cart/SideCart';
 import MobileMenu from '@/components/menu/MobileMenu';
 import DesktopMenu from '@/components/menu/DesktopMenu';
 import Logo from '../Logo';
-import SearchBtn from '@/components/search/SearchBtn';
+import DrawerTrigger from '@/components/@marulloc-compound-components/refactoring/Drawer/DrawerTrigger';
+import ModalTrigger from '@/components/@marulloc-compound-components/refactoring/Modal/ModalTrigger';
+import DropdownTrigger from '@/components/@marulloc-compound-components/refactoring/Dropdown/DropDownTrigger';
 
 const Header = () => {
   return (
@@ -20,7 +21,11 @@ const Header = () => {
 
           <div className={classNames('flex space-x-4 items-center')}>
             <div className="    ">
-              <SearchBtn />
+              {/* <SearchBtn /> */}
+
+              <DropdownTrigger />
+              <DrawerTrigger />
+              <ModalTrigger />
             </div>
             <div>
               <SideCart />
