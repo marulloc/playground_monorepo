@@ -16,5 +16,5 @@ export const getPredictiveSearch = async (query: string): Promise<PredictiveSear
     },
   });
 
-  return parsePredictiveSearch(res.body.data.predictiveSearch.products, res.body.data.predictiveSearch.collection);
+  return parsePredictiveSearch(res.body.data.predictiveSearch.products, res.body.data.predictiveSearch.collections);
 };

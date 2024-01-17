@@ -7,6 +7,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Modal } from '../@marulloc-compound-components/Modal';
 import ModalTrigger from '../@marulloc-compound-components/Modal/ModalTrigger';
+import { getPredictiveSearch } from '@/services/search/service';
+import { PredictiveSearch } from '@/services/search/type';
+import Link from 'next/link';
+import Image from 'next/image';
+import ProductPrice from '../ProductPrice';
 
 /**
  * @todo OnChange Premitive Search & Throttle
@@ -18,7 +23,6 @@ type Props = {
 };
 const SearchDialog = ({ Trigger }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
-
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -42,6 +46,19 @@ const SearchDialog = ({ Trigger }: Props) => {
     close();
   };
 
+  const [predictive, setPredictive] = useState<PredictiveSearch>({ products: [], collections: [] });
+
+  useEffect(() => {
+    (async () => {
+      const { products, collections } = await getPredictiveSearch('');
+      setPredictive({ products, collections });
+    })();
+  }, []);
+
+  const handlePredictive = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { products, collections } = await getPredictiveSearch(e.target.value);
+    setPredictive({ products, collections });
+  };
   return (
     <Modal>
       <ModalTrigger>{({ open }) => <div onClick={() => open()}>{Trigger}</div>}</ModalTrigger>
@@ -67,6 +84,7 @@ const SearchDialog = ({ Trigger }: Props) => {
 
                 <input
                   ref={inputRef}
+                  onChange={handlePredictive}
                   id="search"
                   name="search-2"
                   placeholder="Search ..."
@@ -83,30 +101,61 @@ const SearchDialog = ({ Trigger }: Props) => {
               </div>
             </form>
             {/* Recent */}
-            <div className="text-zinc-100 p-6">
+            {/* <div className="text-zinc-100 p-6">
               <p className="text-xs text-zinc-400">Recent Searches</p>
 
               <div className="py-4">Black Shirts</div>
+            </div> */}
+
+            {/* Result - Collections */}
+            <div className="text-zinc-100 p-6">
+              <p className="text-xs text-zinc-400">Collections</p>
+
+              <ul className="pt-2 pb-4">
+                {predictive.collections.map((collection) => (
+                  <li key={`predictive-search-collection-${collection.handle}`} className="py-1">
+                    <Link href={collection.routePath}>{collection.title}</Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* Result */}
+            {/* Result - Products */}
             <div className="text-zinc-300 p-6">
-              <p className="text-xs text-zinc-400">Results</p>
+              <p className="text-xs text-zinc-400">Products</p>
 
+              <ul>
+                {predictive.products.map((product) => (
+                  <li key={`predictive-search-product-${product.handle}`}>
+                    <Link href={product.handleRoute} onClick={() => close()}>
+                      <div className="flex items-center py-4 space-x-6">
+                        <div
+                          className={classNames(
+                            'py-4 aspect-square h-16 bg-black',
+                            'rounded-lg flex justify-center items-center overflow-hidden',
+                          )}
+                        >
+                          <Image
+                            src={product.featuredImage?.url || ''}
+                            alt={product.featuredImage?.altText || product.title}
+                            width={product.featuredImage?.width || 0}
+                            height={product.featuredImage?.height || 0}
+                            className="h-16 aspect-square object-cover"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <div>{product.title}</div>
+                          <div className="text-sm text-zinc-400">
+                            <ProductPrice priceRange={product.priceRange} />
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
               {/* Row */}
-              <div className="flex items-center py-4 space-x-6">
-                <div
-                  className={classNames(
-                    'py-4 aspect-square h-16 bg-black',
-                    'rounded-lg flex justify-center items-center',
-                  )}
-                ></div>
-
-                <div className="space-y-2">
-                  <div>Black Shirts</div>
-                  <div className="text-sm text-zinc-400">blah blah about Black Shirts</div>
-                </div>
-              </div>
               {/* eof */}
             </div>
 

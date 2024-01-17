@@ -9,7 +9,7 @@ type GetPredictiveSearchService = {
   data: {
     predictiveSearch: {
       products: ShopifyProduct[];
-      collection: ShopifyCollection[];
+      collections: ShopifyCollection[];
     };
   };
   variables: {

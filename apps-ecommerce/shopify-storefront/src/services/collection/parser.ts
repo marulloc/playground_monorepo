@@ -1,9 +1,9 @@
-import { generateRouteFromGID } from '../utils';
+import { generateGIDRoute } from '../utils';
 
 export const parseCollection = (collection: ShopifyCollection): Collection => {
   return {
     ...collection,
-    routePath: generateRouteFromGID(collection.id as string),
+    routePath: generateGIDRoute(collection.id as string),
   };
 };
 
