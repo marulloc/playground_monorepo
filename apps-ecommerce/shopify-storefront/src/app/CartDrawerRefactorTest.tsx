@@ -8,11 +8,22 @@ import Link from 'next/link';
 
 import Image from 'next/image';
 import { useCartContext } from '@/components/cart/context';
+import { useState } from 'react';
 const CartDrawerRefactorTest = () => {
   const { cart, updateItem, deleteItem } = useCartContext();
+
+  const [outerControll, setOuterControll] = useState(false);
   return (
     <>
-      <Drawer anchor="right">
+      {/* <button className="p-4 bg-teal-500" onClick={() => setOuterControll(true)}>
+        Out Open
+      </button> */}
+      <Drawer
+        anchor="right"
+        // Outer can controll
+        // open={outerControll}
+        // onClose={() => setOuterControll(false)}
+      >
         <Drawer.Trigger>
           {({ openDrawer }) => (
             <button onClick={() => openDrawer()} className={classNames('rounded-lg text-zinc-400 p-1.5')}>

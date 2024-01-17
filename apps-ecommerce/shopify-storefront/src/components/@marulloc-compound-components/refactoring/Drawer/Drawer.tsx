@@ -33,19 +33,34 @@ export const useDrawerContext = () => {
  */
 type DrawerRootProps = {
   children: React.ReactNode;
+  open?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
 } & Pick<DrawerContextType, 'anchor'>;
 
-const DrawerRoot = ({ anchor, children }: DrawerRootProps) => {
+const DrawerRoot = ({ anchor, open, onOpen, onClose, children }: DrawerRootProps) => {
   const [context, setContext] = useState<DrawerContextType>({
-    isOpen: false,
+    isOpen: open || false,
     anchor,
     openDrawer: () => {},
     closeDrawer: () => {},
   });
-  useEffect(() => setContext((context) => ({ ...context, anchor })), [anchor]);
 
-  const openDrawer = useCallback(() => setContext((context) => ({ ...context, isOpen: true })), []);
-  const closeDrawer = useCallback(() => setContext((context) => ({ ...context, isOpen: false })), []);
+  useEffect(() => {
+    setContext((context) => {
+      if (open === undefined) return { ...context, anchor };
+      return { ...context, anchor, isOpen: open };
+    });
+  }, [anchor, open]);
+
+  const openDrawer = useCallback(() => {
+    setContext((context) => ({ ...context, isOpen: true }));
+    if (onOpen) onOpen();
+  }, [onOpen]);
+  const closeDrawer = useCallback(() => {
+    setContext((context) => ({ ...context, isOpen: false }));
+    if (onClose) onClose();
+  }, [onClose]);
 
   return <DrawerContext.Provider value={{ ...context, openDrawer, closeDrawer }}>{children}</DrawerContext.Provider>;
 };
