@@ -5,6 +5,7 @@ import { getCollectionProducts } from '@/services/collection/service';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import DropdownTrigger from '@/components/@marulloc-compound-components/refactoring/Dropdown/DropDownTrigger';
+import Tester from './CartDrawerRefactorTest';
 
 /**
  * @ToDo Carousel -> Collection Data or My Custom
@@ -16,7 +17,10 @@ export default async function Home() {
 
   return (
     <div className={classNames(' mt-20')}>
-      <DropdownTrigger />
+      {/* <DropdownTrigger /> */}
+
+      <Tester></Tester>
+
       {/* Hero Carousel Section */}
       <section className={classNames('   h-96', theme.mainBackground, theme.maxSize)}>
         <div className=" h-full flex justify-center items-center   space-x-4">

@@ -4,7 +4,6 @@ import SideCart from '@/components/cart/SideCart';
 import MobileMenu from '@/components/menu/MobileMenu';
 import DesktopMenu from '@/components/menu/DesktopMenu';
 import Logo from '../Logo';
-import DrawerTrigger from '@/components/@marulloc-compound-components/refactoring/Drawer/DrawerTrigger';
 import ModalTrigger from '@/components/@marulloc-compound-components/refactoring/Modal/ModalTrigger';
 import DropdownTrigger from '@/components/@marulloc-compound-components/refactoring/Dropdown/DropDownTrigger';
 
@@ -23,9 +22,9 @@ const Header = () => {
             <div className="    ">
               {/* <SearchBtn /> */}
 
-              <DropdownTrigger />
+              {/*  
               <DrawerTrigger />
-              <ModalTrigger />
+              <ModalTrigger /> */}
             </div>
             <div>
               <SideCart />
