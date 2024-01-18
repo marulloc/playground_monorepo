@@ -1,6 +1,7 @@
 'use client';
 
-import { Modal } from '@/components/@marulloc-compound-components/refactoring/Modal/Modal';
+import { Modal } from '@/components/@marulloc-compound-components/refactoring/Modal';
+// import { Modal } from '@/components/@marulloc-compound-components/refactoring/Modal/Modal';
 import ProductPrice from '@/components/ProductPrice';
 import { throttle } from '@/components/utils';
 import { getPredictiveSearch } from '@/services/search/service';

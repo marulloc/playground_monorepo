@@ -1,0 +1,51 @@
+'use client';
+
+import { useCallback, useEffect, useState } from 'react';
+import { DrawerContext, DrawerContextType } from './context';
+import DrawerTrigger from './DrawerTrigger';
+import DrawerContents from './DrawerContents';
+import DrawerBackdrop from './DrawerBackdrop';
+
+type DrawerRootProps = {
+  children: React.ReactNode;
+  open?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
+} & Pick<DrawerContextType, 'anchor'>;
+
+const DrawerRoot = ({ anchor, open, onOpen, onClose, children }: DrawerRootProps) => {
+  const [context, setContext] = useState<DrawerContextType>({
+    isOpen: open || false,
+    anchor,
+    openDrawer: () => {},
+    closeDrawer: () => {},
+  });
+
+  useEffect(() => {
+    setContext((context) => {
+      if (open === undefined) return { ...context, anchor };
+      return { ...context, anchor, isOpen: open };
+    });
+  }, [anchor, open]);
+
+  const openDrawer = useCallback(() => {
+    setContext((context) => ({ ...context, isOpen: true }));
+    if (onOpen) onOpen();
+  }, [onOpen]);
+  const closeDrawer = useCallback(() => {
+    setContext((context) => ({ ...context, isOpen: false }));
+    if (onClose) onClose();
+  }, [onClose]);
+
+  return (
+    <DrawerContext.Provider value={{ ...context, openDrawer, closeDrawer }}>
+      <>{children}</>
+    </DrawerContext.Provider>
+  );
+};
+
+export const Drawer = Object.assign(DrawerRoot, {
+  Trigger: DrawerTrigger,
+  Contents: DrawerContents,
+  Backdrop: DrawerBackdrop,
+});
