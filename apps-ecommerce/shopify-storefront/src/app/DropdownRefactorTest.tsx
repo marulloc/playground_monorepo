@@ -4,10 +4,10 @@ import { Dropdown } from '@/components/@marulloc-compound-components/refactoring
 import { classNames } from '@/styles/utils';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
-const DropdownRefactorTest = () => {
+const DropdownRefactorTest = ({ id }: { id: string }) => {
   return (
-    <div className="border m-4 p-4">
-      <Dropdown id="test">
+    <div className="border m-4 p-4  ">
+      <Dropdown id={id}>
         <Dropdown.Trigger>
           {({ isOpen }) => (
             <div>
@@ -42,9 +42,13 @@ const DropdownRefactorTest = () => {
         </Dropdown.Trigger>
         <Dropdown.Contents>
           {() => (
-            <div className="bg-white mt-4 p-2">
+            <div className="bg-white mt-4 p-8 space-y-8 h-96 overflow-auto">
               <div>Dropdown Item 1</div>
               <div>Dropdown Item 2</div>
+              <div>Dropdown Item 3</div>
+              <div>Dropdown Item 3</div>
+              <div>Dropdown Item 3</div>
+              <div>Dropdown Item 3</div>
               <div>Dropdown Item 3</div>
             </div>
           )}

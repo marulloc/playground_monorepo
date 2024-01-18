@@ -24,7 +24,8 @@ export default async function Home() {
       <Tester></Tester>
       <ModalRefactorTest />
 
-      <DropdownRefactorTest />
+      <DropdownRefactorTest id={'normal'} />
+      {/* <DropdownRefactorTest /> */}
 
       {/* Hero Carousel Section */}
       <section className={classNames('   h-96', theme.mainBackground, theme.maxSize)}>
@@ -71,6 +72,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <DropdownRefactorTest id={'bottom-up'} />
     </div>
   );
 }

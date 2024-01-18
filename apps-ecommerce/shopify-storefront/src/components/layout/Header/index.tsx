@@ -4,8 +4,6 @@ import SideCart from '@/components/cart/SideCart';
 import MobileMenu from '@/components/menu/MobileMenu';
 import DesktopMenu from '@/components/menu/DesktopMenu';
 import Logo from '../Logo';
-import ModalTrigger from '@/components/@marulloc-compound-components/refactoring/Modal/ModalTrigger';
-import DropdownTrigger from '@/components/@marulloc-compound-components/refactoring/Dropdown/DropDownTrigger';
 
 const Header = () => {
   return (

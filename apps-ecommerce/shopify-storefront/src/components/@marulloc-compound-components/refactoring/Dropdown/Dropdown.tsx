@@ -56,7 +56,6 @@ const DropdownRoot = ({ children, onClose, onOpen, id }: DropdownRootProps) => {
   useEffect(() => {
     const dropdown = document.getElementById(context.dropdownId);
     const trigger = document.getElementById(context.triggerId);
-    console.log(dropdown, trigger);
 
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdown && trigger && !dropdown.contains(event.target as Node) && !trigger.contains(event.target as Node)) {
@@ -76,7 +75,7 @@ const DropdownRoot = ({ children, onClose, onOpen, id }: DropdownRootProps) => {
         closeDropdown,
       }}
     >
-      <>{children}</>
+      <div>{children}</div>
     </DropdownContext.Provider>
   );
 };
@@ -90,9 +89,10 @@ const DropdownRoot = ({ children, onClose, onOpen, id }: DropdownRootProps) => {
  */
 type DropdownContentsProps = {
   children: (props: DropdownContextType) => React.ReactNode;
+  matchTriggerWidth?: boolean;
 } & Omit<React.ComponentPropsWithoutRef<'div'>, 'children' | 'id'>;
 
-const DropdownContents = ({ children, className, ...rest }: DropdownContentsProps) => {
+const DropdownContents = ({ children, className, matchTriggerWidth = true, ...rest }: DropdownContentsProps) => {
   const { isOpen, dropdownId, triggerId, ...restContext } = useDropdownContext();
   const [isMounted, setIsMounted] = useState(false);
 
@@ -101,16 +101,25 @@ const DropdownContents = ({ children, className, ...rest }: DropdownContentsProp
   }, []);
 
   useEffect(() => {
-    const dropdown = document.getElementById(dropdownId);
-    const trigger = document.getElementById(triggerId);
-
     const updatePosition = () => {
+      const dropdown = document.getElementById(dropdownId);
+      const trigger = document.getElementById(triggerId);
+
       if (!dropdown || !trigger) return;
 
       const triggerRect = trigger.getBoundingClientRect();
-      dropdown.style.top = `${triggerRect.bottom + window.scrollY}px`;
+      const dropdownHeight = dropdown.offsetHeight;
+      const spaceBelow = window.innerHeight - triggerRect.bottom;
+
+      if (spaceBelow < dropdownHeight && triggerRect.top > dropdownHeight) {
+        // 현재 뷰포트보다 드롭다운의 높이가 클 경우에
+        dropdown.style.top = `${triggerRect.top - dropdownHeight + window.scrollY}px`;
+      } else {
+        dropdown.style.top = `${triggerRect.bottom + window.scrollY}px`;
+      }
+
       dropdown.style.left = `${triggerRect.left + window.scrollX}px`;
-      dropdown.style.width = `${triggerRect.width}px`;
+      if (matchTriggerWidth) dropdown.style.width = `${triggerRect.width}px`;
     };
     if (isOpen) {
       updatePosition();
@@ -118,7 +127,7 @@ const DropdownContents = ({ children, className, ...rest }: DropdownContentsProp
     }
 
     return () => window.removeEventListener('resize', updatePosition);
-  }, [dropdownId, isOpen, triggerId]);
+  }, [dropdownId, isOpen, matchTriggerWidth, triggerId]);
 
   if (!isMounted) return null;
 
@@ -127,7 +136,7 @@ const DropdownContents = ({ children, className, ...rest }: DropdownContentsProp
       {...rest}
       id={dropdownId}
       className={classNames(
-        'absolute z-50 transition-all duration-300 ease-out',
+        'absolute   transition-all duration-300 ease-out  ',
         isOpen ? 'visible opacity-100 translate-y-0' : 'invisible opacity-0 -translate-y-4',
         className,
       )}
