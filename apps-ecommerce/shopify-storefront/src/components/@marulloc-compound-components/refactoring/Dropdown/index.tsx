@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { DropdownContext, DropdownContextType } from './context';
 import DropdownTrigger from './DropdownTrigger';
 import DropdownContents from './DropdownContents';
+import { withPortalRoot } from '../portal-utils';
+import { DROPDOWN_PORTAL_ID } from './constant';
 
 type DropdownRootProps = {
   id: string;
@@ -56,7 +58,7 @@ const DropdownRoot = ({ children, onClose, onOpen, id }: DropdownRootProps) => {
   );
 };
 
-export const Dropdown = Object.assign(DropdownRoot, {
+export const Dropdown = Object.assign(withPortalRoot(DropdownRoot, DROPDOWN_PORTAL_ID), {
   Trigger: DropdownTrigger,
   Contents: DropdownContents,
 });

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { DropdownContextType, useDropdownContext } from './context';
 import ReactDOM from 'react-dom';
 import { classNames } from '@/styles/utils';
+import { DROPDOWN_PORTAL_ID } from './constant';
 
 type DropdownContentsProps = {
   children: (props: DropdownContextType) => React.ReactNode;
@@ -61,7 +62,7 @@ const DropdownContents = ({ children, className, matchTriggerWidth = true, ...re
     >
       <>{children({ dropdownId, triggerId, isOpen, ...restContext })}</>
     </div>,
-    document.body,
+    document.getElementById(DROPDOWN_PORTAL_ID)!,
   );
 };
 

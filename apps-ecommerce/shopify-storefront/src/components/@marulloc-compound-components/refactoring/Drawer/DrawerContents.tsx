@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { DrawerContextType, useDrawerContext } from './context';
 import { classNames } from '@/styles/utils';
 import ReactDOM from 'react-dom';
+import { DRAWER_PORTAL_ID } from './constant';
 
 type DrawerContentsProps<T extends React.ElementType = 'aside'> = {
   children: (props: DrawerContextType) => React.ReactNode;
@@ -69,7 +70,7 @@ const DrawerContents = <T extends React.ElementType = 'aside'>({
     >
       {children({ isOpen, anchor, closeDrawer, openDrawer })}
     </Component>,
-    document.getElementById('drawer-root')!,
+    document.getElementById(DRAWER_PORTAL_ID)!,
   );
 };
 

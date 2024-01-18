@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ModalContextType, useModalContext } from './context';
 import ReactDOM from 'react-dom';
 import { classNames } from '@/styles/utils';
+import { MODAL_PORTAL_ID } from './constant';
 
 type ModalContentsProps<T extends React.ElementType = 'div'> = {
   children: (props: ModalContextType) => React.ReactNode;
@@ -41,7 +42,7 @@ const ModalContents = <T extends React.ElementType = 'div'>({
     >
       <>{children({ isOpen, openModal, closeModal })}</>
     </Component>,
-    document.getElementById('modal-root')!,
+    document.getElementById(MODAL_PORTAL_ID)!,
   );
 };
 

@@ -5,6 +5,8 @@ import { DrawerContext, DrawerContextType } from './context';
 import DrawerTrigger from './DrawerTrigger';
 import DrawerContents from './DrawerContents';
 import DrawerBackdrop from './DrawerBackdrop';
+import { DRAWER_PORTAL_ID } from './constant';
+import { usePortalRoot, withPortalRoot } from '../portal-utils';
 
 type DrawerRootProps = {
   children: React.ReactNode;
@@ -44,7 +46,7 @@ const DrawerRoot = ({ anchor, open, onOpen, onClose, children }: DrawerRootProps
   );
 };
 
-export const Drawer = Object.assign(DrawerRoot, {
+export const Drawer = Object.assign(withPortalRoot(DrawerRoot, DRAWER_PORTAL_ID), {
   Trigger: DrawerTrigger,
   Contents: DrawerContents,
   Backdrop: DrawerBackdrop,

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { DrawerContextType, useDrawerContext } from './context';
 import ReactDOM from 'react-dom';
 import { classNames } from '@/styles/utils';
+import { DRAWER_PORTAL_ID } from './constant';
 
 type DrawerBackdropProps<T extends React.ElementType = 'div'> = {
   children: (props: DrawerContextType) => React.ReactNode;
@@ -45,7 +46,7 @@ const DrawerBackdrop = <T extends React.ElementType = 'div'>({
     >
       {children({ ...restContext, isOpen, closeDrawer })}
     </Component>,
-    document.getElementById('drawer-root')!,
+    document.getElementById(DRAWER_PORTAL_ID)!,
   );
 };
 

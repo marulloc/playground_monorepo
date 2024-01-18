@@ -5,6 +5,8 @@ import { ModalContext, ModalContextType } from './context';
 import ModalTrigger from './ModalTrigger';
 import ModalContents from './ModalContents';
 import ModalBackdrop from './ModalBackdrop';
+import { withPortalRoot } from '../portal-utils';
+import { MODAL_PORTAL_ID } from './constant';
 
 export type ModalRootProps = {
   children: React.ReactNode;
@@ -43,7 +45,7 @@ const ModalRoot: React.ComponentType<ModalRootProps> = ({ children, open, onClos
   );
 };
 
-export const Modal = Object.assign(ModalRoot, {
+export const Modal = Object.assign(withPortalRoot(ModalRoot, MODAL_PORTAL_ID), {
   Trigger: ModalTrigger,
   Contents: ModalContents,
   Backdrop: ModalBackdrop,
