@@ -1,10 +1,10 @@
 import { classNames } from '@/styles/utils';
 import { theme } from '@/styles/theme';
-import MobileMenu from '@/components/menu/MobileMenu';
 import DesktopMenu from '@/components/menu/DesktopMenu';
 import Logo from '../Logo';
 import SearchTriggerIcon from '@/components/search/SearchTriggerIcon';
 import CartTriggerIcon from '@/components/cart/CartTriggerIcon';
+import MobileMenuTriggerIcon from '@/components/menu/MobileMenuTriggerIcon';
 
 const Header = () => {
   return (
@@ -32,7 +32,7 @@ const Header = () => {
       <div className="block md:hidden">
         <div className={classNames(theme.maxSize, theme.layoutPadding, 'flex items-center justify-between', 'py-4')}>
           <div className={classNames(' ')}>
-            <MobileMenu />
+            <MobileMenuTriggerIcon />
           </div>
 
           <div className={classNames(' ')}>

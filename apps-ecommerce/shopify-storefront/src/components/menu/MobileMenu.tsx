@@ -1,28 +1,30 @@
 'use client';
 
-import { Drawer } from '@/components/@marulloc-compound-components/Drawer';
 import { classNames } from '@/styles/utils';
 import { Bars3BottomLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import SearchTriggerInput from '../search/SearchTriggerInput';
+import { Drawer } from '../@marulloc-compound-components/refactoring/Drawer';
 
-const MobileMenu = () => {
+type Props = {
+  Trigger: React.ReactNode;
+};
+
+const MobileMenu = ({ Trigger }: Props) => {
   return (
-    <Drawer anchor={'bottom'}>
-      <Drawer.Overlay />
-
+    <Drawer anchor="bottom">
       <Drawer.Trigger>
-        {({ open }) => (
-          <button onClick={() => open()} className={classNames('rounded-lg text-zinc-400 p-1.5')}>
-            <Bars3BottomLeftIcon className="w-6 h-6" />
-          </button>
+        {({ openDrawer }) => (
+          <div onClick={() => openDrawer()}>
+            <>{Trigger}</>
+          </div>
         )}
       </Drawer.Trigger>
 
       <Drawer.Contents>
-        {({ close }) => (
+        {({ isOpen, closeDrawer }) => (
           <div
             className={classNames(
-              'bg-gray-900 bg-opacity-50 backdrop-blur-sm ',
+              'bg-zinc-900 bg-opacity-90 backdrop-blur-md ',
               'h-screen w-screen',
               'p-6',
               'dark:text-white  ',
@@ -30,7 +32,7 @@ const MobileMenu = () => {
             )}
           >
             <button
-              onClick={() => close()}
+              onClick={() => closeDrawer()}
               className={classNames(
                 'group',
                 'h-10',
@@ -42,14 +44,14 @@ const MobileMenu = () => {
               <XMarkIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
             </button>
 
-            <div onClick={(e) => close()}>
+            <div onClick={(e) => closeDrawer()}>
               <SearchTriggerInput />
             </div>
 
             <nav>
               <ul className="  space-y-3">
                 <li
-                  onClick={() => close()}
+                  onClick={() => closeDrawer()}
                   className={classNames(
                     'hover:text-zinc-100 text-zinc-300',
                     'cursor-pointer',
@@ -61,7 +63,7 @@ const MobileMenu = () => {
                 </li>
 
                 <li
-                  onClick={() => close()}
+                  onClick={() => closeDrawer()}
                   className={classNames(
                     'hover:text-zinc-100 text-zinc-300',
                     'cursor-pointer',
@@ -73,7 +75,7 @@ const MobileMenu = () => {
                 </li>
 
                 <li
-                  onClick={() => close()}
+                  onClick={() => closeDrawer()}
                   className={classNames(
                     'hover:text-zinc-100 text-zinc-300',
                     'cursor-pointer',
