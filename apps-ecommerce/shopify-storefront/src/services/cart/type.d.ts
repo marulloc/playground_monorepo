@@ -2,7 +2,24 @@
  * @description lines: BaseLineConnection.flatMap
  */
 type Cart = Omit<ShopifyCart, 'lines'> & {
-  lines: ShopifyBaseCartLine[];
+  lines: CartLine[];
+};
+
+type CartLine = Omit<ShopifyBaseCartLine, 'product'> & {
+  id: string;
+  quantity: number;
+  merchandise: {
+    id: string;
+    title: string;
+    selectedOptions: {
+      name: string;
+      value: string;
+    }[];
+    product: Product;
+  };
+  cost: {
+    totalAmount: ShopifyMoney;
+  };
 };
 
 type CreateCartService = {

@@ -1,10 +1,10 @@
 import { classNames } from '@/styles/utils';
 import { theme } from '@/styles/theme';
-import SideCart from '@/components/cart/SideCart';
 import MobileMenu from '@/components/menu/MobileMenu';
 import DesktopMenu from '@/components/menu/DesktopMenu';
 import Logo from '../Logo';
 import SearchTriggerIcon from '@/components/search/SearchTriggerIcon';
+import CartTriggerIcon from '@/components/cart/CartTriggerIcon';
 
 const Header = () => {
   return (
@@ -22,7 +22,7 @@ const Header = () => {
               <SearchTriggerIcon />
             </div>
             <div>
-              <SideCart />
+              <CartTriggerIcon />
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@ const Header = () => {
           </div>
 
           <div className={classNames(' ')}>
-            <SideCart />
+            <CartTriggerIcon />
           </div>
         </div>
       </div>

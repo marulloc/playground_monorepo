@@ -20,7 +20,7 @@ const Search = ({ Trigger }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>, close: () => void) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>, closeModal: () => void) => {
     e.preventDefault();
 
     const form = e.target as HTMLFormElement;
@@ -37,7 +37,7 @@ const Search = ({ Trigger }: Props) => {
     const queryString = `${paramsString.length ? '?' : ''}${paramsString}`;
     router.push('/search' + queryString);
 
-    close();
+    closeModal();
   };
 
   // Search
@@ -126,7 +126,7 @@ const Search = ({ Trigger }: Props) => {
               <ul>
                 {predictive.products.map((product) => (
                   <li key={`predictive-search-product-${product.handle}`}>
-                    <Link href={product.handleRoute} onClick={() => close()}>
+                    <Link href={product.handleRoute} onClick={() => closeModal()}>
                       <div className="flex items-center py-4 space-x-6">
                         <div
                           className={classNames(
