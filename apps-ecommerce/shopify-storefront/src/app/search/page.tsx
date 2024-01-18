@@ -1,4 +1,3 @@
-import Search from '@/components/legacy/Search';
 import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';

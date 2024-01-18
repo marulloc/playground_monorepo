@@ -3,8 +3,7 @@
 import { Drawer } from '@/components/@marulloc-compound-components/Drawer';
 import { classNames } from '@/styles/utils';
 import { Bars3BottomLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import SearchBtnFake from '../search/SearchBtnFake';
-import ModalRefactorTest from '@/app/ModalRefactorTest';
+import SearchTriggerInput from '../search/SearchTriggerInput';
 
 const MobileMenu = () => {
   return (
@@ -43,15 +42,8 @@ const MobileMenu = () => {
               <XMarkIcon className={classNames('h-full w-auto', 'group-hover:scale-110')} />
             </button>
 
-            <div
-              //
-              onClick={(e) => close()}
-            >
-              <ModalRefactorTest />
-              {/* <SearchBtnFake /> */}
-
-              {/* <DrawerTrigger /> */}
-              {/* <ModalTrigger /> */}
+            <div onClick={(e) => close()}>
+              <SearchTriggerInput />
             </div>
 
             <nav>

@@ -22,9 +22,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <body className={classNames('font-mono', '  min-h-full   ', theme.bodyBackground)}>
           <Header />
 
-          <main className={classNames('relative h-screen  z-0 ')}>{children}</main>
+          <main className={classNames('relative   z-0 ')}>{children}</main>
 
-          {/* <Footer /> */}
+          <Footer />
         </body>
       </CartProvider>
     </html>

@@ -1,10 +1,10 @@
 import { classNames } from '@/styles/utils';
-import SearchDialog from './SearchDialog';
+import Search from './Search';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
-const SearchBtn = () => {
+const SearchTriggerIcon = () => {
   return (
-    <SearchDialog
+    <Search
       Trigger={
         <button className={classNames('rounded-lg text-zinc-400 p-1.5')}>
           <MagnifyingGlassIcon className="w-6 h-6" />
@@ -14,4 +14,4 @@ const SearchBtn = () => {
   );
 };
 
-export default SearchBtn;
+export default SearchTriggerIcon;

@@ -4,10 +4,6 @@ import { theme } from '@/styles/theme';
 import { getCollectionProducts } from '@/services/collection/service';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
-import Tester from './CartDrawerRefactorTest';
-import ModalRefactorTest from './ModalRefactorTest';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import DropdownRefactorTest from './DropdownRefactorTest';
 
 /**
  * @ToDo Carousel -> Collection Data or My Custom
@@ -19,14 +15,6 @@ export default async function Home() {
 
   return (
     <div className={classNames(' mt-20')}>
-      {/* <DropdownTrigger /> */}
-
-      <Tester></Tester>
-      <ModalRefactorTest />
-
-      <DropdownRefactorTest id={'normal'} />
-      {/* <DropdownRefactorTest /> */}
-
       {/* Hero Carousel Section */}
       <section className={classNames('   h-96', theme.mainBackground, theme.maxSize)}>
         <div className=" h-full flex justify-center items-center   space-x-4">
@@ -72,8 +60,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
-      <DropdownRefactorTest id={'bottom-up'} />
     </div>
   );
 }

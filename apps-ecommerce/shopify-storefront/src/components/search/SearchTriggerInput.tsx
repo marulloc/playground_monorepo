@@ -1,12 +1,10 @@
 import { classNames } from '@/styles/utils';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
+import Search from './Search';
 
-import SearchDialog from './SearchDialog';
-
-const SearchBtnFake = () => {
+const SearchTriggerInput = () => {
   return (
-    <SearchDialog
+    <Search
       Trigger={
         <div className="relative w-full">
           <div className={classNames('relative group')}>
@@ -17,7 +15,7 @@ const SearchBtnFake = () => {
               />
             </div>
             <input
-              id="search"
+              id="fake-search"
               name="search"
               placeholder="Search ..."
               type="search"
@@ -41,4 +39,4 @@ const SearchBtnFake = () => {
   );
 };
 
-export default SearchBtnFake;
+export default SearchTriggerInput;

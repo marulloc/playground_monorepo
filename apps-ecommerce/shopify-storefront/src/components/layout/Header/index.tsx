@@ -4,6 +4,7 @@ import SideCart from '@/components/cart/SideCart';
 import MobileMenu from '@/components/menu/MobileMenu';
 import DesktopMenu from '@/components/menu/DesktopMenu';
 import Logo from '../Logo';
+import SearchTriggerIcon from '@/components/search/SearchTriggerIcon';
 
 const Header = () => {
   return (
@@ -17,12 +18,8 @@ const Header = () => {
           </div>
 
           <div className={classNames('flex space-x-4 items-center')}>
-            <div className="    ">
-              {/* <SearchBtn /> */}
-
-              {/*  
-              <DrawerTrigger />
-              <ModalTrigger /> */}
+            <div>
+              <SearchTriggerIcon />
             </div>
             <div>
               <SideCart />

@@ -1,28 +1,21 @@
 'use client';
 
-import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
-import { ArrowRightIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Modal } from '../@marulloc-compound-components/refactoring/Modal';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Modal } from '../@marulloc-compound-components/Modal';
-import ModalTrigger from '../@marulloc-compound-components/Modal/ModalTrigger';
+import ProductPrice from '@/components/ProductPrice';
+import { throttle } from '@/components/utils';
 import { getPredictiveSearch } from '@/services/search/service';
 import { PredictiveSearch } from '@/services/search/type';
-import Link from 'next/link';
-import Image from 'next/image';
-import ProductPrice from '../ProductPrice';
-import { throttle } from '../utils';
-
-/**
- * @todo OnChange Premitive Search & Throttle
- * @returns
- */
+import { ArrowRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 type Props = {
   Trigger: React.ReactNode;
 };
-const SearchDialog = ({ Trigger }: Props) => {
+const Search = ({ Trigger }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -47,6 +40,7 @@ const SearchDialog = ({ Trigger }: Props) => {
     close();
   };
 
+  // Search
   const [predictive, setPredictive] = useState<PredictiveSearch>({ products: [], collections: [] });
 
   useEffect(() => {
@@ -62,20 +56,30 @@ const SearchDialog = ({ Trigger }: Props) => {
   }, 500);
 
   return (
-    <Modal>
-      <ModalTrigger>{({ open }) => <div onClick={() => open()}>{Trigger}</div>}</ModalTrigger>
-
-      <Modal.Backdrop />
+    <Modal
+      onOpen={() => {
+        setTimeout(() => {
+          inputRef.current?.focus({ preventScroll: true });
+        }, 500);
+      }}
+    >
+      <Modal.Trigger>
+        {({ openModal }) => (
+          <div onClick={() => openModal()}>
+            <>{Trigger}</>
+          </div>
+        )}
+      </Modal.Trigger>
 
       <Modal.Contents>
-        {({ open, close, isOpen }) => (
+        {({ isOpen, closeModal }) => (
           <div
             className={classNames(
-              'w-full max-w-4xl relative isolate',
+              ' relative p-4 max-w-4xl mx-auto mt-24',
               'bg-zinc-900 shadow-lg border rounded-lg border-zinc-500',
             )}
           >
-            <form onSubmit={(e) => handleSubmit(e, close)}>
+            <form onSubmit={(e) => handleSubmit(e, closeModal)}>
               <div className={classNames('relative group ')}>
                 <div className="absolute inset-y-0 left-0 flex items-center pl-5">
                   <MagnifyingGlassIcon
@@ -88,7 +92,7 @@ const SearchDialog = ({ Trigger }: Props) => {
                   ref={inputRef}
                   onChange={handlePredictive}
                   id="search"
-                  name="search-2"
+                  name="search-input"
                   placeholder="Search ..."
                   type="search"
                   className={classNames(
@@ -102,13 +106,6 @@ const SearchDialog = ({ Trigger }: Props) => {
                 />
               </div>
             </form>
-            {/* Recent */}
-            {/* <div className="text-zinc-100 p-6">
-              <p className="text-xs text-zinc-400">Recent Searches</p>
-
-              <div className="py-4">Black Shirts</div>
-            </div> */}
-
             {/* Result - Collections */}
             <div className="text-zinc-100 p-6">
               <p className="text-xs text-zinc-400">Collections</p>
@@ -157,19 +154,23 @@ const SearchDialog = ({ Trigger }: Props) => {
                   </li>
                 ))}
               </ul>
-              {/* Row */}
-              {/* eof */}
             </div>
-
             <div className="border-t border-zinc-700 h-14 text-right  text-teal-600 flex space-x-2 items-center justify-end px-6 text-xs">
               <span>Search with filters</span>
               <ArrowRightIcon className="w-3 h-3 " />
+              <button onClick={() => closeModal()}>Close</button>
             </div>
           </div>
         )}
       </Modal.Contents>
+
+      <Modal.Backdrop>
+        {() => (
+          <div className={classNames('w-full h-full', 'dark:bg-black dark:bg-opacity-70 bg-white bg-opacity-50')} />
+        )}
+      </Modal.Backdrop>
     </Modal>
   );
 };
 
-export default SearchDialog;
+export default Search;
