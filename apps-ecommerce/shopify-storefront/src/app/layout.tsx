@@ -28,7 +28,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
           <main className={classNames('min-h-full z-0 ')}>{children}</main>
 
-          <Footer />
+          {/* <Footer /> */}
         </body>
       </CartProvider>
     </html>

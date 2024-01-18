@@ -4,9 +4,10 @@ import { theme } from '@/styles/theme';
 import { getCollectionProducts } from '@/services/collection/service';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
-import DropdownTrigger from '@/components/@marulloc-compound-components/refactoring/Dropdown/DropDownTrigger';
 import Tester from './CartDrawerRefactorTest';
 import ModalRefactorTest from './ModalRefactorTest';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import DropdownRefactorTest from './DropdownRefactorTest';
 
 /**
  * @ToDo Carousel -> Collection Data or My Custom
@@ -22,6 +23,8 @@ export default async function Home() {
 
       <Tester></Tester>
       <ModalRefactorTest />
+
+      <DropdownRefactorTest />
 
       {/* Hero Carousel Section */}
       <section className={classNames('   h-96', theme.mainBackground, theme.maxSize)}>
