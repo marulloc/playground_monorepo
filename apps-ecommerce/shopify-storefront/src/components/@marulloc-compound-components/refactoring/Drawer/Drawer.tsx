@@ -62,7 +62,11 @@ const DrawerRoot = ({ anchor, open, onOpen, onClose, children }: DrawerRootProps
     if (onClose) onClose();
   }, [onClose]);
 
-  return <DrawerContext.Provider value={{ ...context, openDrawer, closeDrawer }}>{children}</DrawerContext.Provider>;
+  return (
+    <DrawerContext.Provider value={{ ...context, openDrawer, closeDrawer }}>
+      <>{children}</>
+    </DrawerContext.Provider>
+  );
 };
 
 /**

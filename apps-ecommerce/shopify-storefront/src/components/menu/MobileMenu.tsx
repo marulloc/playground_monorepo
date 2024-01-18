@@ -4,7 +4,7 @@ import { Drawer } from '@/components/@marulloc-compound-components/Drawer';
 import { classNames } from '@/styles/utils';
 import { Bars3BottomLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import SearchBtnFake from '../search/SearchBtnFake';
-import ModalTrigger from '../@marulloc-compound-components/refactoring/Modal/ModalTrigger';
+import ModalRefactorTest from '@/app/ModalRefactorTest';
 
 const MobileMenu = () => {
   return (
@@ -47,10 +47,11 @@ const MobileMenu = () => {
               //
               onClick={(e) => close()}
             >
-              <SearchBtnFake />
+              <ModalRefactorTest />
+              {/* <SearchBtnFake /> */}
 
               {/* <DrawerTrigger /> */}
-              <ModalTrigger />
+              {/* <ModalTrigger /> */}
             </div>
 
             <nav>

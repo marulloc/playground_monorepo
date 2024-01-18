@@ -6,6 +6,7 @@ import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import DropdownTrigger from '@/components/@marulloc-compound-components/refactoring/Dropdown/DropDownTrigger';
 import Tester from './CartDrawerRefactorTest';
+import ModalRefactorTest from './ModalRefactorTest';
 
 /**
  * @ToDo Carousel -> Collection Data or My Custom
@@ -20,6 +21,7 @@ export default async function Home() {
       {/* <DropdownTrigger /> */}
 
       <Tester></Tester>
+      <ModalRefactorTest />
 
       {/* Hero Carousel Section */}
       <section className={classNames('   h-96', theme.mainBackground, theme.maxSize)}>
