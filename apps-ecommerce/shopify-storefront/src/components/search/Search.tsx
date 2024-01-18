@@ -1,7 +1,7 @@
 'use client';
 
 import { classNames } from '@/styles/utils';
-import { Modal } from '../@marulloc-compound-components/refactoring/Modal';
+import { Modal } from '../@marulloc-compound-components/Modal';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';

@@ -1,17 +1,21 @@
 'use client';
 
-import { Fragment } from 'react';
-import { ModalContextValue, useModalContext } from './context';
+import React from 'react';
+import { ModalContextType, useModalContext } from './context';
 
-type Props<T extends React.ElementType = typeof Fragment> = {
-  children: (props: ModalContextValue) => React.ReactNode;
+type ModalTriggerProps<T extends React.ElementType = typeof React.Fragment> = {
+  children: (props: ModalContextType) => React.ReactNode;
   as?: T;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
 
-const ModalTrigger = <T extends React.ElementType = typeof Fragment>({ as, children, ...rest }: Props<T>) => {
-  const [context] = useModalContext();
+const ModalTrigger = <T extends React.ElementType = typeof React.Fragment>({
+  as,
+  children,
+  ...rest
+}: ModalTriggerProps<T>) => {
+  const context = useModalContext();
 
-  const Component = as ?? Fragment;
+  const Component = as ?? React.Fragment;
   return <Component {...rest}>{children({ ...context })}</Component>;
 };
 

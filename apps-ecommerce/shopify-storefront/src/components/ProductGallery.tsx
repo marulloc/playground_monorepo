@@ -1,6 +1,6 @@
 'use client';
 
-import ClientCompo from '@/app/ClientCompo';
+import ClientCompo from '@/components/ClientCompo';
 import { classNames } from '@/styles/utils';
 import Image from 'next/image';
 import Link from 'next/link';

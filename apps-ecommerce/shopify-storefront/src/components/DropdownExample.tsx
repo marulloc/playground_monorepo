@@ -1,7 +1,6 @@
 'use client';
 
-import { Dropdown } from '@/components/@marulloc-compound-components/refactoring/Dropdown';
-// import { Dropdown } from '@/components/@marulloc-compound-components/refactoring/Dropdown/Dropdown';
+import { Dropdown } from '@/components/@marulloc-compound-components/Dropdown';
 import { classNames } from '@/styles/utils';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 

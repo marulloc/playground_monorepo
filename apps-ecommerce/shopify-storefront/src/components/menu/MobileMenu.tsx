@@ -1,9 +1,9 @@
 'use client';
 
 import { classNames } from '@/styles/utils';
-import { Bars3BottomLeftIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import SearchTriggerInput from '../search/SearchTriggerInput';
-import { Drawer } from '../@marulloc-compound-components/refactoring/Drawer';
+import { Drawer } from '../@marulloc-compound-components/Drawer';
 
 type Props = {
   Trigger: React.ReactNode;

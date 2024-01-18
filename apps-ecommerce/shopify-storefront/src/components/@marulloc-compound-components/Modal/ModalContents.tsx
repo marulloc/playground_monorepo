@@ -1,39 +1,48 @@
 'use client';
 
-import { ModalContextValue, useModalContext } from './context';
+import { useEffect, useState } from 'react';
+import { ModalContextType, useModalContext } from './context';
+import ReactDOM from 'react-dom';
 import { classNames } from '@/styles/utils';
+import { MODAL_PORTAL_ID } from './constant';
 
-type Props<T extends React.ElementType = 'div'> = {
-  children: (props: ModalContextValue) => React.ReactNode;
+type ModalContentsProps<T extends React.ElementType = 'div'> = {
+  children: (props: ModalContextType) => React.ReactNode;
   as?: T;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
 
-const ModalContents = <T extends React.ElementType = 'div'>({ as, children, className, ...rest }: Props<T>) => {
-  const [{ isOpen, close, ...restContext }, setContext] = useModalContext();
+const ModalContents = <T extends React.ElementType = 'div'>({
+  children,
+  as,
+  className,
+  ...rest
+}: ModalContentsProps<T>) => {
+  const { isOpen, openModal, closeModal } = useModalContext();
+  const [isMounted, setIsMounted] = useState(false);
 
-  const defaultStyle = classNames(isOpen ? 'delay-200 duration-1000 opacity-100' : 'delay-0  duration-1000');
-  const requiredStyle = classNames(
-    'fixed z-50 ',
-    'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
-    'w-full h-full flex justify-center items-center',
-    'overflow-hidden',
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-    'transition-all ease-in-out',
-    isOpen ? 'visible opacity-100  ' : 'invisible opacity-0',
-  );
+  if (!isMounted) return null;
 
   const Component = as ?? 'div';
-  return (
+  return ReactDOM.createPortal(
     <Component
       {...rest}
-      id="dialog-wrapper"
-      className={classNames(defaultStyle, className, requiredStyle)}
+      id="modal-contents-wrapper"
+      className={classNames(
+        'fixed inset-0 z-40',
+        'transition-all transform duration-300 ease-in-out',
+        isOpen ? 'visible opacity-100 translate-y-0' : 'invisible opacity-0 -translate-y-4',
+      )}
       onClick={(e: any) => {
-        if (e.target?.id === 'dialog-wrapper') setContext((context) => ({ ...context, isOpen: false }));
+        if (e.target.id === 'modal-contents-wrapper') closeModal();
       }}
     >
-      {children({ isOpen, close, ...restContext })}
-    </Component>
+      <>{children({ isOpen, openModal, closeModal })}</>
+    </Component>,
+    document.getElementById(MODAL_PORTAL_ID)!,
   );
 };
 

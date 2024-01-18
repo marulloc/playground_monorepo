@@ -1,4 +1,4 @@
-import ClientCompo from '@/app/ClientCompo';
+import ClientCompo from '@/components/ClientCompo';
 import Price from '@/components/Price';
 import ProductAddToCart from '@/components/ProductAddToCart';
 import ProductCard from '@/components/ProductCard';

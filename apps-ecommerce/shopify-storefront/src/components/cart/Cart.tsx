@@ -1,7 +1,7 @@
 'use client';
 
 import { classNames } from '@/styles/utils';
-import { Drawer } from '../@marulloc-compound-components/refactoring/Drawer';
+import { Drawer } from '../@marulloc-compound-components/Drawer';
 import { useCartContext } from './context';
 import { ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import CartLines from './CartLines';

@@ -1,17 +1,21 @@
 'use client';
 
-import { Fragment } from 'react';
-import { DrawerContextValue, useDrawerContext } from './context';
+import React from 'react';
+import { DrawerContextType, useDrawerContext } from './context';
 
-type Props<T extends React.ElementType = typeof Fragment> = {
-  children: (props: DrawerContextValue) => React.ReactNode;
+type DrawerTriggerProps<T extends React.ElementType = typeof React.Fragment> = {
+  children: (props: DrawerContextType) => React.ReactNode;
   as?: T;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
 
-const DrawerTrigger = <T extends React.ElementType = typeof Fragment>({ as, children, ...rest }: Props<T>) => {
-  const [context] = useDrawerContext();
+const DrawerTrigger = <T extends React.ElementType = typeof React.Fragment>({
+  as,
+  children,
+  ...rest
+}: DrawerTriggerProps<T>) => {
+  const context = useDrawerContext();
 
-  const Component = as ?? Fragment;
+  const Component = as ?? React.Fragment;
   return <Component {...rest}>{children({ ...context })}</Component>;
 };
 

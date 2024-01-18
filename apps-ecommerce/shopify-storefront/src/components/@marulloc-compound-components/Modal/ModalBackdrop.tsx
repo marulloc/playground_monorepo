@@ -1,40 +1,54 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { ModalContextType, useModalContext } from './context';
+import ReactDOM from 'react-dom';
 import { classNames } from '@/styles/utils';
-import { useModalContext } from './context';
-import { useMemo } from 'react';
+import { MODAL_PORTAL_ID } from './constant';
 
-type Props<T extends React.ElementType = 'div'> = {
+type ModalBackdropProps<T extends React.ElementType = 'div'> = {
+  children: (props: ModalContextType) => React.ReactNode;
+  preventScroll?: boolean;
   as?: T;
 } & Omit<React.ComponentPropsWithoutRef<T>, 'children'>;
 
-const ModalBackdrop = ({ as, className, ...rest }: Props) => {
-  const [{ isOpen, close }, setContext] = useModalContext();
+const ModalBackdrop = <T extends React.ElementType = 'div'>({
+  children,
+  preventScroll,
+  as,
+  className,
+  ...rest
+}: ModalBackdropProps<T>) => {
+  const { isOpen, openModal, closeModal } = useModalContext();
+  const [isMounted, setIsMounted] = useState(false);
 
-  const defaultStyle = classNames(
-    isOpen ? ' duration-200  opacity-100' : ' duration-300 opacity-0 - ',
-    'bg-zinc-700 bg-opacity-30 backdrop-blur-sm backdrop',
-  ); //=> 스타일을 칠드런으로 빼는 것도 생각해봐
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-  const requiredStyle = classNames(
-    'fixed top-0 left-0 w-screen h-screen',
-    'transition-all',
+  useEffect(() => {
+    if (isOpen) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'visible';
+  }, [isOpen]);
 
-    'z-40 ',
-    isOpen ? ' visible opacity-100  ' : ' invisible opacity-0  ',
-  );
+  if (!isMounted) return null;
 
   const Component = as ?? 'div';
-  return (
+  return ReactDOM.createPortal(
     <Component
       {...rest}
-      className={classNames(defaultStyle, className, requiredStyle)}
+      className={classNames(
+        'fixed z-30 top-0 left-0 w-screen h-screen transition-all transform duration-300 ease-in-out ',
+        isOpen ? 'visible opacity-100' : 'invisible opacity-0',
+        className,
+      )}
       onClick={(e: any) => {
-        setContext((context) => ({ ...context, isOpen: false }));
+        closeModal();
       }}
     >
-      <div className={classNames('w-screen h-screen ', isOpen ? 'block' : 'hidden')} onClick={() => close()} />
-    </Component>
+      {children({ isOpen, openModal, closeModal })}
+    </Component>,
+    document.getElementById(MODAL_PORTAL_ID)!,
   );
 };
 
