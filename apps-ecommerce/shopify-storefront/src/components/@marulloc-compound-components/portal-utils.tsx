@@ -27,7 +27,9 @@ export function withPortalRoot<T extends React.ComponentType<any>>(
       document.body.appendChild(rootDiv);
 
       return () => {
-        document.body.removeChild(rootDiv);
+        if (rootDiv.parentNode === document.body) {
+          document.body.removeChild(rootDiv);
+        }
       };
     }, []);
 

@@ -11,6 +11,8 @@ type Props = {
  * @returns
  */
 const Price = ({ currencyCode, amount, ...rest }: Props) => {
+  if (!currencyCode || !amount) return null;
+
   return (
     <p suppressHydrationWarning={true} {...rest}>
       {`${new Intl.NumberFormat(undefined, {
