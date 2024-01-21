@@ -1,9 +1,11 @@
-import { generateGIDRoute } from '../utils';
+import { generateGIDRoute, generateHandleRoute } from '../utils';
 
 export const parseCollection = (collection: ShopifyCollection): Collection => {
   return {
     ...collection,
-    routePath: generateGIDRoute(collection.id as string),
+
+    gidRoute: generateGIDRoute(collection.id),
+    handleRoute: generateHandleRoute(collection.id, collection.handle).replace('/collection', '/search'),
   };
 };
 

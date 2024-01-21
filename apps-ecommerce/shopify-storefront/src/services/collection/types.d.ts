@@ -1,5 +1,6 @@
 type Collection = ShopifyCollection & {
-  routePath: string; // for routing in next.js
+  handleRoute: string;
+  gidRoute: string;
 };
 
 type GetCollectionsService = {
