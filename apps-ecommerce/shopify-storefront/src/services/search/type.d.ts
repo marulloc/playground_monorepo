@@ -24,8 +24,8 @@ type GetProductsSearchService = {
   variables: {
     query: string;
     productFilters: ShopifyProductFilter[];
-    sortKey: ShopifySortKey;
-    reverse: boolean;
+    sortKey?: ShopifySortKey;
+    reverse?: boolean;
   };
 };
 
@@ -38,7 +38,7 @@ type GetProductsInCollectionSearchService = {
   variables: {
     handle: string;
     productFilters: ShopifyProductFilter[];
-    sortKey: ShopifySortKey;
-    reverse: boolean;
+    sortKey?: ShopifySortKey;
+    reverse?: boolean;
   };
 };

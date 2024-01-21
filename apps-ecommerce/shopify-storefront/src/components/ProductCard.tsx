@@ -16,8 +16,8 @@ const ProductCard = ({ product }: Props) => {
     >
       <Image
         fill
-        alt={product.featuredImage.altText || ''}
-        src={product.featuredImage.url}
+        alt={product.featuredImage?.altText || ''}
+        src={product.featuredImage?.url}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         priority={false}
       />

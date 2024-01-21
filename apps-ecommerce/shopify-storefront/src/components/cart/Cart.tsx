@@ -72,8 +72,8 @@ const Cart = ({ Trigger }: Props) => {
                   <p>Taxes</p>
                   <Price
                     className="text-right text-base text-black dark:text-white"
-                    amount={cart?.cost.totalTaxAmount.amount || ''}
-                    currencyCode={cart?.cost.totalTaxAmount.currencyCode || ''}
+                    amount={cart?.cost.totalTaxAmount?.amount || ''}
+                    currencyCode={cart?.cost.totalTaxAmount?.currencyCode || ''}
                   />
                 </div>
 

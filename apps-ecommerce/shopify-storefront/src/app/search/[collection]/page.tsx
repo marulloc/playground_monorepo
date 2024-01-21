@@ -1,52 +1,69 @@
 import ClientCompo from '@/components/ClientCompo';
+import ProductCard from '@/components/ProductCard';
 import { getCollections } from '@/services/collection/service';
+import { getProductsInCollectionSearch } from '@/services/search/service';
 import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import Sort from '../Sort';
 
+export const runtime = 'edge';
 /**
  * @layout -> Collection List / Search Result / Filter List
  * @returns
  */
-const Page = async () => {
-  const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+const Page = async ({
+  searchParams,
+  params,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined };
+  params: { collection: string };
+}) => {
+  const { collection } = params;
+  const { sortKey, query, filter } = searchParams as { [key: string]: string };
+
+  const products = await getProductsInCollectionSearch({
+    handle: collection,
+    sortKey: sortKey as ShopifySortKey,
+    filters: [],
+    reverse: false,
+  });
+
+  console.log('just');
 
   return (
     <div className="order-last min-h-screen w-full md:order-none">
       <div className="flex justify-between items-center">
         {/* Summary */}
-        <p className="mb-4 text-xs text-gray-400 ">
-          {`Showing ${products.length} ${'result'} for `}
-          <span className="font-bold text-gray-200">&quot;{'some~'}&quot;</span>
-        </p>
+        {query ? (
+          <p className="mb-4 text-xs text-gray-400 ">
+            {`Showing ${products.length} ${'result'} for `}
+            <span className="font-bold text-gray-200">&quot;{query}&quot;</span>
+          </p>
+        ) : (
+          <p></p>
+        )}
 
         {/* Sorting */}
         <div className="flex-shrink-0 flex justify-end mb-4">
-          <p className=" text-xs flex space-x-2 px-3 py-1 -mt-1 -mr-3 justify-end items-center hover:bg-gray-600 cursor-pointer rounded-full">
-            {/* <span className="  text-gray-400">{`Sort by : `}</span> */}
-
-            <span className="font-bold"> {'Price:Low to High'} </span>
-            <span>
-              <ChevronDownIcon className="h-4 w-4" />
-            </span>
-          </p>
+          <Sort />
         </div>
       </div>
 
-      <div className="grid gap-4  grid-cols-2   lg:grid-cols-3">
-        {products.map((num) => (
-          <div
-            key={`product-card-${num}`}
-            className={classNames(
-              theme.mainBackground,
-              'w-full aspect-square',
-              'text-zinc-200 flex justify-center items-center',
-            )}
-          >
-            Card {num}
-          </div>
-        ))}
+      <div>
+        <ul className="grid gap-4  grid-cols-2   lg:grid-cols-3">
+          {products.map((product) => (
+            <li
+              key={`product-card-${product.handle}`}
+              className={classNames(theme.mainBackground, 'w-full aspect-square')}
+            >
+              <Link href={product.handleRoute} key={`home-product-card-${product.handle}`}>
+                <ProductCard product={product} />
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
