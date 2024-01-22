@@ -76,7 +76,7 @@ const Search = ({ Trigger }: Props) => {
         {({ isOpen, closeModal }) => (
           <div
             className={classNames(
-              ' relative p-4 max-w-4xl mx-auto  md:mt-24 max-h-screen overflow-auto',
+              ' relative p-4 max-w-4xl mx-auto  md:mt-24 h-screen md:h-fit overflow-auto',
               'bg-zinc-900 shadow-lg border rounded-lg border-zinc-500',
             )}
           >

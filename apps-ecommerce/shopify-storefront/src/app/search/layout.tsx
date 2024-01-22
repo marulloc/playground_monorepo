@@ -13,7 +13,7 @@ const Layout = async (props: { children: React.ReactNode }) => {
           ' text-black dark:text-white',
         )}
       >
-        <div className="order-first w-full flex-none md:max-w-[125px]  ">
+        <div className="order-first w-full flex-none md:max-w-[160px]  ">
           <CollectionNavigation />
         </div>
 
