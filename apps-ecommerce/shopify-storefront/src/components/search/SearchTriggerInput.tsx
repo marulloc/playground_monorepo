@@ -1,8 +1,17 @@
+'use client';
+
 import { classNames } from '@/styles/utils';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import Search from './Search';
+import { useSearchParams } from 'next/navigation';
 
-const SearchTriggerInput = () => {
+type Props = {
+  defaultValue?: string;
+};
+
+const SearchTriggerInput = ({ defaultValue }: Props) => {
+  const searchParams = useSearchParams();
+
   return (
     <Search
       Trigger={
@@ -18,6 +27,7 @@ const SearchTriggerInput = () => {
               id="fake-search"
               name="search"
               placeholder="Search ..."
+              defaultValue={defaultValue || searchParams.get('query') || ''}
               type="search"
               className={classNames(
                 'h-10 block w-full',

@@ -1,19 +1,14 @@
-import ClientCompo from '@/components/ClientCompo';
 import ProductCard from '@/components/ProductCard';
-import { getCollections } from '@/services/collection/service';
+import { getCollection, getCollections } from '@/services/collection/service';
 import { getProductsInCollectionSearch } from '@/services/search/service';
 import { theme } from '@/styles/theme';
 import { classNames } from '@/styles/utils';
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import Sort from '../Sort';
+import Sort from '../../../components/Sort';
 import { SortKey } from '@/services/search/type';
 
 export const runtime = 'edge';
-/**
- * @layout -> Collection List / Search Result / Filter List
- * @returns
- */
+
 const Page = async ({
   searchParams,
   params,
@@ -21,29 +16,28 @@ const Page = async ({
   searchParams?: { [key: string]: string | string[] | undefined };
   params: { collection: string };
 }) => {
-  const { collection } = params;
+  const { collection: handle } = params;
   const { sort, query, filter } = searchParams as { [key: string]: string };
 
+  const collection = await getCollection(handle);
   const products = await getProductsInCollectionSearch({
-    handle: collection,
+    handle,
     sortKey: sort as SortKey,
     filters: [],
   });
 
   return (
     <div className="order-last min-h-screen w-full md:order-none">
-      <div className="flex justify-between items-center">
-        {/* Summary */}
-        {query ? (
-          <p className="mb-4 text-xs text-gray-400 ">
-            {`Showing ${products.length} ${'result'} for `}
-            <span className="font-bold text-gray-200">&quot;{query}&quot;</span>
-          </p>
-        ) : (
-          <p></p>
-        )}
+      <div className="h-10   mb-4">
+        <h1 className=" text-lg md:text-xl text-teal-400 font-semibold">{collection?.title}</h1>
+      </div>
 
-        {/* Sorting */}
+      <div className="flex justify-between items-center">
+        <p className="mb-4 text-xs text-gray-400 ">
+          {`Showing ${products.length} ${'products'} in `}
+          <span className="font-bold text-gray-200">&quot;{collection?.title}&quot;</span>
+        </p>
+
         <div className="flex-shrink-0 flex justify-end mb-4">
           <Sort />
         </div>
