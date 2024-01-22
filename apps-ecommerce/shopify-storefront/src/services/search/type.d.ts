@@ -42,3 +42,5 @@ type GetProductsInCollectionSearchService = {
     reverse?: boolean;
   };
 };
+
+type SortKey = 'relevance' | 'plth' | 'phtl';

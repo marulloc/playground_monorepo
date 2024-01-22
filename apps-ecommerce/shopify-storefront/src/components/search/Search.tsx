@@ -114,7 +114,9 @@ const Search = ({ Trigger }: Props) => {
               <ul className="pt-2 pb-4">
                 {predictive.collections.map((collection) => (
                   <li key={`predictive-search-collection-${collection.handle}`} className="py-1">
-                    <Link href={collection.handleRoute}>{collection.title}</Link>
+                    <Link href={collection.handleRoute} onClick={() => closeModal()}>
+                      {collection.title}
+                    </Link>
                   </li>
                 ))}
               </ul>

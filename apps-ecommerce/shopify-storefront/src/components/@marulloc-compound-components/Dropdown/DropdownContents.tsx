@@ -51,17 +51,20 @@ const DropdownContents = ({ children, className, matchTriggerWidth = true, ...re
   if (!isMounted) return null;
 
   return ReactDOM.createPortal(
-    <div
-      {...rest}
-      id={dropdownId}
-      className={classNames(
-        'absolute   transition-all duration-300 ease-out  ',
-        isOpen ? 'visible opacity-100 translate-y-0' : 'invisible opacity-0 -translate-y-4',
-        className,
-      )}
-    >
-      <>{children({ dropdownId, triggerId, isOpen, ...restContext })}</>
-    </div>,
+    <>
+      <div
+        {...rest}
+        id={dropdownId}
+        className={classNames(
+          'absolute   transition-all duration-300 ease-out z-30 ',
+          isOpen ? 'visible opacity-100 translate-y-0' : 'invisible opacity-0 -translate-y-4',
+          className,
+        )}
+      >
+        <>{children({ dropdownId, triggerId, isOpen, ...restContext })}</>
+      </div>
+      <div className={classNames(isOpen ? 'visible' : 'invisible', '  fixed inset-0 z-0')}></div>
+    </>,
     document.getElementById(DROPDOWN_PORTAL_ID)!,
   );
 };

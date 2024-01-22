@@ -7,6 +7,7 @@ import { classNames } from '@/styles/utils';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import Sort from '../Sort';
+import { SortKey } from '@/services/search/type';
 
 export const runtime = 'edge';
 /**
@@ -21,16 +22,13 @@ const Page = async ({
   params: { collection: string };
 }) => {
   const { collection } = params;
-  const { sortKey, query, filter } = searchParams as { [key: string]: string };
+  const { sort, query, filter } = searchParams as { [key: string]: string };
 
   const products = await getProductsInCollectionSearch({
     handle: collection,
-    sortKey: sortKey as ShopifySortKey,
+    sortKey: sort as SortKey,
     filters: [],
-    reverse: false,
   });
-
-  console.log('just');
 
   return (
     <div className="order-last min-h-screen w-full md:order-none">

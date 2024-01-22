@@ -11,3 +11,20 @@ export const parsePredictiveSearch = (
     collections: collections.map((collection) => parseCollection(collection)),
   };
 };
+
+export const parseSortParams = (
+  sortKey: 'relevance' | 'plth' | 'phtl',
+): { sortKey: ShopifySortKey; reverse: boolean } => {
+  switch (sortKey) {
+    case 'plth':
+      return { sortKey: 'PRICE', reverse: false };
+
+    case 'phtl':
+      return { sortKey: 'PRICE', reverse: true };
+
+    default:
+    case undefined:
+    case 'relevance':
+      return { sortKey: 'RELEVANCE', reverse: false };
+  }
+};
